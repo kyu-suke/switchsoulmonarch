@@ -17,7 +17,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let menuItemUtil: MenuItemUtil = MenuItemUtil()
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
-    let preferencesVC = PreferencesViewController()
+    let preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
+    
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
@@ -60,8 +61,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func show(_ sender: NSMenuItem){
-        self.preferencesVC.showPreferences()
+        preferencesWindow.showWindow(self)
     }
+    
 
 }
 
