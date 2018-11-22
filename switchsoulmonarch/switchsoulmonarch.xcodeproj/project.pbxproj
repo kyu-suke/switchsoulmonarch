@@ -119,8 +119,8 @@
 			children = (
 				045EDC0821A1B0AF00B6D9A5 /* AppDelegate.swift */,
 				045EDC3421A1B21C00B6D9A5 /* MenuItemUtil.swift */,
-				BA1B48F721A6929D0076DF66 /* PreferencesWindowController.xib */,
 				04C7EF8521A1C4BA004F11F4 /* PreferencesViewController.swift */,
+				BA1B48F721A6929D0076DF66 /* PreferencesWindowController.xib */,
 				045EDC0C21A1B0B000B6D9A5 /* Assets.xcassets */,
 				045EDC0E21A1B0B000B6D9A5 /* Main.storyboard */,
 				045EDC1121A1B0B000B6D9A5 /* Info.plist */,

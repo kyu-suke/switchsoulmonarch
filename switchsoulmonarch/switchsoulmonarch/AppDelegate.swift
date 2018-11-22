@@ -19,7 +19,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
     
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         self.statusItem.button?.image = NSImage(named: "icon")
@@ -62,8 +61,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func show(_ sender: NSMenuItem){
         preferencesWindow.showWindow(self)
+        NSApplication.shared.activate(ignoringOtherApps: true)
     }
-    
-
 }
 
