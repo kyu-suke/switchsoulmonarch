@@ -8,27 +8,30 @@
 
 import Cocoa
 import Magnet
+import KeyHolder
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var menu: NSMenu!
-    
+
     let menuItemUtil: MenuItemUtil = MenuItemUtil()
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
     let preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
     
+    let userDefaults = UserDefaults()
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         self.statusItem.button?.image = NSImage(named: "icon")
 
         self.statusItem.menu = menu
 
-        if let keyCombo = KeyCombo(keyCode: 104, cocoaModifiers: .control) {
-            let hotKey = HotKey(identifier: "CommandM", keyCombo: keyCombo, target: self, action: #selector(AppDelegate.tappedHotKey))
-            hotKey.register()
-        }
+//        if let keyCombo = KeyCombo(keyCode: 104, cocoaModifiers: .control) {
+//            let hotKey = HotKey(identifier: "CommandM", keyCombo: keyCombo, target: self, action: #selector(AppDelegate.tappedHotKey))
+//            hotKey.register()
+//        }
         
         menu.addItem(self.menuItemUtil.makeAppItem(appName: "iTerm.app", shortcutKey: "i"))
         menu.addItem(self.menuItemUtil.makeAppItem(appName: "Google Chrome.app", shortcutKey: "g"))
@@ -40,13 +43,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(self.menuItemUtil.makePreferencesItem())
         menu.addItem(self.menuItemUtil.makeQuitItem())
 
+        // set HotKey
+        if let keyComboTmp = userDefaults.object(forKey: "mainMenuHotKeyKeyCombo") {
+            let keyCombo = NSKeyedUnarchiver.unarchiveObject(with: keyComboTmp as! Data) as? KeyCombo
+            let hotKey = HotKey(identifier: "mainMenuHotKey", keyCombo: keyCombo!, target: self, action: #selector(AppDelegate.showMainMenu))
+            hotKey.register()
+        }
+
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
-    @objc func tappedHotKey() {
+    @objc func showMainMenu() {
         menu.popUp(positioning: nil, at: NSEvent.mouseLocation, in: nil)
     }
     
@@ -63,5 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         preferencesWindow.showWindow(self)
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
+
+    
 }
 
