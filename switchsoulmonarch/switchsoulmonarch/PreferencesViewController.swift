@@ -9,6 +9,7 @@
 import Cocoa
 import Magnet
 import KeyHolder
+import Carbon
 
 class PreferencesWindowController: NSWindowController {
 
@@ -17,6 +18,7 @@ class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var eisuHotKeyCheck: NSButton!
     
     let userDefaults = UserDefaults()
+
     override func windowDidLoad() {
         super.windowDidLoad()
 
@@ -73,11 +75,11 @@ extension PreferencesWindowController: RecordViewDelegate {
     }
 
     func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        HotKeyCenter.shared.unregisterHotKey(with: "mainMenuHotKey")
-        let hotKey = HotKey(identifier: "mainMenuHotKey", keyCombo: keyCombo, target: self, action: #selector(self.hotkeyCalled))
-        hotKey.register()
-        print(keyCombo)
+
+        print(UInt16(kVK_JIS_Kana))
+        print(UInt16(kVK_JIS_Eisu))
+        AppDelegate().hoge()
+        AppDelegate().setMainMenu(keyCombo: keyCombo)
         userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
     }
 }
