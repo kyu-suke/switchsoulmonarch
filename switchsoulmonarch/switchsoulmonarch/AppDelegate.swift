@@ -27,15 +27,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         self.statusItem.button?.image = NSImage(named: "icon")
 
-        self.statusItem.menu = menu
 
 //        if let keyCombo = KeyCombo(keyCode: 104, cocoaModifiers: .control) {
 //            let hotKey = HotKey(identifier: "CommandM", keyCombo: keyCombo, target: self, action: #selector(AppDelegate.tappedHotKey))
 //            hotKey.register()
 //        }
         
-        menu = setMainmenu()
-
         // set HotKey
         if let keyComboTmp = userDefaults.object(forKey: "mainMenuHotKeyKeyCombo") {
             let keyCombo = NSKeyedUnarchiver.unarchiveObject(with: keyComboTmp as! Data) as? KeyCombo
@@ -43,6 +40,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             hotKey.register()
         }
 
+        // ここを関数にするとクリックしてもメニューがでてこない
+        menu.addItem(self.menuItemUtil.makeAppItem(appName: "iTerm.app", shortcutKey: "i"))
+        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Google Chrome.app", shortcutKey: "g"))
+        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Franz.app", shortcutKey: "r"))
+        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Finder.app", shortcutKey: "f"))
+        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Xcode", shortcutKey: "x"))
+        menu.addItem(self.menuItemUtil.makeAppItem(appName: "MacVim", shortcutKey: "v"))
+        
+        menu.addItem(self.menuItemUtil.makePreferencesItem())
+        menu.addItem(self.menuItemUtil.makeQuitItem())
+
+        self.statusItem.menu = menu
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
