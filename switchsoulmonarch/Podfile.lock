@@ -1,16 +1,21 @@
 PODS:
+  - KeyHolder (3.0.1):
+    - Magnet (~> 2.3)
   - Magnet (2.3.1)
 
 DEPENDENCIES:
+  - KeyHolder
   - Magnet
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - KeyHolder
     - Magnet
 
 SPEC CHECKSUMS:
+  KeyHolder: 142932db4eac7420b003e2eae94c9a61b8b53cb1
   Magnet: f8dac2ffc845ffe68b2dd21c68a801f866f4a098
 
-PODFILE CHECKSUM: dfd8f65016b7c7995d9907bdc6d66be5a8216293
+PODFILE CHECKSUM: 874f3bf59e8144aa9c474fc1f2d3054888ae35bd
 
 COCOAPODS: 1.6.0.beta.2
