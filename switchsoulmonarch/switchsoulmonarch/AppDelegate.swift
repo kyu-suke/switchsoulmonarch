@@ -88,13 +88,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         HotKeyCenter.shared.unregisterHotKey(with: "mainMenuHotKey")
         let hotKey = HotKey(identifier: "mainMenuHotKey", keyCombo: keyCombo, target: self, action: #selector(showMainMenu))
         hotKey.register()
-
-    }
-
-    @objc func hoge() {
-        print("QQQQQQQQQQQQQQQQQ")
-    }
-
-    
+    }    
 }
 

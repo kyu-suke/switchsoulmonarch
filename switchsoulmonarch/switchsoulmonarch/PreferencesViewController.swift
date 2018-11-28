@@ -14,13 +14,38 @@ import Carbon
 class PreferencesWindowController: NSWindowController {
 
     @IBOutlet weak var recordView: RecordView!
-    @IBOutlet weak var kanaHotKeyCheck: NSButtonCell!
-    @IBOutlet weak var eisuHotKeyCheck: NSButton!
+    @IBOutlet weak var ctrlEisuRadio: NSButton!
+    @IBOutlet weak var ctrlKanaRadio: NSButton!
+    
+
+
+    @IBAction func buttonClick(_ sender: NSButton) {
+        hotKeyRadios.forEach { $0.state = NSControl.StateValue(rawValue: 0) }
+        sender.state = NSControl.StateValue(rawValue: 1)
+        print(UInt16(kVK_JIS_Kana))
+        print(UInt16(kVK_JIS_Eisu))
+        switch sender.identifier!.rawValue {
+        case "ctrlEisu":
+            if let keyCombo = KeyCombo(keyCode: kVK_JIS_Eisu, cocoaModifiers: .control) {
+            AppDelegate().setMainMenu(keyCombo: keyCombo)
+            userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
+            }
+        case "ctrlKana":
+            if let keyCombo = KeyCombo(keyCode: kVK_JIS_Kana, cocoaModifiers: .control) {
+            AppDelegate().setMainMenu(keyCombo: keyCombo)
+            userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
+            }
+        default:
+            print("else")
+        }
+    }
     
     let userDefaults = UserDefaults()
+    var hotKeyRadios: [NSButton]!
 
     override func windowDidLoad() {
         super.windowDidLoad()
+        hotKeyRadios = [ctrlEisuRadio, ctrlKanaRadio]
 
         window?.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.floatingWindow)))
 
@@ -28,6 +53,7 @@ class PreferencesWindowController: NSWindowController {
 
     }
 
+    
     override func showWindow(_ sender: Any?) {
         super.showWindow(self)
 
@@ -38,15 +64,6 @@ class PreferencesWindowController: NSWindowController {
             recordView.keyCombo = keyCombo
         }
         recordView.delegate = self
-        
-        //        if let keyCombo = KeyCombo(keyCode: 104, cocoaModifiers: .control) {
-        //            let hotKey = HotKey(identifier: "CommandM", keyCombo: keyCombo, target: self, action: #selector(AppDelegate.tappedHotKey))
-        //            hotKey.register()
-        //        }
-        
-//        let hotKey = HotKey(identifier: "KeyHolderExample", keyCombo: keyCombo!, target: self, action: #selector(AppDelegate.hotkeyCalled))
-//        hotKey.register()
-        
 
     }
 
@@ -76,9 +93,6 @@ extension PreferencesWindowController: RecordViewDelegate {
 
     func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
 
-        print(UInt16(kVK_JIS_Kana))
-        print(UInt16(kVK_JIS_Eisu))
-        AppDelegate().hoge()
         AppDelegate().setMainMenu(keyCombo: keyCombo)
         userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
     }
