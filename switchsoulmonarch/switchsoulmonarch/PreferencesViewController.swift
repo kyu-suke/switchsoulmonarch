@@ -81,11 +81,14 @@ class PreferencesWindowController: NSWindowController {
         openPanel.canChooseFiles = true // ファイルを選択できるか
         // openPanel.allowedFileTypes = NSImage.imageTypes // 選択できるファイル種別
         openPanel.allowedFileTypes = ["app"]
-        
+
+        openPanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.floatingWindow)))
+
         openPanel.begin { (result) -> Void in
             if result.rawValue == NSFileHandlingPanelOKButton {  // ファイルを選択したか(OKを押したか)
                 guard let url = openPanel.url else { return }
                 print(url.path)
+                
                 NSWorkspace.shared.launchApplication(url.path)
                 // ここでファイルを読み込む
             }
