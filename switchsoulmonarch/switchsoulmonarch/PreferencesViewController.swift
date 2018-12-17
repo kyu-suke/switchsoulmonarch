@@ -16,9 +16,9 @@ class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var ctrlEisuRadio: NSButton!
     @IBOutlet weak var ctrlKanaRadio: NSButton!
+
+    let appSets: [AppSet] = []
     
-
-
     @IBAction func buttonClick(_ sender: NSButton) {
         hotKeyRadios.forEach { $0.state = NSControl.StateValue(rawValue: 0) }
         sender.state = NSControl.StateValue(rawValue: 1)
@@ -112,7 +112,7 @@ class PreferencesWindowController: NSWindowController {
         
         openPanel.begin { (result) -> Void in
             if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
-                // ファイルを選択したか(OKを押したか)
+    
                 guard let url = openPanel.url else { return }
                 let qa = sender.frame
 
@@ -133,14 +133,11 @@ class PreferencesWindowController: NSWindowController {
                 print(url.path)
 
                 // NSWorkspace.shared.launchApplication(url.path) // app起動
-                // ここでファイルを読み込む
             }
         }
     }
-    @objc func endEdit(_ sender: Any) {
-        print("ENNNNNNNNNDDDDDDDDDDDDDD")
-    }
 
+    
 }
 
 extension PreferencesWindowController: RecordViewDelegate {

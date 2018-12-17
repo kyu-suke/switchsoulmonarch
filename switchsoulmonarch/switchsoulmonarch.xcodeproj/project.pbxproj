@@ -18,6 +18,7 @@
 		8B409890F902C73C4B445D28 /* Pods_switchsoulmonarchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACD78C45A0981D9730CD24B /* Pods_switchsoulmonarchTests.framework */; };
 		BA1B48F921A6929D0076DF66 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1B48F721A6929D0076DF66 /* PreferencesWindowController.xib */; };
 		BA4B066D21C754A200AFAE65 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4B066C21C754A200AFAE65 /* AppTextField.swift */; };
+		BA4B066F21C7898400AFAE65 /* AppSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4B066E21C7898400AFAE65 /* AppSet.swift */; };
 		D6DA2E98D59E1D677B000A68 /* Pods_switchsoulmonarch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF8F2CBAA42D1DF185581A3 /* Pods_switchsoulmonarch.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		AF88FDD0AA3913D04C37A6EF /* Pods-switchsoulmonarchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-switchsoulmonarchTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-switchsoulmonarchTests/Pods-switchsoulmonarchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BA1B48F721A6929D0076DF66 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		BA4B066C21C754A200AFAE65 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
+		BA4B066E21C7898400AFAE65 /* AppSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSet.swift; sourceTree = "<group>"; };
 		D80652F4E55DE9828A3DB7D9 /* Pods-switchsoulmonarchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-switchsoulmonarchUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-switchsoulmonarchUITests/Pods-switchsoulmonarchUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FCA7323C28A8A8FA53636714 /* Pods_switchsoulmonarchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_switchsoulmonarchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -121,6 +123,7 @@
 			children = (
 				045EDC0821A1B0AF00B6D9A5 /* AppDelegate.swift */,
 				045EDC3421A1B21C00B6D9A5 /* MenuItemUtil.swift */,
+				BA4B066E21C7898400AFAE65 /* AppSet.swift */,
 				BA4B066C21C754A200AFAE65 /* AppTextField.swift */,
 				04C7EF8521A1C4BA004F11F4 /* PreferencesViewController.swift */,
 				BA1B48F721A6929D0076DF66 /* PreferencesWindowController.xib */,
@@ -390,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				045EDC3521A1B21C00B6D9A5 /* MenuItemUtil.swift in Sources */,
+				BA4B066F21C7898400AFAE65 /* AppSet.swift in Sources */,
 				045EDC0921A1B0AF00B6D9A5 /* AppDelegate.swift in Sources */,
 				04C7EF8621A1C4BA004F11F4 /* PreferencesViewController.swift in Sources */,
 				BA4B066D21C754A200AFAE65 /* AppTextField.swift in Sources */,

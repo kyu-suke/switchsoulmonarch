@@ -40,14 +40,53 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             hotKey.register()
         }
 
-        // ここを関数にするとクリックしてもメニューがでてこない
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "iTerm.app", shortcutKey: "i"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Google Chrome.app", shortcutKey: "g"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Franz.app", shortcutKey: "r"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Finder.app", shortcutKey: "f"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Xcode", shortcutKey: "x"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "MacVim", shortcutKey: "v"))
+//        userDefaults.set([
+//            [
+//                "path": "/Applications/iTerm.app",
+//                "key":  "i"
+//            ],
+//            [
+//                "path": "/Applications/Google Chrome.app",
+//                "key":  "g"
+//            ],
+//            [
+//                "path": "/Applications/Franz.app",
+//                "key":  "r"
+//            ],
+//            [
+//                "path": "/Applications/Finder.app",
+//                "key":  "f"
+//            ],
+//            [
+//                "path": "/Applications/Xcode",
+//                "key":  "x"
+//            ],
+//            [
+//                "path": "/Applications/MacVim",
+//                "key":  "v"
+//            ],
+//            ], forKey: "apps")
+
+        // set HotKey
+        if let apps = userDefaults.array(forKey: "apps") {
+            print(apps)
+            for app in apps {
+                print(app)
+                let a: [String:String] = app as! [String : String]
+                let path = a["path"]!
+                let key = a["key"]!
+                menu.addItem(self.menuItemUtil.makeAppItem(appName: path, shortcutKey: key))
+            }
+        }
         
+        // ここを関数にするとクリックしてもメニューがでてこない
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/iTerm.app", shortcutKey: "i"))
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Google Chrome.app", shortcutKey: "g"))
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Franz.app", shortcutKey: "r"))
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Finder.app", shortcutKey: "f"))
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Xcode", shortcutKey: "x"))
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/MacVim", shortcutKey: "v"))
+
         menu.addItem(self.menuItemUtil.makePreferencesItem())
         menu.addItem(self.menuItemUtil.makeQuitItem())
 
