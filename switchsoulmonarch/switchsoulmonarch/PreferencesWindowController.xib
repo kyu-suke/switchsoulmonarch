@@ -18,18 +18,14 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="645" height="273"/>
+            <rect key="contentRect" x="196" y="240" width="645" height="645"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="645" height="273"/>
+                <rect key="frame" x="0.0" y="0.0" width="645" height="645"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZj-Fp-0mG" customClass="RecordView" customModule="KeyHolder">
-                        <rect key="frame" x="0.0" y="146" width="645" height="115"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
                     <button identifier="ctrlEisu" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yji-AI-f8c">
-                        <rect key="frame" x="19" y="113" width="84" height="18"/>
+                        <rect key="frame" x="19" y="485" width="84" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="radio" title="Ctrl + 英数" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MYD-HG-nld">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -40,7 +36,7 @@
                         </connections>
                     </button>
                     <button identifier="ctrlKana" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fp5-lf-kd8">
-                        <rect key="frame" x="19" y="91" width="84" height="18"/>
+                        <rect key="frame" x="20" y="463" width="84" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="radio" title="Ctrl + かな" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="9eB-RT-wV2">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -50,17 +46,8 @@
                             <action selector="buttonClick:" target="-2" id="2yy-vg-uSA"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="slm-Z7-I7x">
-                        <rect key="frame" x="84" y="37" width="37" height="17"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="2rB-fs-QeT">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XhR-Ld-9ce">
-                        <rect key="frame" x="146" y="26" width="81" height="32"/>
+                        <rect key="frame" x="146" y="398" width="81" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="w42-gf-weT">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -70,6 +57,10 @@
                             <action selector="openFile:" target="-2" id="EOc-wP-XHa"/>
                         </connections>
                     </button>
+                    <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZj-Fp-0mG" customClass="RecordView" customModule="KeyHolder">
+                        <rect key="frame" x="0.0" y="530" width="645" height="115"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
                 </subviews>
             </view>
             <connections>

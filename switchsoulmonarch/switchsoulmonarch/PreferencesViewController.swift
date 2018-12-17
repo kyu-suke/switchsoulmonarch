@@ -51,9 +51,13 @@ class PreferencesWindowController: NSWindowController {
 
         recordView.tintColor = NSColor(red: 0.164, green: 0.517, blue: 0.823, alpha: 1)
 
+        let appButton = NSButton(frame: NSMakeRect(20,50,70,20))
+        appButton.title = "Add App"
+        appButton.action = #selector(addApp(_:))
+
+        window?.contentView?.addSubview(appButton)
     }
 
-    
     override func showWindow(_ sender: Any?) {
         super.showWindow(self)
 
@@ -73,7 +77,6 @@ class PreferencesWindowController: NSWindowController {
 
 
     @IBAction func openFile(_ sender: Any) {
-        print("afdasdfadadsf")
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false // 複数ファイルの選択を許すか
         openPanel.canChooseDirectories = false // ディレクトリを選択できるか
@@ -85,16 +88,59 @@ class PreferencesWindowController: NSWindowController {
         openPanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.floatingWindow)))
 
         openPanel.begin { (result) -> Void in
-            if result.rawValue == NSFileHandlingPanelOKButton {  // ファイルを選択したか(OKを押したか)
+            if result.rawValue == NSFileHandlingPanelOKButton {
+                // ファイルを選択したか(OKを押したか)
                 guard let url = openPanel.url else { return }
                 print(url.path)
                 
-                NSWorkspace.shared.launchApplication(url.path)
+                // NSWorkspace.shared.launchApplication(url.path) // app起動
                 // ここでファイルを読み込む
             }
         }
     }
-    
+
+    @objc func addApp(_ sender: NSButton) {
+        let openPanel = NSOpenPanel()
+        openPanel.allowsMultipleSelection = false // 複数ファイルの選択を許すか
+        openPanel.canChooseDirectories = false // ディレクトリを選択できるか
+        openPanel.canCreateDirectories = false // ディレクトリを作成できるか
+        openPanel.canChooseFiles = true // ファイルを選択できるか
+        // openPanel.allowedFileTypes = NSImage.imageTypes // 選択できるファイル種別
+        openPanel.allowedFileTypes = ["app"]
+        
+        openPanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.floatingWindow)))
+        
+        openPanel.begin { (result) -> Void in
+            if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
+                // ファイルを選択したか(OKを押したか)
+                guard let url = openPanel.url else { return }
+                let qa = sender.frame
+
+                // app url
+                let app = NSTextField(frame: NSMakeRect(qa.minX + 100, qa.minY, 180, qa.height))
+                app.stringValue = url.path
+                self.window?.contentView?.addSubview(app)
+
+                // app hot key
+                let hotKey = AppHotKeyTextField(frame: NSMakeRect(qa.minX + 300, qa.minY, 50, qa.height))
+                self.window?.contentView?.addSubview(hotKey)
+                
+                // app del button
+                let delBtn = NSButton(frame: NSMakeRect(qa.minX + 370, qa.minY, 50, qa.height))
+                delBtn.title = "delete"
+                self.window?.contentView?.addSubview(delBtn)
+
+                print(url.path)
+
+                // NSWorkspace.shared.launchApplication(url.path) // app起動
+                // ここでファイルを読み込む
+            }
+        }
+    }
+    @objc func endEdit(_ sender: Any) {
+        print("ENNNNNNNNNDDDDDDDDDDDDDD")
+    }
+
 }
 
 extension PreferencesWindowController: RecordViewDelegate {
