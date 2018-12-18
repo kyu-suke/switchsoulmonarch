@@ -78,7 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 menu.addItem(self.menuItemUtil.makeAppItem(appName: path, shortcutKey: key))
             }
         }
-        
+
         // ここを関数にするとクリックしてもメニューがでてこない
 //        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/iTerm.app", shortcutKey: "i"))
 //        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Google Chrome.app", shortcutKey: "g"))

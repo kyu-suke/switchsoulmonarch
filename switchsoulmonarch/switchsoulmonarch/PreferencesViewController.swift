@@ -69,6 +69,29 @@ class PreferencesWindowController: NSWindowController {
         }
         recordView.delegate = self
 
+        // set HotKey
+        if let apps = userDefaults.array(forKey: "apps") {
+            var i = 0
+            for ap in apps {
+                let a: [String:String] = ap as! [String : String]
+
+                // app url
+                let app = NSTextField(frame: NSMakeRect(100, CGFloat(50 + (i * 25)), 180, 20))
+                app.stringValue = a["path"]!
+                self.window?.contentView?.addSubview(app)
+                
+                // app hot key
+                let hotKey = AppHotKeyTextField(frame: NSMakeRect(300, CGFloat(50 + (i * 25)), 50, 20))
+                self.window?.contentView?.addSubview(hotKey)
+                
+                // app del button
+                let delBtn = NSButton(frame: NSMakeRect(370, CGFloat(50 + (i * 25)), 50, 20))
+                delBtn.title = "delete"
+                self.window?.contentView?.addSubview(delBtn)
+                i += 1
+            }
+        }
+
     }
 
     @objc func hotkeyCalled() {
