@@ -76,7 +76,8 @@ class PreferencesWindowController: NSWindowController {
                 let a: [String:String] = ap as! [String : String]
 
                 // app url
-                let app = NSTextField(frame: NSMakeRect(100, CGFloat(50 + (i * 25)), 180, 20))
+                let app = AppHotKeyTextField(frame: NSMakeRect(100, CGFloat(50 + (i * 25)), 180, 20))
+                app.identifier = NSUserInterfaceItemIdentifier(rawValue: "app:\(i)")
                 app.stringValue = a["path"]!
                 self.window?.contentView?.addSubview(app)
                 

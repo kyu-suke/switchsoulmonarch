@@ -22,6 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
     
     let userDefaults = UserDefaults()
+    let settingApps = SettingApps()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
@@ -40,43 +41,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             hotKey.register()
         }
 
-//        userDefaults.set([
-//            [
-//                "path": "/Applications/iTerm.app",
-//                "key":  "i"
-//            ],
-//            [
-//                "path": "/Applications/Google Chrome.app",
-//                "key":  "g"
-//            ],
-//            [
-//                "path": "/Applications/Franz.app",
-//                "key":  "r"
-//            ],
-//            [
-//                "path": "/Applications/Finder.app",
-//                "key":  "f"
-//            ],
-//            [
-//                "path": "/Applications/Xcode",
-//                "key":  "x"
-//            ],
-//            [
-//                "path": "/Applications/MacVim",
-//                "key":  "v"
-//            ],
-//            ], forKey: "apps")
-
+        SettingApps.apps.setApps()
+        let apps = SettingApps.apps.getApps()
         // set HotKey
-        if let apps = userDefaults.array(forKey: "apps") {
-            print(apps)
-            for app in apps {
-                print(app)
-                let a: [String:String] = app as! [String : String]
-                let path = a["path"]!
-                let key = a["key"]!
-                menu.addItem(self.menuItemUtil.makeAppItem(appName: path, shortcutKey: key))
-            }
+        for app in apps {
+            print(app)
+            let a: [String:String] = app as! [String : String]
+            let path = a["path"]!
+            let key = a["key"]!
+            menu.addItem(self.menuItemUtil.makeAppItem(appName: path, shortcutKey: key))
         }
 
         // ここを関数にするとクリックしてもメニューがでてこない
