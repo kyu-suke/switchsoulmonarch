@@ -13,7 +13,7 @@ class SettingApps: NSObject {
     var app_list: [[String : String]] = []
     let userDefaults = UserDefaults()
 
-    func setApps() {
+    func setAppList() {
         if let apps = userDefaults.array(forKey: "apps") {
             for app in apps {
                 print(app)
@@ -24,7 +24,11 @@ class SettingApps: NSObject {
             }
         }
     }
+
     func getApps() -> [[String : String]] {
         return self.app_list
+    }
+    func setApps(apps: [[String : String]]) {
+        userDefaults.set(apps, forKey: "apps")
     }
 }

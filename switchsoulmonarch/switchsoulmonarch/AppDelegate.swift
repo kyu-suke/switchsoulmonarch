@@ -41,7 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             hotKey.register()
         }
 
-        SettingApps.apps.setApps()
+        SettingApps.apps.setAppList()
         let apps = SettingApps.apps.getApps()
         // set HotKey
         for app in apps {
@@ -49,6 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let a: [String:String] = app as! [String : String]
             let path = a["path"]!
             let key = a["key"]!
+            print(path)
             menu.addItem(self.menuItemUtil.makeAppItem(appName: path, shortcutKey: key))
         }
 

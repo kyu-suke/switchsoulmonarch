@@ -12,11 +12,28 @@ import Cocoa
 class AppHotKeyTextField: NSTextField {
     override func textDidChange(_ notification: Notification) {
         let ident = (identifier?.rawValue)!.split(separator: ":")
-        print(identifier?.rawValue ?? "none")
+
         let k = Int(ident[1])!
-        print(k)
-        let apps = SettingApps.apps.getApps()
-        print(apps[k])
+        let t = ident[0]
+
+        var apps = SettingApps.apps.getApps()
+        var app: [String : String] = apps[k]
+        if t == "path" {
+            app = [
+                "path": self.stringValue,
+                "key": app["key"]!
+            ]
+
+        } else if t == "key" {
+            app = [
+                "path": app["path"]!,
+                "key": self.stringValue
+            ]
+
+        }
+        print(app)
+        apps[k] = app
+        SettingApps.apps.setApps(apps: apps)
 //        apps[k] = ["path": , "key": ]
     }
     //        userDefaults.set([

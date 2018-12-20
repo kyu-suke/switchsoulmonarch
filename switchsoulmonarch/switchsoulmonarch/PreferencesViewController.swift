@@ -77,12 +77,14 @@ class PreferencesWindowController: NSWindowController {
 
                 // app url
                 let app = AppHotKeyTextField(frame: NSMakeRect(100, CGFloat(50 + (i * 25)), 180, 20))
-                app.identifier = NSUserInterfaceItemIdentifier(rawValue: "app:\(i)")
+                app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(i)")
                 app.stringValue = a["path"]!
                 self.window?.contentView?.addSubview(app)
                 
                 // app hot key
                 let hotKey = AppHotKeyTextField(frame: NSMakeRect(300, CGFloat(50 + (i * 25)), 50, 20))
+                hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(i)")
+                hotKey.stringValue = a["key"]!
                 self.window?.contentView?.addSubview(hotKey)
                 
                 // app del button
