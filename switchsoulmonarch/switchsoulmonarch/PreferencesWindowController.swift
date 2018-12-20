@@ -11,7 +11,7 @@ import Magnet
 import KeyHolder
 import Carbon
 
-class PreferencesWindowController: NSWindowController {
+class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
     @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var ctrlEisuRadio: NSButton!
@@ -42,6 +42,12 @@ class PreferencesWindowController: NSWindowController {
     
     let userDefaults = UserDefaults()
     var hotKeyRadios: [NSButton]!
+    let menuItemUtil = MenuItemUtil()
+
+    func windowWillClose(_ notification: Notification) {
+        print("CLOOOOOOOOOOOOO")
+        menuItemUtil.setMenus()
+    }
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -56,6 +62,8 @@ class PreferencesWindowController: NSWindowController {
         appButton.action = #selector(addApp(_:))
 
         window?.contentView?.addSubview(appButton)
+        self.window!.delegate = self
+
     }
 
     override func showWindow(_ sender: Any?) {

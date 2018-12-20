@@ -34,4 +34,8 @@ class MenuItemUtil: NSObject {
         item.action = #selector(AppDelegate.show(_:))
         return item
     }
+    
+    public func setMenus() {
+        print("MEEEENUUUUUUUUU")
+    }
 }
