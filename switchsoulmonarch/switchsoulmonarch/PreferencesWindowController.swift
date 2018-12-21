@@ -16,8 +16,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var ctrlEisuRadio: NSButton!
     @IBOutlet weak var ctrlKanaRadio: NSButton!
-
-    let appSets: [AppSet] = []
     
     @IBAction func buttonClick(_ sender: NSButton) {
         hotKeyRadios.forEach { $0.state = NSControl.StateValue(rawValue: 0) }
@@ -27,12 +25,12 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         switch sender.identifier!.rawValue {
         case "ctrlEisu":
             if let keyCombo = KeyCombo(keyCode: kVK_JIS_Eisu, cocoaModifiers: .control) {
-            AppDelegate().setMainMenu(keyCombo: keyCombo)
+            MenuItemManager().setMainMenu(keyCombo: keyCombo)
             userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
             }
         case "ctrlKana":
             if let keyCombo = KeyCombo(keyCode: kVK_JIS_Kana, cocoaModifiers: .control) {
-            AppDelegate().setMainMenu(keyCombo: keyCombo)
+            MenuItemManager().setMainMenu(keyCombo: keyCombo)
             userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
             }
         default:
@@ -195,7 +193,7 @@ extension PreferencesWindowController: RecordViewDelegate {
 
     func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
 
-        AppDelegate().setMainMenu(keyCombo: keyCombo)
+        MenuItemManager().setMainMenu(keyCombo: keyCombo)
         userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
     }
 }

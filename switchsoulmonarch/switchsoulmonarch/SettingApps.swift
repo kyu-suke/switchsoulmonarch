@@ -14,6 +14,7 @@ class SettingApps: NSObject {
     let userDefaults = UserDefaults()
 
     func setAppList() {
+        self.app_list = []
         if let apps = userDefaults.array(forKey: "apps") {
             for app in apps {
                 print(app)
@@ -23,6 +24,9 @@ class SettingApps: NSObject {
                 self.app_list.append(a)
             }
         }
+        
+// will run when window is closed
+//        setApps(apps: self.app_list)
     }
 
     func getApps() -> [[String : String]] {

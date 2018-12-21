@@ -15,57 +15,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var menu: NSMenu!
 
-    let menuItemUtil: MenuItemUtil = MenuItemUtil()
-
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-
-    let preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
-    
+    var preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
     let userDefaults = UserDefaults()
-    let settingApps = SettingApps()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         self.statusItem.button?.image = NSImage(named: "icon")
 
-
-//        if let keyCombo = KeyCombo(keyCode: 104, cocoaModifiers: .control) {
-//            let hotKey = HotKey(identifier: "CommandM", keyCombo: keyCombo, target: self, action: #selector(AppDelegate.tappedHotKey))
-//            hotKey.register()
-//        }
-        
         // set HotKey
         if let keyComboTmp = userDefaults.object(forKey: "mainMenuHotKeyKeyCombo") {
             let keyCombo = NSKeyedUnarchiver.unarchiveObject(with: keyComboTmp as! Data) as? KeyCombo
-            let hotKey = HotKey(identifier: "mainMenuHotKey", keyCombo: keyCombo!, target: self, action: #selector(AppDelegate.showMainMenu))
-            hotKey.register()
+            MenuItemManager().setMainMenu(keyCombo: keyCombo!)
         }
 
-        setMenus()
-//        SettingApps.apps.setAppList()
-//        let apps = SettingApps.apps.getApps()
-//        // set HotKey
-//        for app in apps {
-//            print(app)
-//            let a: [String:String] = app as! [String : String]
-//            let path = a["path"]!
-//            let key = a["key"]!
-//            print(path)
-//            menu.addItem(self.menuItemUtil.makeAppItem(appName: path, shortcutKey: key))
-//        }
-
-        // ここを関数にするとクリックしてもメニューがでてこない
-//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/iTerm.app", shortcutKey: "i"))
-//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Google Chrome.app", shortcutKey: "g"))
-//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Franz.app", shortcutKey: "r"))
-//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Finder.app", shortcutKey: "f"))
-//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Xcode", shortcutKey: "x"))
-//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/MacVim", shortcutKey: "v"))
-
-//        menu.addItem(self.menuItemUtil.makePreferencesItem())
-//        menu.addItem(self.menuItemUtil.makeQuitItem())
-
-//        self.statusItem.menu = menu
+        self.statusItem.menu = MenuItemManager().getMenus()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -73,63 +37,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func quit(_ sender: Any){
-        //アプリケーションの終了
         NSApplication.shared.terminate(self)
     }
     
     @objc func preferences(_ sender: NSMenuItem){
-        self.menuItemUtil.setLaunchApp(appName: sender.title)
+        MenuItemUtil().setLaunchApp(appName: sender.title)
     }
 
     @objc func show(_ sender: NSMenuItem){
+        preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
         preferencesWindow.showWindow(self)
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
 
-    func setMainmenu() -> NSMenu {
-
-        let menu = NSMenu()
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "iTerm.app", shortcutKey: "i"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Google Chrome.app", shortcutKey: "g"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Franz.app", shortcutKey: "r"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Finder.app", shortcutKey: "f"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Xcode", shortcutKey: "x"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "MacVim", shortcutKey: "v"))
-        
-        menu.addItem(self.menuItemUtil.makePreferencesItem())
-        menu.addItem(self.menuItemUtil.makeQuitItem())
-        return menu
-    }
-
     @objc func showMainMenu() {
-        let menu = setMainmenu()
+        let menu = MenuItemManager().getMenus()
         menu.popUp(positioning: nil, at: NSEvent.mouseLocation, in: nil)
-    }
-
-    @objc func setMainMenu(keyCombo: KeyCombo) {
-        print("VVVVVVVVVV")
-        HotKeyCenter.shared.unregisterHotKey(with: "mainMenuHotKey")
-        let hotKey = HotKey(identifier: "mainMenuHotKey", keyCombo: keyCombo, target: self, action: #selector(showMainMenu))
-        hotKey.register()
-    }    
-
-    @objc func setMenus() {
-        SettingApps.apps.setAppList()
-        let apps = SettingApps.apps.getApps()
-        var m = NSMenu()
-        for app in apps {
-            print(app)
-            let a: [String:String] = app as! [String : String]
-            let path = a["path"]!
-            let key = a["key"]!
-            print(path)
-            m.addItem(self.menuItemUtil.makeAppItem(appName: path, shortcutKey: key))
-        }
-        menu = m
-        menu.addItem(self.menuItemUtil.makePreferencesItem())
-        menu.addItem(self.menuItemUtil.makeQuitItem())
-        
-        self.statusItem.menu = menu
     }
 
 }
