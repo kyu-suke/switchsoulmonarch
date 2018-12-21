@@ -22,6 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
     
     let userDefaults = UserDefaults()
+    let settingApps = SettingApps()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
@@ -40,18 +41,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             hotKey.register()
         }
 
-        // ここを関数にするとクリックしてもメニューがでてこない
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "iTerm.app", shortcutKey: "i"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Google Chrome.app", shortcutKey: "g"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Franz.app", shortcutKey: "r"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Finder.app", shortcutKey: "f"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "Xcode", shortcutKey: "x"))
-        menu.addItem(self.menuItemUtil.makeAppItem(appName: "MacVim", shortcutKey: "v"))
-        
-        menu.addItem(self.menuItemUtil.makePreferencesItem())
-        menu.addItem(self.menuItemUtil.makeQuitItem())
+        setMenus()
+//        SettingApps.apps.setAppList()
+//        let apps = SettingApps.apps.getApps()
+//        // set HotKey
+//        for app in apps {
+//            print(app)
+//            let a: [String:String] = app as! [String : String]
+//            let path = a["path"]!
+//            let key = a["key"]!
+//            print(path)
+//            menu.addItem(self.menuItemUtil.makeAppItem(appName: path, shortcutKey: key))
+//        }
 
-        self.statusItem.menu = menu
+        // ここを関数にするとクリックしてもメニューがでてこない
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/iTerm.app", shortcutKey: "i"))
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Google Chrome.app", shortcutKey: "g"))
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Franz.app", shortcutKey: "r"))
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Finder.app", shortcutKey: "f"))
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/Xcode", shortcutKey: "x"))
+//        menu.addItem(self.menuItemUtil.makeAppItem(appName: "/Applications/MacVim", shortcutKey: "v"))
+
+//        menu.addItem(self.menuItemUtil.makePreferencesItem())
+//        menu.addItem(self.menuItemUtil.makeQuitItem())
+
+//        self.statusItem.menu = menu
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -98,5 +112,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let hotKey = HotKey(identifier: "mainMenuHotKey", keyCombo: keyCombo, target: self, action: #selector(showMainMenu))
         hotKey.register()
     }    
+
+    @objc func setMenus() {
+        SettingApps.apps.setAppList()
+        let apps = SettingApps.apps.getApps()
+        var m = NSMenu()
+        for app in apps {
+            print(app)
+            let a: [String:String] = app as! [String : String]
+            let path = a["path"]!
+            let key = a["key"]!
+            print(path)
+            m.addItem(self.menuItemUtil.makeAppItem(appName: path, shortcutKey: key))
+        }
+        menu = m
+        menu.addItem(self.menuItemUtil.makePreferencesItem())
+        menu.addItem(self.menuItemUtil.makeQuitItem())
+        
+        self.statusItem.menu = menu
+    }
+
 }
 
