@@ -16,9 +16,10 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var ctrlEisuRadio: NSButton!
     @IBOutlet weak var ctrlKanaRadio: NSButton!
-
-    var baseY = 0
+    @IBOutlet weak var appStackView: NSStackView!
     
+    var appCount = 0
+
     @IBAction func buttonClick(_ sender: NSButton) {
         hotKeyRadios.forEach { $0.state = NSControl.StateValue(rawValue: 0) }
         sender.state = NSControl.StateValue(rawValue: 1)
@@ -77,29 +78,36 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         if let apps = userDefaults.array(forKey: "apps") {
             var i = 0
             for ap in apps {
+                let rectY = getRectY()
                 let a: [String:String] = ap as! [String : String]
 
                 // app url
-                let app = AppHotKeyTextField(frame: NSMakeRect(120, CGFloat(185 - (i * 25)), 180, 20))
+                let app = AppHotKeyTextField(frame: NSMakeRect(0, rectY, 180, 20))
                 app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(i)")
                 app.stringValue = a["path"]!
-                self.window?.contentView?.addSubview(app)
-                
+                appStackView.addSubview(app)
+//                let leadingConstraint = app.topAnchor.constraint(equalTo:self.recordView.bottomAnchor, constant: 30.0)
+//                leadingConstraint.isActive = true
+
                 // app hot key
-                let hotKey = AppHotKeyTextField(frame: NSMakeRect(320, CGFloat(185 - (i * 25)), 50, 20))
+                let hotKey = AppHotKeyTextField(frame: NSMakeRect(200, rectY, 50, 20))
                 hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(i)")
                 hotKey.stringValue = a["key"]!
-                self.window?.contentView?.addSubview(hotKey)
-                
+                appStackView.addSubview(hotKey)
+
                 // app del button
-                let delBtn = NSButton(frame: NSMakeRect(390, CGFloat(185 - (i * 25)), 50, 20))
+                let delBtn = NSButton(frame: NSMakeRect(270, rectY, 50, 20))
                 delBtn.title = "delete"
-                self.window?.contentView?.addSubview(delBtn)
+                appStackView.addSubview(delBtn)
                 i += 1
             }
-            baseY = 185 - (i * 25)
         }
 
+    }
+    
+    func getRectY() -> CGFloat {
+        appCount += 1
+        return CGFloat(20 - (self.appCount * 25))
     }
 
     @objc func hotkeyCalled() {
@@ -120,22 +128,29 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         openPanel.begin { (result) -> Void in
             if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
     
+                let rectY = self.getRectY()
+
                 guard let url = openPanel.url else { return }
                 let qa = sender.frame
 
                 // app url
-                let app = NSTextField(frame: NSMakeRect(qa.minX + 100, CGFloat(self.baseY), 180, qa.height))
+                let app = NSTextField(frame: NSMakeRect(0, rectY, 180, qa.height))
                 app.stringValue = url.path
-                self.window?.contentView?.addSubview(app)
+                self.appStackView.addSubview(app)
 
                 // app hot key
-                let hotKey = AppHotKeyTextField(frame: NSMakeRect(qa.minX + 300, CGFloat(self.baseY), 50, qa.height))
-                self.window?.contentView?.addSubview(hotKey)
+                let hotKey = AppHotKeyTextField(frame: NSMakeRect(200, rectY, 50, qa.height))
+                self.appStackView.addSubview(hotKey)
                 
                 // app del button
-                let delBtn = NSButton(frame: NSMakeRect(qa.minX + 370, CGFloat(self.baseY), 50, qa.height))
+                let delBtn = NSButton(frame: NSMakeRect(270, rectY, 50, qa.height))
                 delBtn.title = "delete"
-                self.window?.contentView?.addSubview(delBtn)
+                self.appStackView.addSubview(delBtn)
+
+                let frame = (self.window?.frame)!
+                let a = CGRect(x: frame.minX, y: frame.minY - 25, width: frame.width, height: frame.height + 25)
+                self.window?.setFrame(a, display: false, animate: false)
+                
             }
         }
     }

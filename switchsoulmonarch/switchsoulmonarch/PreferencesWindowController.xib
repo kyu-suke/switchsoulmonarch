@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWindowController" customModule="switchsoulmonarch" customModuleProvider="target">
             <connections>
+                <outlet property="appStackView" destination="H9O-p5-WGC" id="opB-mD-XQU"/>
                 <outlet property="ctrlEisuRadio" destination="yji-AI-f8c" id="eTl-I7-eVR"/>
                 <outlet property="ctrlKanaRadio" destination="fp5-lf-kd8" id="Tcq-jD-1YU"/>
                 <outlet property="recordView" destination="jZj-Fp-0mG" id="MVi-7L-ni7"/>
@@ -24,9 +25,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="645" height="350"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button identifier="ctrlEisu" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yji-AI-f8c">
+                    <button identifier="ctrlEisu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yji-AI-f8c">
                         <rect key="frame" x="19" y="190" width="84" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="radio" title="Ctrl + 英数" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MYD-HG-nld">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -35,9 +35,8 @@
                             <action selector="buttonClick:" target="-2" id="ObI-gW-dZc"/>
                         </connections>
                     </button>
-                    <button identifier="ctrlKana" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fp5-lf-kd8">
+                    <button identifier="ctrlKana" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fp5-lf-kd8">
                         <rect key="frame" x="20" y="168" width="84" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="radio" title="Ctrl + かな" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="9eB-RT-wV2">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -46,11 +45,26 @@
                             <action selector="buttonClick:" target="-2" id="2yy-vg-uSA"/>
                         </connections>
                     </button>
-                    <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZj-Fp-0mG" customClass="RecordView" customModule="KeyHolder">
+                    <view wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZj-Fp-0mG" customClass="RecordView" customModule="KeyHolder">
                         <rect key="frame" x="0.0" y="215" width="645" height="135"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="135" id="58C-uL-bIT"/>
+                        </constraints>
                     </view>
+                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9O-p5-WGC">
+                        <rect key="frame" x="131" y="185" width="69" height="0.0"/>
+                    </stackView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="yji-AI-f8c" firstAttribute="top" secondItem="jZj-Fp-0mG" secondAttribute="bottom" constant="8" symbolic="YES" id="0GT-kW-N5N"/>
+                    <constraint firstItem="H9O-p5-WGC" firstAttribute="top" secondItem="jZj-Fp-0mG" secondAttribute="bottom" constant="30" id="132-vm-WC1"/>
+                    <constraint firstAttribute="trailing" secondItem="jZj-Fp-0mG" secondAttribute="trailing" id="SwW-eX-Any"/>
+                    <constraint firstItem="jZj-Fp-0mG" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="YAE-HP-jsw"/>
+                    <constraint firstItem="fp5-lf-kd8" firstAttribute="top" secondItem="yji-AI-f8c" secondAttribute="bottom" constant="6" symbolic="YES" id="YbY-vJ-MlN"/>
+                    <constraint firstItem="fp5-lf-kd8" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="21" id="ifK-F7-cGf"/>
+                    <constraint firstItem="yji-AI-f8c" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="pEC-oL-YxC"/>
+                    <constraint firstItem="jZj-Fp-0mG" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="pwM-lw-80P"/>
+                </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
