@@ -31,7 +31,6 @@ class AppHotKeyTextField: NSTextField {
             ]
 
         }
-        print(app)
         apps[k] = app
         SettingApps.apps.setApps(apps: apps)
 //        apps[k] = ["path": , "key": ]

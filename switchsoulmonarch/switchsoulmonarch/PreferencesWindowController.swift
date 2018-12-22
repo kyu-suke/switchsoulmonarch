@@ -20,8 +20,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     @IBAction func buttonClick(_ sender: NSButton) {
         hotKeyRadios.forEach { $0.state = NSControl.StateValue(rawValue: 0) }
         sender.state = NSControl.StateValue(rawValue: 1)
-        print(UInt16(kVK_JIS_Kana))
-        print(UInt16(kVK_JIS_Eisu))
         switch sender.identifier!.rawValue {
         case "ctrlEisu":
             if let keyCombo = KeyCombo(keyCode: kVK_JIS_Eisu, cocoaModifiers: .control) {
@@ -40,11 +38,10 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     
     let userDefaults = UserDefaults()
     var hotKeyRadios: [NSButton]!
-    let menuItemUtil = MenuItemUtil()
 
     func windowWillClose(_ notification: Notification) {
         print("CLOOOOOOOOOOOOO")
-        menuItemUtil.setMenus()
+        MenuItemManager().setMenus()
     }
 
     override func windowDidLoad() {
@@ -67,7 +64,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     override func showWindow(_ sender: Any?) {
         super.showWindow(self)
 
-        print(userDefaults.object(forKey: "mainMenuHotKeyKeyCombo"))
         if let keyComboTmp = userDefaults.object(forKey: "mainMenuHotKeyKeyCombo") {
             let keyCombo = NSKeyedUnarchiver.unarchiveObject(with: keyComboTmp as! Data) as? KeyCombo
 
@@ -123,7 +119,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
             if result.rawValue == NSFileHandlingPanelOKButton {
                 // ファイルを選択したか(OKを押したか)
                 guard let url = openPanel.url else { return }
-                print(url.path)
                 
                 // NSWorkspace.shared.launchApplication(url.path) // app起動
                 // ここでファイルを読み込む
@@ -161,8 +156,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 let delBtn = NSButton(frame: NSMakeRect(qa.minX + 370, qa.minY, 50, qa.height))
                 delBtn.title = "delete"
                 self.window?.contentView?.addSubview(delBtn)
-
-                print(url.path)
 
                 // NSWorkspace.shared.launchApplication(url.path) // app起動
             }

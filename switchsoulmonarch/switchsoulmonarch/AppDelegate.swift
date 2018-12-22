@@ -41,7 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func preferences(_ sender: NSMenuItem){
-        MenuItemUtil().setLaunchApp(appName: sender.title)
+        MenuItemManager().setLaunchApp(appName: sender.title)
     }
 
     @objc func show(_ sender: NSMenuItem){
