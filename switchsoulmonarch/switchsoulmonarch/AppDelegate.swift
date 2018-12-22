@@ -50,10 +50,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
 
-    @objc func showMainMenu() {
-        let menu = MenuItemManager().getMenus()
-        menu.popUp(positioning: nil, at: NSEvent.mouseLocation, in: nil)
-    }
-
 }
 

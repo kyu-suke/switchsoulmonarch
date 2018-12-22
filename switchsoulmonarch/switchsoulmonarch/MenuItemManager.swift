@@ -31,7 +31,7 @@ class MenuItemManager: NSObject {
 
     @objc func setMainMenu(keyCombo: KeyCombo) {
         HotKeyCenter.shared.unregisterHotKey(with: "mainMenuHotKey")
-        let hotKey = HotKey(identifier: "mainMenuHotKey", keyCombo: keyCombo, target: AppDelegate(), action: #selector(AppDelegate.showMainMenu))
+        let hotKey = HotKey(identifier: "mainMenuHotKey", keyCombo: keyCombo, target: self, action: #selector(showMainMenu))
         hotKey.register()
     }
 
@@ -52,15 +52,21 @@ class MenuItemManager: NSObject {
         quitItem.action = #selector(AppDelegate.quit(_:))
         return quitItem
     }
-    
+
     public func makePreferencesItem () -> NSMenuItem {
         let item = NSMenuItem()
         item.title = "Preferences"
         item.action = #selector(AppDelegate.show(_:))
         return item
     }
-    
+
     public func setMenus() {
         print("MEEEENUUUUUUUUU")
     }
+
+    @objc func showMainMenu() {
+        let menu = MenuItemManager().getMenus()
+        menu.popUp(positioning: nil, at: NSEvent.mouseLocation, in: nil)
+    }
+
 }

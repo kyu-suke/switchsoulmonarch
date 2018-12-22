@@ -185,7 +185,6 @@ extension PreferencesWindowController: RecordViewDelegate {
     }
 
     func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
-
         MenuItemManager().setMainMenu(keyCombo: keyCombo)
         userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
     }
