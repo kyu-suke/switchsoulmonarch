@@ -16,6 +16,8 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var ctrlEisuRadio: NSButton!
     @IBOutlet weak var ctrlKanaRadio: NSButton!
+
+    var baseY = 0
     
     @IBAction func buttonClick(_ sender: NSButton) {
         hotKeyRadios.forEach { $0.state = NSControl.StateValue(rawValue: 0) }
@@ -78,23 +80,24 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 let a: [String:String] = ap as! [String : String]
 
                 // app url
-                let app = AppHotKeyTextField(frame: NSMakeRect(100, CGFloat(50 + (i * 25)), 180, 20))
+                let app = AppHotKeyTextField(frame: NSMakeRect(120, CGFloat(185 - (i * 25)), 180, 20))
                 app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(i)")
                 app.stringValue = a["path"]!
                 self.window?.contentView?.addSubview(app)
                 
                 // app hot key
-                let hotKey = AppHotKeyTextField(frame: NSMakeRect(300, CGFloat(50 + (i * 25)), 50, 20))
+                let hotKey = AppHotKeyTextField(frame: NSMakeRect(320, CGFloat(185 - (i * 25)), 50, 20))
                 hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(i)")
                 hotKey.stringValue = a["key"]!
                 self.window?.contentView?.addSubview(hotKey)
                 
                 // app del button
-                let delBtn = NSButton(frame: NSMakeRect(370, CGFloat(50 + (i * 25)), 50, 20))
+                let delBtn = NSButton(frame: NSMakeRect(390, CGFloat(185 - (i * 25)), 50, 20))
                 delBtn.title = "delete"
                 self.window?.contentView?.addSubview(delBtn)
                 i += 1
             }
+            baseY = 185 - (i * 25)
         }
 
     }
@@ -102,30 +105,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     @objc func hotkeyCalled() {
         print("HotKey called!!!!")
     }
-
-
-    @IBAction func openFile(_ sender: Any) {
-        let openPanel = NSOpenPanel()
-        openPanel.allowsMultipleSelection = false // 複数ファイルの選択を許すか
-        openPanel.canChooseDirectories = false // ディレクトリを選択できるか
-        openPanel.canCreateDirectories = false // ディレクトリを作成できるか
-        openPanel.canChooseFiles = true // ファイルを選択できるか
-        // openPanel.allowedFileTypes = NSImage.imageTypes // 選択できるファイル種別
-        openPanel.allowedFileTypes = ["app"]
-
-        openPanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.floatingWindow)))
-
-        openPanel.begin { (result) -> Void in
-            if result.rawValue == NSFileHandlingPanelOKButton {
-                // ファイルを選択したか(OKを押したか)
-                guard let url = openPanel.url else { return }
-                
-                // NSWorkspace.shared.launchApplication(url.path) // app起動
-                // ここでファイルを読み込む
-            }
-        }
-    }
-
+ 
     @objc func addApp(_ sender: NSButton) {
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false // 複数ファイルの選択を許すか
@@ -144,20 +124,18 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 let qa = sender.frame
 
                 // app url
-                let app = NSTextField(frame: NSMakeRect(qa.minX + 100, qa.minY, 180, qa.height))
+                let app = NSTextField(frame: NSMakeRect(qa.minX + 100, CGFloat(self.baseY), 180, qa.height))
                 app.stringValue = url.path
                 self.window?.contentView?.addSubview(app)
 
                 // app hot key
-                let hotKey = AppHotKeyTextField(frame: NSMakeRect(qa.minX + 300, qa.minY, 50, qa.height))
+                let hotKey = AppHotKeyTextField(frame: NSMakeRect(qa.minX + 300, CGFloat(self.baseY), 50, qa.height))
                 self.window?.contentView?.addSubview(hotKey)
                 
                 // app del button
-                let delBtn = NSButton(frame: NSMakeRect(qa.minX + 370, qa.minY, 50, qa.height))
+                let delBtn = NSButton(frame: NSMakeRect(qa.minX + 370, CGFloat(self.baseY), 50, qa.height))
                 delBtn.title = "delete"
                 self.window?.contentView?.addSubview(delBtn)
-
-                // NSWorkspace.shared.launchApplication(url.path) // app起動
             }
         }
     }

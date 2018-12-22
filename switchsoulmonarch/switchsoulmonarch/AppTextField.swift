@@ -33,32 +33,6 @@ class AppHotKeyTextField: NSTextField {
         }
         apps[k] = app
         SettingApps.apps.setApps(apps: apps)
-//        apps[k] = ["path": , "key": ]
     }
-    //        userDefaults.set([
-    //            [
-    //                "path": "/Applications/iTerm.app",
-    //                "key":  "i"
-    //            ],
-    //            [
-    //                "path": "/Applications/Google Chrome.app",
-    //                "key":  "g"
-    //            ],
-    //            [
-    //                "path": "/Applications/Franz.app",
-    //                "key":  "r"
-    //            ],
-    //            [
-    //                "path": "/Applications/Finder.app",
-    //                "key":  "f"
-    //            ],
-    //            [
-    //                "path": "/Applications/Xcode",
-    //                "key":  "x"
-    //            ],
-    //            [
-    //                "path": "/Applications/MacVim",
-    //                "key":  "v"
-    //            ],
-    //            ], forKey: "apps")
+
 }

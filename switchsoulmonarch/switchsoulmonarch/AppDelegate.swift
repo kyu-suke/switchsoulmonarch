@@ -31,10 +31,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.statusItem.menu = MenuItemManager().getMenus()
     }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
     
     @objc func quit(_ sender: Any){
         NSApplication.shared.terminate(self)
@@ -50,5 +46,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
 
+    func applicationWillTerminate(_ aNotification: Notification) {
+        // Insert code here to tear down your application
+    }
 }
 
