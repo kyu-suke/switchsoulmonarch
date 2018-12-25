@@ -23,9 +23,6 @@ class SettingApps: NSObject {
                 self.app_list.append(a)
             }
         }
-        
-// will run when window is closed
-//        setApps(apps: self.app_list)
     }
 
     func getApps() -> [[String : String]] {

@@ -19,6 +19,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var appStackView: NSStackView!
     
     var appCount = 0
+    var identCount = 0
 
     @IBAction func buttonClick(_ sender: NSButton) {
         hotKeyRadios.forEach { $0.state = NSControl.StateValue(rawValue: 0) }
@@ -44,6 +45,54 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
     func windowWillClose(_ notification: Notification) {
         print("CLOOOOOOOOOOOOO")
+        SettingApps.apps.setApps(apps: [])
+        SettingApps.apps.setAppList()
+//        var apps = SettingApps.apps.getApps()
+        var apps: [Int : [String:String]] = [:]
+        print(apps)
+        appStackView!.subviews.forEach {
+            guard let identifier = $0.identifier else {
+                return
+            }
+            let ident = identifier.rawValue.split(separator: ":")
+
+            if ident[0] == "del" {
+                return
+            }
+
+            let appHotKeyTextField = $0 as! AppHotKeyTextField
+            let k = Int(ident[1])!
+            let t = ident[0]
+//            if (k >= apps.count) {
+////                apps.insert(["path":"", "key":""], at: k)
+//            }
+            if let value = apps[k] {
+            } else {
+                apps[k] = ["path":"", "key":""]
+            }
+            var app: [String : String] = apps[k]!
+            if t == "path" {
+                app = [
+                    "path": appHotKeyTextField.stringValue,
+                    "key": app["key"]!
+                ]
+
+            } else if t == "key" {
+                app = [
+                    "path": app["path"]!,
+                    "key": appHotKeyTextField.stringValue
+                ]
+
+            }
+//            apps.insert(app, at: k)
+            apps[k] = app
+
+        }
+        var apppppp: [[String:String]] = []
+        apps.forEach {
+            apppppp.append($0.value)
+        }
+        SettingApps.apps.setApps(apps: apppppp)
         MenuItemManager().setMenus()
     }
 
@@ -76,30 +125,31 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
         // set HotKey
         if let apps = userDefaults.array(forKey: "apps") {
-            var i = 0
+            identCount = 0
             for ap in apps {
                 let rectY = getRectY()
                 let a: [String:String] = ap as! [String : String]
 
                 // app url
                 let app = AppHotKeyTextField(frame: NSMakeRect(0, rectY, 180, 20))
-                app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(i)")
+                app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(identCount)")
                 app.stringValue = a["path"]!
                 appStackView.addSubview(app)
-//                let leadingConstraint = app.topAnchor.constraint(equalTo:self.recordView.bottomAnchor, constant: 30.0)
-//                leadingConstraint.isActive = true
+                
 
                 // app hot key
                 let hotKey = AppHotKeyTextField(frame: NSMakeRect(200, rectY, 50, 20))
-                hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(i)")
+                hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(identCount)")
                 hotKey.stringValue = a["key"]!
                 appStackView.addSubview(hotKey)
 
                 // app del button
                 let delBtn = NSButton(frame: NSMakeRect(270, rectY, 50, 20))
+                delBtn.identifier = NSUserInterfaceItemIdentifier(rawValue: "del:\(identCount)")
                 delBtn.title = "delete"
+                delBtn.action = #selector(delApp(_:))
                 appStackView.addSubview(delBtn)
-                i += 1
+                identCount += 1
             }
         }
 
@@ -107,7 +157,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     
     func getRectY() -> CGFloat {
         appCount += 1
-        return CGFloat(20 - (self.appCount * 25))
+        return CGFloat(180 + (self.appCount * -25))
     }
 
     @objc func hotkeyCalled() {
@@ -116,15 +166,12 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
  
     @objc func addApp(_ sender: NSButton) {
         let openPanel = NSOpenPanel()
-        openPanel.allowsMultipleSelection = false // 複数ファイルの選択を許すか
-        openPanel.canChooseDirectories = false // ディレクトリを選択できるか
-        openPanel.canCreateDirectories = false // ディレクトリを作成できるか
-        openPanel.canChooseFiles = true // ファイルを選択できるか
-        // openPanel.allowedFileTypes = NSImage.imageTypes // 選択できるファイル種別
+        openPanel.allowsMultipleSelection = false
+        openPanel.canChooseDirectories = false
+        openPanel.canCreateDirectories = false
+        openPanel.canChooseFiles = true
         openPanel.allowedFileTypes = ["app"]
-        
         openPanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.floatingWindow)))
-        
         openPanel.begin { (result) -> Void in
             if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
     
@@ -134,28 +181,46 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 let qa = sender.frame
 
                 // app url
-                let app = NSTextField(frame: NSMakeRect(0, rectY, 180, qa.height))
+                let app = AppHotKeyTextField(frame: NSMakeRect(0, rectY, 180, qa.height))
+                app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(self.identCount)")
                 app.stringValue = url.path
                 self.appStackView.addSubview(app)
 
                 // app hot key
                 let hotKey = AppHotKeyTextField(frame: NSMakeRect(200, rectY, 50, qa.height))
+                hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(self.identCount)")
                 self.appStackView.addSubview(hotKey)
                 
                 // app del button
                 let delBtn = NSButton(frame: NSMakeRect(270, rectY, 50, qa.height))
+                delBtn.identifier = NSUserInterfaceItemIdentifier(rawValue: "del:\(self.identCount)")
                 delBtn.title = "delete"
+                delBtn.action = #selector(self.delApp(_:))
                 self.appStackView.addSubview(delBtn)
 
+                // higher window height
                 let frame = (self.window?.frame)!
                 let a = CGRect(x: frame.minX, y: frame.minY - 25, width: frame.width, height: frame.height + 25)
                 self.window?.setFrame(a, display: false, animate: false)
-                
+
+                self.identCount += 1
             }
         }
     }
-
     
+    @objc func delApp(_ sender: NSButton) {
+        let delIdent = sender.identifier?.rawValue.split(separator: ":")[1]
+        appStackView!.subviews.forEach {
+            guard let identifier = $0.identifier else {
+                return
+            }
+            let ident = identifier.rawValue.split(separator: ":")
+            
+            if ident[1] == delIdent {
+                $0.removeFromSuperview()
+            }
+        }
+    }
 }
 
 extension PreferencesWindowController: RecordViewDelegate {

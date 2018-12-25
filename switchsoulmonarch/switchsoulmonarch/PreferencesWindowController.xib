@@ -51,13 +51,13 @@
                             <constraint firstAttribute="height" constant="135" id="58C-uL-bIT"/>
                         </constraints>
                     </view>
-                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9O-p5-WGC">
-                        <rect key="frame" x="131" y="185" width="69" height="0.0"/>
+                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9O-p5-WGC">
+                        <rect key="frame" x="132" y="30" width="493" height="200"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="yji-AI-f8c" firstAttribute="top" secondItem="jZj-Fp-0mG" secondAttribute="bottom" constant="8" symbolic="YES" id="0GT-kW-N5N"/>
-                    <constraint firstItem="H9O-p5-WGC" firstAttribute="top" secondItem="jZj-Fp-0mG" secondAttribute="bottom" constant="30" id="132-vm-WC1"/>
                     <constraint firstAttribute="trailing" secondItem="jZj-Fp-0mG" secondAttribute="trailing" id="SwW-eX-Any"/>
                     <constraint firstItem="jZj-Fp-0mG" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="YAE-HP-jsw"/>
                     <constraint firstItem="fp5-lf-kd8" firstAttribute="top" secondItem="yji-AI-f8c" secondAttribute="bottom" constant="6" symbolic="YES" id="YbY-vJ-MlN"/>
