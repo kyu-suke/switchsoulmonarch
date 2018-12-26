@@ -60,7 +60,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 return
             }
 
-            let appHotKeyTextField = $0 as! AppHotKeyTextField
+            let appHotKeyTextField = $0 as! NSTextField
             let k = Int(ident[1])!
             let t = ident[0]
 //            if (k >= apps.count) {
@@ -131,14 +131,14 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 let a: [String:String] = ap as! [String : String]
 
                 // app url
-                let app = AppHotKeyTextField(frame: NSMakeRect(0, rectY, 180, 20))
+                let app = NSTextField(frame: NSMakeRect(0, rectY, 180, 20))
                 app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(identCount)")
                 app.stringValue = a["path"]!
                 appStackView.addSubview(app)
                 
 
                 // app hot key
-                let hotKey = AppHotKeyTextField(frame: NSMakeRect(200, rectY, 50, 20))
+                let hotKey = NSTextField(frame: NSMakeRect(200, rectY, 50, 20))
                 hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(identCount)")
                 hotKey.stringValue = a["key"]!
                 appStackView.addSubview(hotKey)
@@ -181,13 +181,13 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 let qa = sender.frame
 
                 // app url
-                let app = AppHotKeyTextField(frame: NSMakeRect(0, rectY, 180, qa.height))
+                let app = NSTextField(frame: NSMakeRect(0, rectY, 180, qa.height))
                 app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(self.identCount)")
                 app.stringValue = url.path
                 self.appStackView.addSubview(app)
 
                 // app hot key
-                let hotKey = AppHotKeyTextField(frame: NSMakeRect(200, rectY, 50, qa.height))
+                let hotKey = NSTextField(frame: NSMakeRect(200, rectY, 50, qa.height))
                 hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(self.identCount)")
                 self.appStackView.addSubview(hotKey)
                 
