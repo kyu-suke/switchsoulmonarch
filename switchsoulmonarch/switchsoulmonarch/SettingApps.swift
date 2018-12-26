@@ -14,9 +14,9 @@ class SettingApps: NSObject {
     let userDefaults = UserDefaults()
 
     func setAppList() {
+        self.app_list = []
         if let apps = userDefaults.array(forKey: "apps") {
             for app in apps {
-                print(app)
                 let a: [String:String] = app as! [String : String]
                 let path = a["path"]!
                 let key = a["key"]!
