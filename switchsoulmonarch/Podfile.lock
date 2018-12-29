@@ -2,20 +2,24 @@ PODS:
   - KeyHolder (3.0.1):
     - Magnet (~> 2.3)
   - Magnet (2.3.1)
+  - Sparkle (1.20.0)
 
 DEPENDENCIES:
   - KeyHolder
   - Magnet
+  - Sparkle
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - KeyHolder
     - Magnet
+    - Sparkle
 
 SPEC CHECKSUMS:
   KeyHolder: 142932db4eac7420b003e2eae94c9a61b8b53cb1
   Magnet: f8dac2ffc845ffe68b2dd21c68a801f866f4a098
+  Sparkle: 48999e7ee032f05ca05e28451eadf4af8ede6b44
 
-PODFILE CHECKSUM: 874f3bf59e8144aa9c474fc1f2d3054888ae35bd
+PODFILE CHECKSUM: 0cd4a7bf5703663d2ccbc9ecd1b2e0285715edaa
 
 COCOAPODS: 1.6.0.beta.2
