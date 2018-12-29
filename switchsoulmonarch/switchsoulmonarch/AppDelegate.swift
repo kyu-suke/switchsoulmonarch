@@ -32,6 +32,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.statusItem.menu = MenuItemManager().getMenus()
 
+        // check update
+        let updater = SUUpdater.shared()
+        updater?.feedURL = URL(string: "https://kyu-suke.github.io/appcast.xml")
+        updater?.automaticallyChecksForUpdates = true
+        updater?.updateCheckInterval = 86400
+
     }
     
     @objc func quit(_ sender: Any){
