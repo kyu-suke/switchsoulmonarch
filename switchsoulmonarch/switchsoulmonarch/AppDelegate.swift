@@ -9,6 +9,7 @@
 import Cocoa
 import Magnet
 import KeyHolder
+import Sparkle
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -30,6 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         self.statusItem.menu = MenuItemManager().getMenus()
+
     }
     
     @objc func quit(_ sender: Any){

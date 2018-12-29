@@ -8,6 +8,7 @@ target 'switchsoulmonarch' do
   # Pods for switchsoulmonarch
   pod 'Magnet'
   pod 'KeyHolder'
+  pod 'Sparkle'
 
   target 'switchsoulmonarchTests' do
     inherit! :search_paths

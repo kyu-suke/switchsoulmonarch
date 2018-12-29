@@ -12,6 +12,7 @@
 		045EDC1021A1B0B000B6D9A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045EDC0E21A1B0B000B6D9A5 /* Main.storyboard */; };
 		045EDC1C21A1B0B000B6D9A5 /* switchsoulmonarchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045EDC1B21A1B0B000B6D9A5 /* switchsoulmonarchTests.swift */; };
 		045EDC2721A1B0B000B6D9A5 /* switchsoulmonarchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045EDC2621A1B0B000B6D9A5 /* switchsoulmonarchUITests.swift */; };
+		0466A11421D7536800799A59 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 0466A11321D7536800799A59 /* dsa_pub.pem */; };
 		04C7EF8621A1C4BA004F11F4 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C7EF8521A1C4BA004F11F4 /* PreferencesWindowController.swift */; };
 		88C20F7789A3034EB0974052 /* Pods_switchsoulmonarchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA7323C28A8A8FA53636714 /* Pods_switchsoulmonarchUITests.framework */; };
 		8B409890F902C73C4B445D28 /* Pods_switchsoulmonarchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACD78C45A0981D9730CD24B /* Pods_switchsoulmonarchTests.framework */; };
@@ -53,6 +54,7 @@
 		045EDC2221A1B0B000B6D9A5 /* switchsoulmonarchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = switchsoulmonarchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		045EDC2621A1B0B000B6D9A5 /* switchsoulmonarchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = switchsoulmonarchUITests.swift; sourceTree = "<group>"; };
 		045EDC2821A1B0B000B6D9A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0466A11321D7536800799A59 /* dsa_pub.pem */ = {isa = PBXFileReference; lastKnownFileType = text; name = dsa_pub.pem; path = dsa/dsa_pub.pem; sourceTree = "<group>"; };
 		04C7EF8521A1C4BA004F11F4 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		14F990C21A3109A92256A6D4 /* Pods-switchsoulmonarchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-switchsoulmonarchUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-switchsoulmonarchUITests/Pods-switchsoulmonarchUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3FDEA819F2C36A4F8B9C84E6 /* Pods-switchsoulmonarch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-switchsoulmonarch.release.xcconfig"; path = "Pods/Target Support Files/Pods-switchsoulmonarch/Pods-switchsoulmonarch.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		045EDBFC21A1B0AF00B6D9A5 = {
 			isa = PBXGroup;
 			children = (
+				0466A11321D7536800799A59 /* dsa_pub.pem */,
 				045EDC0721A1B0AF00B6D9A5 /* switchsoulmonarch */,
 				045EDC1A21A1B0B000B6D9A5 /* switchsoulmonarchTests */,
 				045EDC2521A1B0B000B6D9A5 /* switchsoulmonarchUITests */,
@@ -289,6 +292,7 @@
 			files = (
 				BA1B48F921A6929D0076DF66 /* PreferencesWindowController.xib in Resources */,
 				045EDC0D21A1B0B000B6D9A5 /* Assets.xcassets in Resources */,
+				0466A11421D7536800799A59 /* dsa_pub.pem in Resources */,
 				045EDC1021A1B0B000B6D9A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +325,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-switchsoulmonarch/Pods-switchsoulmonarch-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/KeyHolder/KeyHolder.framework",
 				"${BUILT_PRODUCTS_DIR}/Magnet/Magnet.framework",
+				"${PODS_ROOT}/Sparkle/Sparkle.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -328,6 +333,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeyHolder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Magnet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
