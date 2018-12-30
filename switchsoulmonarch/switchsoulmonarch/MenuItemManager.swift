@@ -11,7 +11,6 @@ import Magnet
 import KeyHolder
 
 class MenuItemManager: NSObject {
-    // set MenuItems
 
     @objc func getMenus() -> NSMenu {
         SettingApps.apps.setAppList()
