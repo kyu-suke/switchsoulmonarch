@@ -10,7 +10,7 @@ DEPENDENCIES:
   - Sparkle
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - KeyHolder
     - Magnet
     - Sparkle
@@ -22,4 +22,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 0cd4a7bf5703663d2ccbc9ecd1b2e0285715edaa
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.8.4
