@@ -7,7 +7,7 @@ target 'switchsoulmonarch' do
 
   # Pods for switchsoulmonarch
   pod 'Magnet'
-  pod 'KeyHolder'
+  pod 'KeyHolder', :git => 'https://github.com/kyu-suke/KeyHolder', :branch => 'add_eisu_kana'
   pod 'Sparkle'
 
   target 'switchsoulmonarchTests' do

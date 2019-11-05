@@ -5,21 +5,30 @@ PODS:
   - Sparkle (1.21.2)
 
 DEPENDENCIES:
-  - KeyHolder
+  - KeyHolder (from `https://github.com/kyu-suke/KeyHolder`, branch `add_eisu_kana`)
   - Magnet
   - Sparkle
 
 SPEC REPOS:
   trunk:
-    - KeyHolder
     - Magnet
     - Sparkle
+
+EXTERNAL SOURCES:
+  KeyHolder:
+    :branch: add_eisu_kana
+    :git: https://github.com/kyu-suke/KeyHolder
+
+CHECKOUT OPTIONS:
+  KeyHolder:
+    :commit: 55532f6b92865d97e6a71bc42f7d490bb841e54c
+    :git: https://github.com/kyu-suke/KeyHolder
 
 SPEC CHECKSUMS:
   KeyHolder: 142932db4eac7420b003e2eae94c9a61b8b53cb1
   Magnet: f8dac2ffc845ffe68b2dd21c68a801f866f4a098
   Sparkle: 1678d4707e7665960c7d1b43aca125e6392d11c4
 
-PODFILE CHECKSUM: 0cd4a7bf5703663d2ccbc9ecd1b2e0285715edaa
+PODFILE CHECKSUM: 694e59049ac3528b25b2d249a9e1b999e7f0add0
 
 COCOAPODS: 1.8.4
