@@ -14,42 +14,17 @@ import Carbon
 class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
     @IBOutlet weak var recordView: RecordView!
-    @IBOutlet weak var ctrlEisuRadio: NSButton!
-    @IBOutlet weak var ctrlKanaRadio: NSButton!
     @IBOutlet weak var appStackView: NSStackView!
     
     var appCount = 0
     var identCount = 0
-
-    @IBAction func buttonClick(_ sender: NSButton) {
-        hotKeyRadios.forEach { $0.state = NSControl.StateValue(rawValue: 0) }
-        sender.state = NSControl.StateValue(rawValue: 1)
-        switch sender.identifier!.rawValue {
-        case "ctrlEisu":
-            if let keyCombo = KeyCombo(keyCode: kVK_JIS_Eisu, cocoaModifiers: .control) {
-            MenuItemManager().setMainMenu(keyCombo: keyCombo)
-            userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
-            }
-        case "ctrlKana":
-            if let keyCombo = KeyCombo(keyCode: kVK_JIS_Kana, cocoaModifiers: .control) {
-            MenuItemManager().setMainMenu(keyCombo: keyCombo)
-            userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
-            }
-        default:
-            print("else")
-        }
-    }
     
     let userDefaults = UserDefaults()
-    var hotKeyRadios: [NSButton]!
 
     func windowWillClose(_ notification: Notification) {
-        print("CLOOOOOOOOOOOOO")
         SettingApps.apps.setApps(apps: [])
         SettingApps.apps.setAppList()
-//        var apps = SettingApps.apps.getApps()
         var apps: [Int : [String:String]] = [:]
-        print(apps)
         appStackView!.subviews.forEach {
             guard let identifier = $0.identifier else {
                 return
@@ -63,9 +38,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
             let appHotKeyTextField = $0 as! NSTextField
             let k = Int(ident[1])!
             let t = ident[0]
-//            if (k >= apps.count) {
-////                apps.insert(["path":"", "key":""], at: k)
-//            }
+
             if let value = apps[k] {
             } else {
                 apps[k] = ["path":"", "key":""]
@@ -84,7 +57,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 ]
 
             }
-//            apps.insert(app, at: k)
             apps[k] = app
 
         }
@@ -98,7 +70,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        hotKeyRadios = [ctrlEisuRadio, ctrlKanaRadio]
 
         window?.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.floatingWindow)))
 
@@ -244,6 +215,11 @@ extension PreferencesWindowController: RecordViewDelegate {
 
     func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
         MenuItemManager().setMainMenu(keyCombo: keyCombo)
-        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
+//        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: keyCombo), forKey: "mainMenuHotKeyKeyCombo")
+        do {
+            userDefaults.set(try NSKeyedArchiver.archivedData(withRootObject: keyCombo, requiringSecureCoding: true), forKey: "mainMenuHotKeyKeyCombo")
+        } catch {
+            
+        }
     }
 }

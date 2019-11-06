@@ -18,8 +18,6 @@ class SettingApps: NSObject {
         if let apps = userDefaults.array(forKey: "apps") {
             for app in apps {
                 let a: [String:String] = app as! [String : String]
-                let path = a["path"]!
-                let key = a["key"]!
                 self.app_list.append(a)
             }
         }
