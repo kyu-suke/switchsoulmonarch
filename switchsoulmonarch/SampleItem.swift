@@ -14,5 +14,12 @@ class SampleItem: NSCollectionViewItem {
         super.viewDidLoad()
         // Do view setup here.
     }
-    
+    func updateBG() {
+        if isSelected {
+            self.view.layer?.backgroundColor = NSColor(deviceWhite: 1.0, alpha: 0.3).cgColor
+        } else {
+            self.view.layer?.backgroundColor = CGColor.clear
+        }
+    }
+
 }

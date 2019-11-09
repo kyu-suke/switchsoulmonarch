@@ -17,6 +17,20 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var appStackView: NSStackView!
     @IBOutlet weak var appCollectionView: NSCollectionView!
     
+    @IBAction func addButton(_ sender: Any) {
+        data.append("W") //例えば
+        appCollectionView.reloadData()
+    }
+    
+    @IBAction func deleteButton(_ sender: Any) {
+        guard let n = appCollectionView.selectionIndexPaths.first?.item else { return }
+        let item = appCollectionView.item(at: n) as! SampleItem
+        item.isSelected = false
+        item.updateBG()
+        data.remove(at: n)
+        appCollectionView.reloadData()
+    }
+    
     var appCount = 0
     var identCount = 0
     
@@ -86,7 +100,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
     }
 
-    var data = ["A", "B", "C", "D"]
+    var data = ["A", "B", "C", "D", "E", "F", "G", "H"]
 
     override func showWindow(_ sender: Any?) {
         super.showWindow(self)
@@ -102,7 +116,9 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         appCollectionView.dataSource = self as? NSCollectionViewDataSource
         let nib = NSNib(nibNamed: "SampleItem", bundle: nil)
         appCollectionView.register(nib, forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sample"))
+        appCollectionView.isSelectable = true
         appCollectionView.reloadData()
+
 
 
         let hoge: Set = ["a", "b", "c"]
@@ -247,6 +263,20 @@ extension PreferencesWindowController: RecordViewDelegate,NSCollectionViewDelega
         item.textField?.stringValue = data[indexPath.item]
         item.imageView?.image = NSImage(imageLiteralResourceName: "AppIcon")
         return item
+    }
+
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        let count = collectionView.numberOfItems(inSection: 0)
+        for n in (0 ..< count) {
+            (collectionView.item(at: n) as! SampleItem).updateBG()
+        }
+    }
+
+    func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
+        let count = collectionView.numberOfItems(inSection: 0)
+        for n in (0 ..< count) {
+            (collectionView.item(at: n) as! SampleItem).updateBG()
+        }
     }
 
 }
