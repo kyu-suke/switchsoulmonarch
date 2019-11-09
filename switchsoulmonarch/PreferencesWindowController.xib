@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWindowController" customModule="switchsoulmonarch" customModuleProvider="target">
             <connections>
+                <outlet property="appCollectionView" destination="8Lx-Kv-Aor" id="Sbu-wH-rXe"/>
                 <outlet property="appStackView" destination="H9O-p5-WGC" id="opB-mD-XQU"/>
                 <outlet property="recordView" destination="jZj-Fp-0mG" id="MVi-7L-ni7"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -24,33 +25,89 @@
                 <rect key="frame" x="0.0" y="0.0" width="700" height="350"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <view wantsLayer="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZj-Fp-0mG" customClass="RecordView" customModule="KeyHolder">
-                        <rect key="frame" x="0.0" y="246" width="700" height="104"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="135" id="58C-uL-bIT"/>
-                        </constraints>
-                    </view>
-                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9O-p5-WGC">
-                        <rect key="frame" x="132" y="30" width="493" height="200"/>
+                    <tabView id="769-gq-lT7">
+                        <rect key="frame" x="-7" y="-10" width="714" height="366"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    </stackView>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="amv-6B-aiz">
-                        <rect key="frame" x="0.0" y="130" width="123" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="check update" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nou-y8-A1H">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="checkForUpdates:" target="UpE-8h-l9D" id="elJ-KL-0dP"/>
-                        </connections>
-                    </button>
+                        <font key="font" metaFont="system"/>
+                        <tabViewItems>
+                            <tabViewItem label="Tab" identifier="" id="Lh7-oI-fP2">
+                                <view key="view" id="Psl-HQ-EXg">
+                                    <rect key="frame" x="10" y="33" width="694" height="320"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <view wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZj-Fp-0mG" customClass="RecordView" customModule="KeyHolder">
+                                            <rect key="frame" x="-3" y="100" width="700" height="135"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="135" id="58C-uL-bIT"/>
+                                            </constraints>
+                                        </view>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9O-p5-WGC">
+                                            <rect key="frame" x="347" y="167" width="0.0" height="0.0"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="jZj-Fp-0mG" secondAttribute="trailing" constant="-3" id="8Gx-5a-3an"/>
+                                        <constraint firstItem="jZj-Fp-0mG" firstAttribute="centerY" secondItem="H9O-p5-WGC" secondAttribute="centerY" id="Fs0-30-ant"/>
+                                        <constraint firstItem="jZj-Fp-0mG" firstAttribute="leading" secondItem="Psl-HQ-EXg" secondAttribute="leading" constant="-3" id="KiD-ny-QHY"/>
+                                        <constraint firstItem="jZj-Fp-0mG" firstAttribute="centerY" secondItem="Psl-HQ-EXg" secondAttribute="centerY" constant="-7" id="Ple-it-0dA"/>
+                                        <constraint firstItem="jZj-Fp-0mG" firstAttribute="centerX" secondItem="H9O-p5-WGC" secondAttribute="centerX" id="hex-Rg-Hv7"/>
+                                    </constraints>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="View" identifier="" id="nGX-Ls-ucf">
+                                <view key="view" id="uvO-ru-ZPc">
+                                    <rect key="frame" x="10" y="33" width="694" height="320"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lM-Tx-T8P">
+                                            <rect key="frame" x="-3" y="-3" width="700" height="340"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <clipView key="contentView" ambiguous="YES" id="Fqc-Ks-zj4">
+                                                <rect key="frame" x="1" y="1" width="698" height="338"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <collectionView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Lx-Kv-Aor">
+                                                        <rect key="frame" x="0.0" y="0.0" width="698" height="158"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                                        <collectionViewGridLayout key="collectionViewLayout" id="pf9-Az-Rax"/>
+                                                        <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </collectionView>
+                                                </subviews>
+                                            </clipView>
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="S3b-qa-hf5">
+                                                <rect key="frame" x="1" y="340" width="698" height="16"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="2gJ-jM-uCx">
+                                                <rect key="frame" x="234" y="1" width="15" height="143"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                        </scrollView>
+                                    </subviews>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="Item 2" identifier="" id="10o-Pw-shK">
+                                <view key="view" id="aqL-eg-fCg">
+                                    <rect key="frame" x="10" y="33" width="694" height="320"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="amv-6B-aiz">
+                                            <rect key="frame" x="285" y="151" width="123" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="push" title="check update" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nou-y8-A1H">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="checkForUpdates:" target="UpE-8h-l9D" id="elJ-KL-0dP"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                            </tabViewItem>
+                        </tabViewItems>
+                    </tabView>
                 </subviews>
-                <constraints>
-                    <constraint firstAttribute="trailing" secondItem="jZj-Fp-0mG" secondAttribute="trailing" id="SwW-eX-Any"/>
-                    <constraint firstItem="jZj-Fp-0mG" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="YAE-HP-jsw"/>
-                    <constraint firstItem="jZj-Fp-0mG" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="pwM-lw-80P"/>
-                </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>

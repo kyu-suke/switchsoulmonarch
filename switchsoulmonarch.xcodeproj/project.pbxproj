@@ -13,6 +13,8 @@
 		045EDC1C21A1B0B000B6D9A5 /* switchsoulmonarchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045EDC1B21A1B0B000B6D9A5 /* switchsoulmonarchTests.swift */; };
 		045EDC2721A1B0B000B6D9A5 /* switchsoulmonarchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045EDC2621A1B0B000B6D9A5 /* switchsoulmonarchUITests.swift */; };
 		0466A11421D7536800799A59 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 0466A11321D7536800799A59 /* dsa_pub.pem */; };
+		0490FF032377094600E0577C /* SampleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490FF012377094600E0577C /* SampleItem.swift */; };
+		0490FF042377094600E0577C /* SampleItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0490FF022377094600E0577C /* SampleItem.xib */; };
 		04C7EF8621A1C4BA004F11F4 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C7EF8521A1C4BA004F11F4 /* PreferencesWindowController.swift */; };
 		88C20F7789A3034EB0974052 /* Pods_switchsoulmonarchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA7323C28A8A8FA53636714 /* Pods_switchsoulmonarchUITests.framework */; };
 		8B409890F902C73C4B445D28 /* Pods_switchsoulmonarchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACD78C45A0981D9730CD24B /* Pods_switchsoulmonarchTests.framework */; };
@@ -55,6 +57,8 @@
 		045EDC2621A1B0B000B6D9A5 /* switchsoulmonarchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = switchsoulmonarchUITests.swift; sourceTree = "<group>"; };
 		045EDC2821A1B0B000B6D9A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0466A11321D7536800799A59 /* dsa_pub.pem */ = {isa = PBXFileReference; lastKnownFileType = text; name = dsa_pub.pem; path = dsa/dsa_pub.pem; sourceTree = "<group>"; };
+		0490FF012377094600E0577C /* SampleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleItem.swift; sourceTree = "<group>"; };
+		0490FF022377094600E0577C /* SampleItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SampleItem.xib; sourceTree = "<group>"; };
 		04C7EF8521A1C4BA004F11F4 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		14F990C21A3109A92256A6D4 /* Pods-switchsoulmonarchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-switchsoulmonarchUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-switchsoulmonarchUITests/Pods-switchsoulmonarchUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3FDEA819F2C36A4F8B9C84E6 /* Pods-switchsoulmonarch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-switchsoulmonarch.release.xcconfig"; path = "Pods/Target Support Files/Pods-switchsoulmonarch/Pods-switchsoulmonarch.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 				045EDC0821A1B0AF00B6D9A5 /* AppDelegate.swift */,
 				BA860E0A21CC9944004E118F /* HotKeyManager.swift */,
 				BA860E0C21CC99ED004E118F /* KeyComboManager.swift */,
+				0490FF012377094600E0577C /* SampleItem.swift */,
+				0490FF022377094600E0577C /* SampleItem.xib */,
 				BA860E0E21CC99FF004E118F /* MenuItemManager.swift */,
 				BA34948921CA2AC000C1184D /* SettingApps.swift */,
 				04C7EF8521A1C4BA004F11F4 /* PreferencesWindowController.swift */,
@@ -294,6 +300,7 @@
 				045EDC0D21A1B0B000B6D9A5 /* Assets.xcassets in Resources */,
 				0466A11421D7536800799A59 /* dsa_pub.pem in Resources */,
 				045EDC1021A1B0B000B6D9A5 /* Main.storyboard in Resources */,
+				0490FF042377094600E0577C /* SampleItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +403,7 @@
 				045EDC0921A1B0AF00B6D9A5 /* AppDelegate.swift in Sources */,
 				BA860E0D21CC99ED004E118F /* KeyComboManager.swift in Sources */,
 				04C7EF8621A1C4BA004F11F4 /* PreferencesWindowController.swift in Sources */,
+				0490FF032377094600E0577C /* SampleItem.swift in Sources */,
 				BA860E0F21CC99FF004E118F /* MenuItemManager.swift in Sources */,
 				BA860E0B21CC9944004E118F /* HotKeyManager.swift in Sources */,
 			);

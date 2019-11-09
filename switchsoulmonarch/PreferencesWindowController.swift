@@ -15,6 +15,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
     @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var appStackView: NSStackView!
+    @IBOutlet weak var appCollectionView: NSCollectionView!
     
     var appCount = 0
     var identCount = 0
@@ -40,6 +41,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
             let t = ident[0]
 
             if let value = apps[k] {
+                print(value)
             } else {
                 apps[k] = ["path":"", "key":""]
             }
@@ -84,6 +86,8 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
     }
 
+    var data = ["A", "B", "C", "D"]
+
     override func showWindow(_ sender: Any?) {
         super.showWindow(self)
 
@@ -93,6 +97,15 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
             recordView.keyCombo = keyCombo
         }
         recordView.delegate = self
+
+        appCollectionView.delegate = self as? NSCollectionViewDelegate
+        appCollectionView.dataSource = self as? NSCollectionViewDataSource
+        let nib = NSNib(nibNamed: "SampleItem", bundle: nil)
+        appCollectionView.register(nib, forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sample"))
+        appCollectionView.reloadData()
+
+
+        let hoge: Set = ["a", "b", "c"]
 
         // set HotKey
         if let apps = userDefaults.array(forKey: "apps") {
@@ -106,6 +119,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(identCount)")
                 app.stringValue = a["path"]!
                 appStackView.addSubview(app)
+//                appCollectionView.makeItem(withIdentifier: [], for: [])
                 
 
                 // app hot key
@@ -194,7 +208,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     }
 }
 
-extension PreferencesWindowController: RecordViewDelegate {
+extension PreferencesWindowController: RecordViewDelegate,NSCollectionViewDelegate, NSCollectionViewDataSource {
     func recordViewShouldBeginRecording(_ recordView: RecordView) -> Bool {
         return true
     }
@@ -222,4 +236,18 @@ extension PreferencesWindowController: RecordViewDelegate {
             
         }
     }
+
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data.count
+    }
+
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        // アイテムの用意
+        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sample"), for: indexPath) as! SampleItem
+        item.textField?.stringValue = data[indexPath.item]
+        item.imageView?.image = NSImage(imageLiteralResourceName: "AppIcon")
+        return item
+    }
+
 }
+
