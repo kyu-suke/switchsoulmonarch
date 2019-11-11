@@ -175,11 +175,22 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         openPanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.floatingWindow)))
         openPanel.begin { (result) -> Void in
             if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
-    
+
                 let rectY = self.getRectY()
 
                 guard let url = openPanel.url else { return }
                 let qa = sender.frame
+
+                
+
+                let hoge = NSWorkspace.shared.icon(forFile: url.path)
+//                hoge.draw(in: NSMakeRect(-200, rectY, 180, qa.height))
+                let fuga = NSImageView(frame: NSMakeRect(-100, rectY, 180, qa.height))
+                fuga.image = hoge
+                self.appStackView.addSubview(fuga)
+
+
+                print(hoge)
 
                 // app url
                 let app = NSTextField(frame: NSMakeRect(0, rectY, 180, qa.height))

@@ -31,17 +31,17 @@
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Tab" identifier="" id="Lh7-oI-fP2">
-                                <view key="view" id="Psl-HQ-EXg">
+                                <view key="view" ambiguous="YES" id="Psl-HQ-EXg">
                                     <rect key="frame" x="10" y="33" width="680" height="304"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <view wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZj-Fp-0mG" customClass="RecordView" customModule="KeyHolder">
+                                        <view wantsLayer="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZj-Fp-0mG" customClass="RecordView" customModule="KeyHolder">
                                             <rect key="frame" x="-3" y="92" width="686" height="135"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="135" id="58C-uL-bIT"/>
                                             </constraints>
                                         </view>
-                                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9O-p5-WGC">
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9O-p5-WGC">
                                             <rect key="frame" x="340" y="159" width="0.0" height="0.0"/>
                                         </stackView>
                                     </subviews>
@@ -56,17 +56,17 @@
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="View" identifier="" id="nGX-Ls-ucf">
-                                <view key="view" ambiguous="YES" id="uvO-ru-ZPc">
+                                <view key="view" id="uvO-ru-ZPc">
                                     <rect key="frame" x="10" y="33" width="680" height="304"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <scrollView wantsLayer="YES" ambiguous="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lM-Tx-T8P">
+                                        <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lM-Tx-T8P">
                                             <rect key="frame" x="0.0" y="0.0" width="680" height="304"/>
-                                            <clipView key="contentView" ambiguous="YES" id="Fqc-Ks-zj4">
+                                            <clipView key="contentView" id="Fqc-Ks-zj4">
                                                 <rect key="frame" x="1" y="1" width="678" height="302"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <collectionView ambiguous="YES" id="8Lx-Kv-Aor">
+                                                    <collectionView id="8Lx-Kv-Aor">
                                                         <rect key="frame" x="0.0" y="0.0" width="678" height="158"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                         <collectionViewGridLayout key="collectionViewLayout" id="6bL-9Z-l0j">
