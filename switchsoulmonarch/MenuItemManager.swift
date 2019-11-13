@@ -15,11 +15,15 @@ class MenuItemManager: NSObject {
     @objc func getMenus() -> NSMenu {
         SettingApps.apps.setAppList()
         let apps = SettingApps.apps.getApps()
+        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        print(apps)
         var m = NSMenu()
         for app in apps {
-            let a: [String:String] = app as! [String : String]
-            let path = a["path"]!
-            let key = a["key"]!
+            let a: String = app as! String
+            let url = URL(fileURLWithPath: a)
+            let app = App(url: url)
+            let path = app.path
+            let key = app.hotKey
             m.addItem(makeAppItem(appName: path, shortcutKey: key))
         }
         m.addItem(makePreferencesItem())

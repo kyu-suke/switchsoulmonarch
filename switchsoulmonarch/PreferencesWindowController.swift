@@ -11,6 +11,29 @@ import Magnet
 import KeyHolder
 import Carbon
 
+struct App {
+    var appName: String
+    var path: String
+    var hotKey: String
+    var icon: NSImage
+    
+    init(url: URL){
+        let hoge = NSWorkspace.shared.icon(forFile: url.path)
+        //            let fuga = NSImageView(image: hoge)
+        self.icon = hoge
+        
+        // app url
+        self.path = url.path
+        self.appName = url.lastPathComponent.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: true).first?.description ?? ""
+        
+        // app hot key
+        //            let hotKey = NSTextField(frame: NSMakeRect(200, rectY, 50, qa.height))
+        //            hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(self.identCount)")
+        self.hotKey = ""
+    }
+    
+}
+
 class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
     @IBOutlet weak var recordView: RecordView!
@@ -40,29 +63,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     
     let userDefaults = UserDefaults()
 
-    struct App {
-        var appName: String
-        var path: String
-        var hotKey: String
-        var icon: NSImage
-
-        init(url: URL){
-            let hoge = NSWorkspace.shared.icon(forFile: url.path)
-//            let fuga = NSImageView(image: hoge)
-            self.icon = hoge
-            
-            // app url
-            self.path = url.path
-            self.appName = url.lastPathComponent.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: true).first?.description ?? ""
-            print(self.appName)
-
-            // app hot key
-//            let hotKey = NSTextField(frame: NSMakeRect(200, rectY, 50, qa.height))
-//            hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(self.identCount)")
-            self.hotKey = ""
-        }
-
-    }
     var settedApps: [App] = []
 
     func windowWillClose(_ notification: Notification) {
@@ -142,6 +142,18 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         }
         recordView.delegate = self
 
+        var settedApps: [App] = []
+        if let apps = userDefaults.array(forKey: "apps") {
+            for ap in apps {
+                let rectY = getRectY()
+                let a: String = ap as! String
+                let url = URL(fileURLWithPath: a)
+                let app = App(url: url)
+                settedApps.append(app)
+            }
+        }
+        self.settedApps = settedApps
+
         appCollectionView.delegate = self as? NSCollectionViewDelegate
         appCollectionView.dataSource = self as? NSCollectionViewDataSource
         let nib = NSNib(nibNamed: "SampleItem", bundle: nil)
@@ -151,38 +163,42 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
 
 
-        let hoge: Set = ["a", "b", "c"]
+//        let hoge: Set = ["a", "b", "c"]
 
         // set HotKey
-        if let apps = userDefaults.array(forKey: "apps") {
-            identCount = 0
-            for ap in apps {
-                let rectY = getRectY()
-                let a: [String:String] = ap as! [String : String]
-
-                // app url
-                let app = NSTextField(frame: NSMakeRect(0, rectY, 180, 20))
-                app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(identCount)")
-                app.stringValue = a["path"]!
-                appStackView.addSubview(app)
-//                appCollectionView.makeItem(withIdentifier: [], for: [])
-                
-
-                // app hot key
-                let hotKey = NSTextField(frame: NSMakeRect(200, rectY, 50, 20))
-                hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(identCount)")
-                hotKey.stringValue = a["key"]!
-                appStackView.addSubview(hotKey)
-
-                // app del button
-                let delBtn = NSButton(frame: NSMakeRect(270, rectY, 50, 20))
-                delBtn.identifier = NSUserInterfaceItemIdentifier(rawValue: "del:\(identCount)")
-                delBtn.title = "delete"
-                delBtn.action = #selector(delApp(_:))
-                appStackView.addSubview(delBtn)
-                identCount += 1
-            }
-        }
+//        if let apps = userDefaults.array(forKey: "apps") {
+//            identCount = 0
+//            for ap in apps {
+//                let rectY = getRectY()
+//                let a: String = ap as! String
+//                let url = URL(fileURLWithPath: a)
+//                let app = App(url: url)
+//                let path = app.path
+//                let key = app.hotKey
+//
+//                // app url
+//                let app = NSTextField(frame: NSMakeRect(0, rectY, 180, 20))
+//                app.identifier = NSUserInterfaceItemIdentifier(rawValue: "path:\(identCount)")
+//                app.stringValue = app.path
+//                appStackView.addSubview(app)
+////                appCollectionView.makeItem(withIdentifier: [], for: [])
+//
+//
+//                // app hot key
+//                let hotKey = NSTextField(frame: NSMakeRect(200, rectY, 50, 20))
+//                hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(identCount)")
+//                hotKey.stringValue = a["key"]!
+//                appStackView.addSubview(hotKey)
+//
+//                // app del button
+//                let delBtn = NSButton(frame: NSMakeRect(270, rectY, 50, 20))
+//                delBtn.identifier = NSUserInterfaceItemIdentifier(rawValue: "del:\(identCount)")
+//                delBtn.title = "delete"
+//                delBtn.action = #selector(delApp(_:))
+//                appStackView.addSubview(delBtn)
+//                identCount += 1
+//            }
+//        }
 
     }
     
@@ -212,12 +228,11 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 guard let url = openPanel.url else { return }
                 let qa = sender.frame
 
-                print(url)
-
-
                 var app: App = App(url: url)
                 self.settedApps.append(app)
                 self.appCollectionView.reloadData()
+
+                SettingApps.apps.setApps(apps: self.settedApps)
 
 //
 //
@@ -327,6 +342,5 @@ extension PreferencesWindowController: RecordViewDelegate,NSCollectionViewDelega
             (collectionView.item(at: n) as! SampleItem).updateBG()
         }
     }
-
 }
 
