@@ -11,6 +11,7 @@
                 <outlet property="addButton" destination="ead-2G-kpR" id="26w-wn-U8C"/>
                 <outlet property="appCollectionView" destination="8Lx-Kv-Aor" id="Sbu-wH-rXe"/>
                 <outlet property="appStackView" destination="H9O-p5-WGC" id="opB-mD-XQU"/>
+                <outlet property="appsArrayController" destination="j2E-27-4gb" id="9wY-7Q-XFV"/>
                 <outlet property="recordView" destination="jZj-Fp-0mG" id="MVi-7L-ni7"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -149,5 +150,6 @@
             <point key="canvasLocation" x="211" y="-108"/>
         </window>
         <customObject id="UpE-8h-l9D" customClass="SUUpdater"/>
+        <arrayController id="j2E-27-4gb"/>
     </objects>
 </document>

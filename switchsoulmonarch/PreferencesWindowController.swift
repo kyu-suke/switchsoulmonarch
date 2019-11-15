@@ -34,8 +34,9 @@ struct App {
     
 }
 
-class PreferencesWindowController: NSWindowController, NSWindowDelegate {
+class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSViewController {
 
+    @IBOutlet var appsArrayController: NSArrayController!
     @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var appStackView: NSStackView!
     @IBOutlet weak var appCollectionView: NSCollectionView!

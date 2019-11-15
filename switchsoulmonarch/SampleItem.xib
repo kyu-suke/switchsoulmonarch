@@ -47,7 +47,7 @@
             <connections>
                 <outlet property="imageView" destination="S0D-ua-fWV" id="wDa-xa-0Ad"/>
                 <outlet property="textField" destination="YxH-Bl-apH" id="0dd-wp-kUz"/>
-                <outlet property="view" destination="Hz6-mo-xeY" id="tmn-6u-Ndc"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="7Ai-Pm-hTP"/>
             </connections>
         </collectionViewItem>
     </objects>
