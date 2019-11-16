@@ -43,7 +43,11 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="hzn-5q-yUa" name="value" keyPath="values.representedObject.hotKey" id="awF-4f-sEH"/>
+                        <binding destination="hzn-5q-yUa" name="value" keyPath="values.representedObject.hotKey" id="Ktt-xv-WCJ">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </textField>
             </subviews>
