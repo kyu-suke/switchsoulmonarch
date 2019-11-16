@@ -11,11 +11,34 @@ import Magnet
 import KeyHolder
 import Carbon
 
-struct App {
-    var appName: String
-    var path: String
-    var hotKey: String
-    var icon: NSImage
+//struct App {
+//    var appName: String
+//    var path: String
+//    var hotKey: String
+//    var icon: NSImage
+//
+//    init(url: URL){
+//        let hoge = NSWorkspace.shared.icon(forFile: url.path)
+//        //            let fuga = NSImageView(image: hoge)
+//        self.icon = hoge
+//
+//        // app url
+//        self.path = url.path
+//        self.appName = url.lastPathComponent.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: true).first?.description ?? ""
+//
+//        // app hot key
+//        //            let hotKey = NSTextField(frame: NSMakeRect(200, rectY, 50, qa.height))
+//        //            hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(self.identCount)")
+//        self.hotKey = ""
+//    }
+//
+//}
+
+class App: NSObject{
+    @objc dynamic var appName: String
+    @objc dynamic var path: String
+    @objc dynamic var hotKey: String
+    @objc dynamic var icon: NSImage
     
     init(url: URL){
         let hoge = NSWorkspace.shared.icon(forFile: url.path)
@@ -29,13 +52,14 @@ struct App {
         // app hot key
         //            let hotKey = NSTextField(frame: NSMakeRect(200, rectY, 50, qa.height))
         //            hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(self.identCount)")
-        self.hotKey = ""
+        self.hotKey = "-"
     }
     
 }
 
-class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSViewController {
+class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
+    @IBOutlet var arrayController: NSArrayController!
     @IBOutlet var appsArrayController: NSArrayController!
     @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var appStackView: NSStackView!
@@ -45,10 +69,10 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSViewC
         addApp2(sender as! NSButton)
     }
 
-    @IBAction func addButton(_ sender: Any) {
-//        settedApps.append("W") //例えば
-        appCollectionView.reloadData()
-    }
+//    @IBAction func addButton(_ sender: Any) {
+////        settedApps.append("W") //例えば
+//        appCollectionView.reloadData()
+//    }
     
     @IBAction func deleteButton(_ sender: Any) {
         guard let n = appCollectionView.selectionIndexPaths.first?.item else { return }
@@ -64,10 +88,18 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSViewC
     
     let userDefaults = UserDefaults()
 
-    var settedApps: [App] = []
+    @objc dynamic var settedApps = [App]()
 
     func windowWillClose(_ notification: Notification) {
-//        SettingApps.apps.setApps(apps: [])
+        
+        let a = arrayController.arrangedObjects as! [App]
+        a.forEach { (hoge) in
+            let app = hoge as! App
+            print(app.appName)
+            print(app.hotKey)
+        }
+        
+        //        SettingApps.apps.setApps(apps: [])
 //        SettingApps.apps.setAppList()
 //        var apps: [Int : [String:String]] = [:]
 //        appStackView!.subviews.forEach {
@@ -128,19 +160,29 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSViewC
 //        appButton.action = #selector(addApp(_:))
 //
 //        window?.contentView?.addSubview(appButton)
+
+
+
+//        self.appCollectionView.register(NSNib.init(nibNamed: "SampleItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier.init("SampleItem") )
+//        self.appCollectionView.content = self.settedApps
+
+
         self.window!.delegate = self
 
     }
 
 
     override func showWindow(_ sender: Any?) {
+        print("bbbbbbbbbbbbbbb")
         super.showWindow(self)
+        print("aaaaaaaaaaaaaaaaaaaa")
 
         if let keyComboTmp = userDefaults.object(forKey: "mainMenuHotKeyKeyCombo") {
             let keyCombo = NSKeyedUnarchiver.unarchiveObject(with: keyComboTmp as! Data) as? KeyCombo
 
             recordView.keyCombo = keyCombo
         }
+        print("aaaaaaaaaaaaaaaaaaaa1")
         recordView.delegate = self
 
         var settedApps: [App] = []
@@ -153,15 +195,22 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSViewC
                 settedApps.append(app)
             }
         }
+        print("aaaaaaaaaaaaaaaaaaaa2")
         self.settedApps = settedApps
 
-        appCollectionView.delegate = self as? NSCollectionViewDelegate
-        appCollectionView.dataSource = self as? NSCollectionViewDataSource
-        let nib = NSNib(nibNamed: "SampleItem", bundle: nil)
-        appCollectionView.register(nib, forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sample"))
-        appCollectionView.isSelectable = true
-        appCollectionView.reloadData()
+//        appCollectionView.delegate = self as? NSCollectionViewDelegate
+//        appCollectionView.dataSource = self as? NSCollectionViewDataSource
+//        let nib = NSNib(nibNamed: "SampleItem", bundle: nil)
+//        appCollectionView.register(nib, forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sample"))
+//        appCollectionView.isSelectable = true
+//        appCollectionView.reloadData()
 
+                appCollectionView.delegate = self as? NSCollectionViewDelegate
+                appCollectionView.dataSource = self as? NSCollectionViewDataSource
+
+        self.appCollectionView.register(NSNib.init(nibNamed: "SampleItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier.init("SampleItem") )
+        self.appCollectionView.content = self.settedApps
+        self.appCollectionView.reloadData()
 
 
 //        let hoge: Set = ["a", "b", "c"]
@@ -289,7 +338,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSViewC
     }
 }
 
-extension PreferencesWindowController: RecordViewDelegate,NSCollectionViewDelegate, NSCollectionViewDataSource {
+extension PreferencesWindowController: RecordViewDelegate/*,NSCollectionViewDelegate, NSCollectionViewDataSource*/ {
     func recordViewShouldBeginRecording(_ recordView: RecordView) -> Bool {
         return true
     }
@@ -318,30 +367,30 @@ extension PreferencesWindowController: RecordViewDelegate,NSCollectionViewDelega
         }
     }
 
-    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return settedApps.count
-    }
-
-    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        // アイテムの用意
-        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sample"), for: indexPath) as! SampleItem
-        item.textField?.stringValue = settedApps[indexPath.item].appName
-        item.imageView?.image = settedApps[indexPath.item].icon
-        return item
-    }
-
-    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-        let count = collectionView.numberOfItems(inSection: 0)
-        for n in (0 ..< count) {
-            (collectionView.item(at: n) as! SampleItem).updateBG()
-        }
-    }
-
-    func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
-        let count = collectionView.numberOfItems(inSection: 0)
-        for n in (0 ..< count) {
-            (collectionView.item(at: n) as! SampleItem).updateBG()
-        }
-    }
+//    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return settedApps.count
+//    }
+//
+//    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+//        // アイテムの用意
+//        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "sample"), for: indexPath) as! SampleItem
+//        item.textField?.stringValue = settedApps[indexPath.item].appName
+//        item.imageView?.image = settedApps[indexPath.item].icon
+//        return item
+//    }
+//
+//    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+//        let count = collectionView.numberOfItems(inSection: 0)
+//        for n in (0 ..< count) {
+//            (collectionView.item(at: n) as! SampleItem).updateBG()
+//        }
+//    }
+//
+//    func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
+//        let count = collectionView.numberOfItems(inSection: 0)
+//        for n in (0 ..< count) {
+//            (collectionView.item(at: n) as! SampleItem).updateBG()
+//        }
+//    }
 }
 

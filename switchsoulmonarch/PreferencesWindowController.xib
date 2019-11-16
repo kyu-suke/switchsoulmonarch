@@ -8,10 +8,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWindowController" customModule="switchsoulmonarch" customModuleProvider="target">
             <connections>
-                <outlet property="addButton" destination="ead-2G-kpR" id="26w-wn-U8C"/>
                 <outlet property="appCollectionView" destination="8Lx-Kv-Aor" id="Sbu-wH-rXe"/>
                 <outlet property="appStackView" destination="H9O-p5-WGC" id="opB-mD-XQU"/>
                 <outlet property="appsArrayController" destination="j2E-27-4gb" id="9wY-7Q-XFV"/>
+                <outlet property="arrayController" destination="j2E-27-4gb" id="O3r-ra-CKc"/>
                 <outlet property="recordView" destination="jZj-Fp-0mG" id="MVi-7L-ni7"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -75,6 +75,10 @@
                                                             <size key="maximumItemSize" width="100" height="100"/>
                                                         </collectionViewGridLayout>
                                                         <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <connections>
+                                                            <binding destination="j2E-27-4gb" name="content" keyPath="arrangedObjects" id="5Ps-1c-Qaq"/>
+                                                            <outlet property="dataSource" destination="j2E-27-4gb" id="VDK-PF-9Z2"/>
+                                                        </connections>
                                                     </collectionView>
                                                 </subviews>
                                             </clipView>
@@ -150,6 +154,11 @@
             <point key="canvasLocation" x="211" y="-108"/>
         </window>
         <customObject id="UpE-8h-l9D" customClass="SUUpdater"/>
-        <arrayController id="j2E-27-4gb"/>
+        <arrayController id="j2E-27-4gb">
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="self.settedApps" id="UIR-pG-LDn"/>
+            </connections>
+        </arrayController>
+        <userDefaultsController representsSharedInstance="YES" id="99W-ba-AAO"/>
     </objects>
 </document>

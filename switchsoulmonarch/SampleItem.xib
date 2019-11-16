@@ -30,8 +30,11 @@
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="okG-5u-yRO" name="value" keyPath="representedObject.appName" id="FWq-re-pvt"/>
+                    </connections>
                 </textField>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="97J-hQ-e6t">
+                <textField identifier="hotKey" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="97J-hQ-e6t">
                     <rect key="frame" x="10" y="3" width="80" height="21"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" drawsBackground="YES" id="4lL-G9-rlv">
@@ -39,6 +42,9 @@
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="hzn-5q-yUa" name="value" keyPath="values.representedObject.hotKey" id="awF-4f-sEH"/>
+                    </connections>
                 </textField>
             </subviews>
             <point key="canvasLocation" x="139" y="154"/>
@@ -50,6 +56,7 @@
                 <outlet property="view" destination="Hz6-mo-xeY" id="7Ai-Pm-hTP"/>
             </connections>
         </collectionViewItem>
+        <userDefaultsController representsSharedInstance="YES" id="hzn-5q-yUa"/>
     </objects>
     <resources>
         <image name="icon" width="16" height="16"/>

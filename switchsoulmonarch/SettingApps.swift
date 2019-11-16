@@ -34,8 +34,8 @@ class SettingApps: NSObject {
         }
         userDefaults.set(paths, forKey: "apps")
 
-        print("CCCCCCCCCCCC")
-print(        userDefaults.array(forKey: "apps"))
-        print("AAAAAAAAAAAAAAAAAAAA")
+//        print("CCCCCCCCCCCC")
+//print(        userDefaults.array(forKey: "apps"))
+//        print("AAAAAAAAAAAAAAAAAAAA")
     }
 }

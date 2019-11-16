@@ -15,8 +15,8 @@ class MenuItemManager: NSObject {
     @objc func getMenus() -> NSMenu {
         SettingApps.apps.setAppList()
         let apps = SettingApps.apps.getApps()
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        print(apps)
+//        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+//        print(apps)
         var m = NSMenu()
         for app in apps {
             let a: String = app as! String
