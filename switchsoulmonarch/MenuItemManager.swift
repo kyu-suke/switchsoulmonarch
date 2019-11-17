@@ -17,11 +17,12 @@ class MenuItemManager: NSObject {
         let apps = SettingApps.apps.getApps()
 //        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 //        print(apps)
+        
         var m = NSMenu()
         for app in apps {
-            let a: String = app as! String
-            let url = URL(fileURLWithPath: a)
-            let app = App(url: url)
+            let a = app as! [String:String]
+            let url = URL(fileURLWithPath: a["path"]!)
+            let app = App(url: url, hotKey: a["hotKey"]!)
             let path = app.path
             let key = app.hotKey
             m.addItem(makeAppItem(appName: path, shortcutKey: key))

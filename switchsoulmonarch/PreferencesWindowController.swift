@@ -40,7 +40,7 @@ class App: NSObject{
     @objc dynamic var hotKey: String
     @objc dynamic var icon: NSImage
     
-    init(url: URL){
+    init(url: URL, hotKey: String){
         let hoge = NSWorkspace.shared.icon(forFile: url.path)
         //            let fuga = NSImageView(image: hoge)
         self.icon = hoge
@@ -52,7 +52,7 @@ class App: NSObject{
         // app hot key
         //            let hotKey = NSTextField(frame: NSMakeRect(200, rectY, 50, qa.height))
         //            hotKey.identifier = NSUserInterfaceItemIdentifier(rawValue: "key:\(self.identCount)")
-        self.hotKey = "-"
+        self.hotKey = hotKey
     }
     
 }
@@ -92,12 +92,26 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 
     func windowWillClose(_ notification: Notification) {
         
+        var apps: [[String:String]] = []
+
         let a = arrayController.arrangedObjects as! [App]
-        a.forEach { (hoge) in
-            let app = hoge as! App
-            print(app.appName)
-            print(app.hotKey)
-        }
+//        a.forEach { (hoge) in
+//            let app = hoge as! App
+//            print(app.appName)
+//            print(app.hotKey)
+//
+//            apps.append(["path" : app.path, "key": app.hotKey])
+//        }
+//        SettingApps.apps.setApps(apps: apps)
+//        MenuItemManager().setMenus()
+
+        SettingApps.apps.setApps(apps: a)
+        MenuItemManager().setMenus()
+
+        
+        
+        
+        
         
         //        SettingApps.apps.setApps(apps: [])
 //        SettingApps.apps.setAppList()
@@ -189,9 +203,9 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         if let apps = userDefaults.array(forKey: "apps") {
             for ap in apps {
                 let rectY = getRectY()
-                let a: String = ap as! String
-                let url = URL(fileURLWithPath: a)
-                let app = App(url: url)
+                let a = ap as! [String:String]
+                let url = URL(fileURLWithPath: a["path"]!)
+                let app = App(url: url, hotKey: a["hotKey"]!)
                 settedApps.append(app)
             }
         }
@@ -278,7 +292,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 guard let url = openPanel.url else { return }
                 let qa = sender.frame
 
-                var app: App = App(url: url)
+                var app = App(url: url, hotKey: "")
                 self.settedApps.append(app)
                 self.appCollectionView.reloadData()
 

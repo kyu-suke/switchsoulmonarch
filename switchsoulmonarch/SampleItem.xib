@@ -34,7 +34,7 @@
                         <binding destination="okG-5u-yRO" name="value" keyPath="representedObject.appName" id="FWq-re-pvt"/>
                     </connections>
                 </textField>
-                <textField identifier="hotKey" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="97J-hQ-e6t">
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="97J-hQ-e6t">
                     <rect key="frame" x="10" y="3" width="80" height="21"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" drawsBackground="YES" id="4lL-G9-rlv">
@@ -43,7 +43,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="hzn-5q-yUa" name="value" keyPath="values.representedObject.hotKey" id="Ktt-xv-WCJ">
+                        <binding destination="okG-5u-yRO" name="value" keyPath="representedObject.hotKey" id="cCq-8i-XcJ">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                             </dictionary>
