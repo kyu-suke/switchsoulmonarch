@@ -21,6 +21,9 @@
                     <rect key="frame" x="0.0" y="32" width="100" height="68"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon" id="Umj-fF-iNO"/>
+                    <connections>
+                        <binding destination="okG-5u-yRO" name="value" keyPath="representedObject.icon" id="DE7-cO-ZGd"/>
+                    </connections>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YxH-Bl-apH">
                     <rect key="frame" x="-2" y="32" width="104" height="16"/>
