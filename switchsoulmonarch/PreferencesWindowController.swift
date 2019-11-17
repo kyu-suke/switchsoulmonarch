@@ -101,6 +101,8 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         
         self.appCollectionView.register(NSNib.init(nibNamed: "SampleItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier.init("SampleItem") )
         self.appCollectionView.content = self.settedApps
+        self.appCollectionView.isSelectable = true
+
         self.appCollectionView.reloadData()
         
     }
@@ -150,7 +152,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     }
 }
 
-extension PreferencesWindowController: RecordViewDelegate {
+extension PreferencesWindowController: RecordViewDelegate, NSCollectionViewDelegate {
     func recordViewShouldBeginRecording(_ recordView: RecordView) -> Bool {
         return true
     }
@@ -177,5 +179,20 @@ extension PreferencesWindowController: RecordViewDelegate {
             
         }
     }
+    
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        let count = collectionView.numberOfItems(inSection: 0)
+        for n in (0 ..< count) {
+            (collectionView.item(at: n) as! SampleItem).updateBG()
+        }
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
+        let count = collectionView.numberOfItems(inSection: 0)
+        for n in (0 ..< count) {
+            (collectionView.item(at: n) as! SampleItem).updateBG()
+        }
+    }
+
 }
 
