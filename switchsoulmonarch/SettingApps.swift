@@ -10,32 +10,29 @@ import Cocoa
 
 class SettingApps: NSObject {
     static let apps = SettingApps()
-    var app_list: [String] = []
+    var app_list: [[String:String]] = []
     let userDefaults = UserDefaults()
 
     func setAppList() {
         self.app_list = []
         if let apps = userDefaults.array(forKey: "apps") {
             for app in apps {
-                let a: String = app as! String
+                let a = app as! [String:String]
                 self.app_list.append(a)
             }
         }
     }
 
-    func getApps() -> [String] {
+    func getApps() -> [[String:String]] {
         return self.app_list
     }
+
     func setApps(apps: [App]) {
-        var paths: [String] = []
+        var paths: [[String:String]] = []
         apps.forEach { (app) in
-            let url = app.path
-            paths.append(url)
+            paths.append(["path" : app.path, "hotKey": app.hotKey])
         }
         userDefaults.set(paths, forKey: "apps")
-
-        print("CCCCCCCCCCCC")
-print(        userDefaults.array(forKey: "apps"))
-        print("AAAAAAAAAAAAAAAAAAAA")
     }
+
 }

@@ -21,6 +21,9 @@
                     <rect key="frame" x="0.0" y="32" width="100" height="68"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon" id="Umj-fF-iNO"/>
+                    <connections>
+                        <binding destination="okG-5u-yRO" name="value" keyPath="representedObject.icon" id="DE7-cO-ZGd"/>
+                    </connections>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YxH-Bl-apH">
                     <rect key="frame" x="-2" y="32" width="104" height="16"/>
@@ -30,6 +33,9 @@
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="okG-5u-yRO" name="value" keyPath="representedObject.appName" id="FWq-re-pvt"/>
+                    </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="97J-hQ-e6t">
                     <rect key="frame" x="10" y="3" width="80" height="21"/>
@@ -39,6 +45,13 @@
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="okG-5u-yRO" name="value" keyPath="representedObject.hotKey" id="cCq-8i-XcJ">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
                 </textField>
             </subviews>
             <point key="canvasLocation" x="139" y="154"/>
@@ -47,9 +60,10 @@
             <connections>
                 <outlet property="imageView" destination="S0D-ua-fWV" id="wDa-xa-0Ad"/>
                 <outlet property="textField" destination="YxH-Bl-apH" id="0dd-wp-kUz"/>
-                <outlet property="view" destination="Hz6-mo-xeY" id="tmn-6u-Ndc"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="7Ai-Pm-hTP"/>
             </connections>
         </collectionViewItem>
+        <userDefaultsController representsSharedInstance="YES" id="hzn-5q-yUa"/>
     </objects>
     <resources>
         <image name="icon" width="16" height="16"/>
