@@ -91,20 +91,8 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ead-2G-kpR">
-                                            <rect key="frame" x="2" y="-7" width="65" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5Yi-DJ-SBe">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="addApp:" target="-2" id="Bho-k6-hm7"/>
-                                            </connections>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ULn-Ck-Mar">
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ULn-Ck-Mar">
                                             <rect key="frame" x="97" y="-7" width="60" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="push" title="Del" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="csk-nk-QYN">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -117,7 +105,9 @@
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="6lM-Tx-T8P" secondAttribute="bottom" id="RFW-SG-sUp"/>
                                         <constraint firstItem="6lM-Tx-T8P" firstAttribute="leading" secondItem="uvO-ru-ZPc" secondAttribute="leading" id="Rh5-ac-99Q"/>
+                                        <constraint firstItem="ULn-Ck-Mar" firstAttribute="leading" secondItem="uvO-ru-ZPc" secondAttribute="leading" constant="103" id="TRB-KO-aUm"/>
                                         <constraint firstAttribute="trailing" secondItem="6lM-Tx-T8P" secondAttribute="trailing" id="VkV-3P-S66"/>
+                                        <constraint firstItem="6lM-Tx-T8P" firstAttribute="bottom" secondItem="ULn-Ck-Mar" secondAttribute="bottom" id="WbY-oP-oeE"/>
                                         <constraint firstItem="6lM-Tx-T8P" firstAttribute="top" secondItem="uvO-ru-ZPc" secondAttribute="top" id="b7s-4J-ICx"/>
                                     </constraints>
                                 </view>

@@ -17,15 +17,28 @@ class App: NSObject{
     @objc dynamic var hotKey: String
     @objc dynamic var icon: NSImage
     
-    init(url: URL, hotKey: String){
-        let hoge = NSWorkspace.shared.icon(forFile: url.path)
-        self.icon = hoge
-        
-        // app url
-        self.path = url.path
-        self.appName = url.lastPathComponent.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: true).first?.description ?? ""
-        
-        self.hotKey = hotKey
+    var isAddButton: Bool
+
+    init(url: URL, hotKey: String, isAddButton: Bool){
+
+        if isAddButton {
+            self.icon = NSImage(named: "plus")!
+            self.path = ""
+            self.appName = ""
+            self.hotKey = ""
+            self.isAddButton = isAddButton
+
+        } else {
+            let hoge = NSWorkspace.shared.icon(forFile: url.path)
+            self.icon = hoge
+            
+            // app url
+            self.path = url.path
+            self.appName = url.lastPathComponent.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: true).first?.description ?? ""
+            
+            self.hotKey = hotKey
+            self.isAddButton = isAddButton
+        }
     }
     
 }
@@ -37,11 +50,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var recordView: RecordView!
     @IBOutlet weak var appStackView: NSStackView!
     @IBOutlet weak var appCollectionView: NSCollectionView!
-    
-    @IBAction func addApp(_ sender: Any) {
-        addApp2(sender as! NSButton)
-    }
-    
+        
     @IBAction func deleteButton(_ sender: Any) {
         guard let n = appCollectionView.selectionIndexPaths.first?.item else { return }
         let item = appCollectionView.item(at: n) as! SampleItem
@@ -61,7 +70,9 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
         
         let a = arrayController.arrangedObjects as! [App]
-        SettingApps.apps.setApps(apps: a)
+        SettingApps.apps.setApps(apps: a.filter({ (app) -> Bool in
+            return !app.isAddButton
+        }))
         MenuItemManager().setMenus()
     }
 
@@ -89,14 +100,18 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
             for ap in apps {
                 let a = ap as! [String:String]
                 let url = URL(fileURLWithPath: a["path"]!)
-                let app = App(url: url, hotKey: a["hotKey"]!)
+                let app = App(url: url, hotKey: a["hotKey"]!, isAddButton: false)
                 settedApps.append(app)
             }
         }
 
+        // add plus button
+        let plusButton = App(url: URL(fileURLWithPath: ""), hotKey: "", isAddButton: true)
+        settedApps.append(plusButton)
+
         self.settedApps = settedApps
         
-        self.appCollectionView.delegate = self as? NSCollectionViewDelegate
+        self.appCollectionView.delegate = self as NSCollectionViewDelegate
         self.appCollectionView.dataSource = self as? NSCollectionViewDataSource
         
         self.appCollectionView.register(NSNib.init(nibNamed: "SampleItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier.init("SampleItem") )
@@ -107,11 +122,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         
     }
     
-    func getRectY() -> CGFloat {
-        appCount += 1
-        return CGFloat(180 + (self.appCount * -25))
-    }
-
     @objc func hotkeyCalled() {
         print("HotKey called!!!!")
     }
@@ -128,7 +138,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
             if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
                 guard let url = openPanel.url else { return }
 
-                let app = App(url: url, hotKey: "")
+                let app = App(url: url, hotKey: "", isAddButton: false)
                 self.settedApps.append(app)
                 self.appCollectionView.reloadData()
 
@@ -183,6 +193,10 @@ extension PreferencesWindowController: RecordViewDelegate, NSCollectionViewDeleg
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         let count = collectionView.numberOfItems(inSection: 0)
         for n in (0 ..< count) {
+            let item = collectionView.item(at: n) as! SampleItem
+            if item.isSelected && self.settedApps[n].isAddButton {
+                self.addApp2(NSButton())
+            }
             (collectionView.item(at: n) as! SampleItem).updateBG()
         }
     }

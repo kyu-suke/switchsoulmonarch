@@ -32,6 +32,7 @@ class SettingApps: NSObject {
         apps.forEach { (app) in
             paths.append(["path" : app.path, "hotKey": app.hotKey])
         }
+
         userDefaults.set(paths, forKey: "apps")
     }
 

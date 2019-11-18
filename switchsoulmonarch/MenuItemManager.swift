@@ -20,7 +20,7 @@ class MenuItemManager: NSObject {
         for app in apps {
             let a = app
             let url = URL(fileURLWithPath: a["path"]!)
-            let app = App(url: url, hotKey: a["hotKey"]!)
+            let app = App(url: url, hotKey: a["hotKey"]!, isAddButton: false)
             let path = app.path
             let key = app.hotKey
             m.addItem(makeAppItem(appName: path, shortcutKey: key))
