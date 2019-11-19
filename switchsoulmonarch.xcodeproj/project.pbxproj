@@ -20,8 +20,6 @@
 		8B409890F902C73C4B445D28 /* Pods_switchsoulmonarchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACD78C45A0981D9730CD24B /* Pods_switchsoulmonarchTests.framework */; };
 		BA1B48F921A6929D0076DF66 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1B48F721A6929D0076DF66 /* PreferencesWindowController.xib */; };
 		BA34948A21CA2AC000C1184D /* SettingApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA34948921CA2AC000C1184D /* SettingApps.swift */; };
-		BA860E0B21CC9944004E118F /* HotKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA860E0A21CC9944004E118F /* HotKeyManager.swift */; };
-		BA860E0D21CC99ED004E118F /* KeyComboManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA860E0C21CC99ED004E118F /* KeyComboManager.swift */; };
 		BA860E0F21CC99FF004E118F /* MenuItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA860E0E21CC99FF004E118F /* MenuItemManager.swift */; };
 		D6DA2E98D59E1D677B000A68 /* Pods_switchsoulmonarch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF8F2CBAA42D1DF185581A3 /* Pods_switchsoulmonarch.framework */; };
 /* End PBXBuildFile section */
@@ -69,8 +67,6 @@
 		AF88FDD0AA3913D04C37A6EF /* Pods-switchsoulmonarchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-switchsoulmonarchTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-switchsoulmonarchTests/Pods-switchsoulmonarchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BA1B48F721A6929D0076DF66 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		BA34948921CA2AC000C1184D /* SettingApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingApps.swift; sourceTree = "<group>"; };
-		BA860E0A21CC9944004E118F /* HotKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyManager.swift; sourceTree = "<group>"; };
-		BA860E0C21CC99ED004E118F /* KeyComboManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyComboManager.swift; sourceTree = "<group>"; };
 		BA860E0E21CC99FF004E118F /* MenuItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemManager.swift; sourceTree = "<group>"; };
 		D80652F4E55DE9828A3DB7D9 /* Pods-switchsoulmonarchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-switchsoulmonarchUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-switchsoulmonarchUITests/Pods-switchsoulmonarchUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FCA7323C28A8A8FA53636714 /* Pods_switchsoulmonarchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_switchsoulmonarchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,8 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				045EDC0821A1B0AF00B6D9A5 /* AppDelegate.swift */,
-				BA860E0A21CC9944004E118F /* HotKeyManager.swift */,
-				BA860E0C21CC99ED004E118F /* KeyComboManager.swift */,
 				0490FF012377094600E0577C /* SampleItem.swift */,
 				0490FF022377094600E0577C /* SampleItem.xib */,
 				BA860E0E21CC99FF004E118F /* MenuItemManager.swift */,
@@ -401,11 +395,9 @@
 			files = (
 				BA34948A21CA2AC000C1184D /* SettingApps.swift in Sources */,
 				045EDC0921A1B0AF00B6D9A5 /* AppDelegate.swift in Sources */,
-				BA860E0D21CC99ED004E118F /* KeyComboManager.swift in Sources */,
 				04C7EF8621A1C4BA004F11F4 /* PreferencesWindowController.swift in Sources */,
 				0490FF032377094600E0577C /* SampleItem.swift in Sources */,
 				BA860E0F21CC99FF004E118F /* MenuItemManager.swift in Sources */,
-				BA860E0B21CC9944004E118F /* HotKeyManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

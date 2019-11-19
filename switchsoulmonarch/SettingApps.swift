@@ -9,22 +9,19 @@
 import Cocoa
 
 class SettingApps: NSObject {
-    static let apps = SettingApps()
-    var app_list: [[String:String]] = []
+    var apps: [App] = []
     let userDefaults = UserDefaults()
 
     func setAppList() {
-        self.app_list = []
-        if let apps = userDefaults.array(forKey: "apps") {
-            for app in apps {
-                let a = app as! [String:String]
-                self.app_list.append(a)
+        if let appData = UserDefaults.standard.object(forKey: "apps") as? Data {
+            if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(appData) as? [App] {
+                self.apps = unarchivedObject
             }
         }
     }
 
-    func getApps() -> [[String:String]] {
-        return self.app_list
+    func getApps() -> [App] {
+        return self.apps
     }
 
     func setApps(apps: [App]) {
@@ -33,7 +30,8 @@ class SettingApps: NSObject {
             paths.append(["path" : app.path, "hotKey": app.hotKey])
         }
 
-        userDefaults.set(paths, forKey: "apps")
+        let appData = try! NSKeyedArchiver.archivedData(withRootObject: apps, requiringSecureCoding: false)
+        UserDefaults.standard.set(appData, forKey: "apps")
     }
 
 }

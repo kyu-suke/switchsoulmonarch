@@ -14,19 +14,19 @@ import Sparkle
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    @IBOutlet weak var menu: NSMenu!
-
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     var preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
     let userDefaults = UserDefaults()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
+//        userDefaults.set([], forKey: "apps")
+
         self.statusItem.button?.image = NSImage(named: "icon")
 
         // set HotKey
         if let keyComboTmp = userDefaults.object(forKey: "mainMenuHotKeyKeyCombo") {
-            let keyCombo = NSKeyedUnarchiver.unarchiveObject(with: keyComboTmp as! Data) as? KeyCombo
+            let keyCombo = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(keyComboTmp as! Data) as! KeyCombo
             MenuItemManager().setMainMenu(keyCombo: keyCombo!)
         }
 
@@ -49,8 +49,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func show(_ sender: NSMenuItem){
-        preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
-        preferencesWindow.showWindow(self)
+        self.preferencesWindow = PreferencesWindowController(windowNibName: "PreferencesWindowController")
+        self.preferencesWindow.showWindow(self)
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
 

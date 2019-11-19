@@ -11,7 +11,7 @@ import Magnet
 import KeyHolder
 import Carbon
 
-class App: NSObject{
+class App: NSObject, NSCoding{
     @objc dynamic var appName: String
     @objc dynamic var path: String
     @objc dynamic var hotKey: String
@@ -40,7 +40,19 @@ class App: NSObject{
             self.isAddButton = isAddButton
         }
     }
+
+    required convenience init?(coder aDecoder: NSCoder) {
+        let path        = aDecoder.decodeObject(forKey: "path") as! String
+        let hotKey      = aDecoder.decodeObject(forKey: "hotKey") as! String
+        self.init(url: URL(fileURLWithPath: path), hotKey: hotKey, isAddButton: false)
+    }
     
+
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(path, forKey: "path")
+        aCoder.encode(hotKey, forKey: "hotKey")
+    }
+
 }
 
 class PreferencesWindowController: NSWindowController, NSWindowDelegate {
@@ -59,21 +71,16 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         settedApps.remove(at: n)
         appCollectionView.reloadData()
     }
-    
-    var appCount = 0
-    var identCount = 0
-    
+        
     let userDefaults = UserDefaults()
 
     @objc dynamic var settedApps = [App]()
 
     func windowWillClose(_ notification: Notification) {
-        
         let a = arrayController.arrangedObjects as! [App]
-        SettingApps.apps.setApps(apps: a.filter({ (app) -> Bool in
+        SettingApps().setApps(apps: a.filter({ (app) -> Bool in
             return !app.isAddButton
         }))
-        MenuItemManager().setMenus()
     }
 
     override func windowDidLoad() {
@@ -96,12 +103,9 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         recordView.delegate = self
 
         var settedApps: [App] = []
-        if let apps = userDefaults.array(forKey: "apps") {
-            for ap in apps {
-                let a = ap as! [String:String]
-                let url = URL(fileURLWithPath: a["path"]!)
-                let app = App(url: url, hotKey: a["hotKey"]!, isAddButton: false)
-                settedApps.append(app)
+        if let storedData = UserDefaults.standard.object(forKey: "apps") as? Data {
+            if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedData) as? [App] {
+                settedApps = unarchivedObject
             }
         }
 
@@ -113,20 +117,13 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         
         self.appCollectionView.delegate = self as NSCollectionViewDelegate
         self.appCollectionView.dataSource = self as? NSCollectionViewDataSource
-        
         self.appCollectionView.register(NSNib.init(nibNamed: "SampleItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier.init("SampleItem") )
         self.appCollectionView.content = self.settedApps
         self.appCollectionView.isSelectable = true
-
         self.appCollectionView.reloadData()
-        
-    }
-    
-    @objc func hotkeyCalled() {
-        print("HotKey called!!!!")
     }
  
-    @objc func addApp2(_ sender: NSButton) {
+    @objc func addApp(_ sender: NSButton) {
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
         openPanel.canChooseDirectories = false
@@ -139,24 +136,12 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
                 guard let url = openPanel.url else { return }
 
                 let app = App(url: url, hotKey: "", isAddButton: false)
+                let plusButton = self.settedApps.popLast()!
                 self.settedApps.append(app)
+                self.settedApps.append(plusButton)
                 self.appCollectionView.reloadData()
 
-                SettingApps.apps.setApps(apps: self.settedApps)
-            }
-        }
-    }
-    
-    @objc func delApp(_ sender: NSButton) {
-        let delIdent = sender.identifier?.rawValue.split(separator: ":")[1]
-        appStackView!.subviews.forEach {
-            guard let identifier = $0.identifier else {
-                return
-            }
-            let ident = identifier.rawValue.split(separator: ":")
-            
-            if ident[1] == delIdent {
-                $0.removeFromSuperview()
+                SettingApps().setApps(apps: self.settedApps)
             }
         }
     }
@@ -195,7 +180,7 @@ extension PreferencesWindowController: RecordViewDelegate, NSCollectionViewDeleg
         for n in (0 ..< count) {
             let item = collectionView.item(at: n) as! SampleItem
             if item.isSelected && self.settedApps[n].isAddButton {
-                self.addApp2(NSButton())
+                self.addApp(NSButton())
             }
             (collectionView.item(at: n) as! SampleItem).updateBG()
         }

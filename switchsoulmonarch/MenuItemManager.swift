@@ -13,22 +13,17 @@ import KeyHolder
 class MenuItemManager: NSObject {
 
     @objc func getMenus() -> NSMenu {
-        SettingApps.apps.setAppList()
-        let apps = SettingApps.apps.getApps()
+        let settingApps = SettingApps()
+        settingApps.setAppList()
         
-        let m = NSMenu()
-        for app in apps {
-            let a = app
-            let url = URL(fileURLWithPath: a["path"]!)
-            let app = App(url: url, hotKey: a["hotKey"]!, isAddButton: false)
-            let path = app.path
-            let key = app.hotKey
-            m.addItem(makeAppItem(appName: path, shortcutKey: key))
+        let menu = NSMenu()
+        for app in settingApps.getApps() {
+            menu.addItem(makeAppItem(appName: app.path, shortcutKey: app.hotKey))
         }
-        m.addItem(makePreferencesItem())
-        m.addItem(makeQuitItem())
+        menu.addItem(makePreferencesItem())
+        menu.addItem(makeQuitItem())
 
-        return m
+        return menu
     }
 
     @objc func setMainMenu(keyCombo: KeyCombo) {
@@ -62,12 +57,8 @@ class MenuItemManager: NSObject {
         return item
     }
 
-    public func setMenus() {
-        print("MEEEENUUUUUUUUU")
-    }
-
     @objc func showMainMenu() {
-        let menu = MenuItemManager().getMenus()
+        let menu = self.getMenus()
         menu.popUp(positioning: nil, at: NSEvent.mouseLocation, in: nil)
     }
 
