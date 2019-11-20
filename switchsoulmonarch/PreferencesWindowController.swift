@@ -102,12 +102,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
         }
         recordView.delegate = self
 
-        var settedApps: [App] = []
-        if let storedData = UserDefaults.standard.object(forKey: "apps") as? Data {
-            if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedData) as? [App] {
-                settedApps = unarchivedObject
-            }
-        }
+        var settedApps: [App] = SettingApps().getApps()
 
         // add plus button
         let plusButton = App(url: URL(fileURLWithPath: ""), hotKey: "", isAddButton: true)

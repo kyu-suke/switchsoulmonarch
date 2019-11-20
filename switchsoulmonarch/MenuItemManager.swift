@@ -13,11 +13,9 @@ import KeyHolder
 class MenuItemManager: NSObject {
 
     @objc func getMenus() -> NSMenu {
-        let settingApps = SettingApps()
-        settingApps.setAppList()
         
         let menu = NSMenu()
-        for app in settingApps.getApps() {
+        for app in SettingApps().getApps() {
             menu.addItem(makeAppItem(appName: app.path, shortcutKey: app.hotKey))
         }
         menu.addItem(makePreferencesItem())

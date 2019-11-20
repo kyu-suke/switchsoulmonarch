@@ -9,19 +9,15 @@
 import Cocoa
 
 class SettingApps: NSObject {
-    var apps: [App] = []
     let userDefaults = UserDefaults()
 
-    func setAppList() {
-        if let appData = UserDefaults.standard.object(forKey: "apps") as? Data {
-            if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(appData) as? [App] {
-                self.apps = unarchivedObject
+    func getApps() -> [App] {
+        if let storedData = UserDefaults.standard.object(forKey: "apps") as? Data {
+            if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedData) as? [App] {
+                return unarchivedObject
             }
         }
-    }
-
-    func getApps() -> [App] {
-        return self.apps
+        return []
     }
 
     func setApps(apps: [App]) {
