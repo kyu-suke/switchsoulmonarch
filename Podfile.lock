@@ -2,7 +2,7 @@ PODS:
   - KeyHolder (3.0.1):
     - Magnet (~> 2.3)
   - Magnet (2.3.1)
-  - Sparkle (1.21.2)
+  - Sparkle (1.22.0)
 
 DEPENDENCIES:
   - KeyHolder (from `https://github.com/kyu-suke/KeyHolder`, branch `add_eisu_kana`)
@@ -27,7 +27,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   KeyHolder: 142932db4eac7420b003e2eae94c9a61b8b53cb1
   Magnet: f8dac2ffc845ffe68b2dd21c68a801f866f4a098
-  Sparkle: 1678d4707e7665960c7d1b43aca125e6392d11c4
+  Sparkle: 593ac2e677c07bcb6c3b22d621240e7cbedaab57
 
 PODFILE CHECKSUM: 694e59049ac3528b25b2d249a9e1b999e7f0add0
 
