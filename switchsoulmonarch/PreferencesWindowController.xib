@@ -31,7 +31,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="Tab" identifier="" id="Lh7-oI-fP2">
+                            <tabViewItem label="hotkey" identifier="" id="Lh7-oI-fP2">
                                 <view key="view" id="Psl-HQ-EXg">
                                     <rect key="frame" x="10" y="33" width="680" height="304"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,18 +56,18 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="View" identifier="" id="nGX-Ls-ucf">
-                                <view key="view" ambiguous="YES" id="uvO-ru-ZPc">
+                            <tabViewItem label="apps" identifier="" id="nGX-Ls-ucf">
+                                <view key="view" id="uvO-ru-ZPc">
                                     <rect key="frame" x="10" y="33" width="680" height="304"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <scrollView wantsLayer="YES" ambiguous="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lM-Tx-T8P">
+                                        <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lM-Tx-T8P">
                                             <rect key="frame" x="0.0" y="0.0" width="680" height="304"/>
-                                            <clipView key="contentView" ambiguous="YES" id="Fqc-Ks-zj4">
+                                            <clipView key="contentView" id="Fqc-Ks-zj4">
                                                 <rect key="frame" x="1" y="1" width="678" height="302"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <collectionView ambiguous="YES" id="8Lx-Kv-Aor">
+                                                    <collectionView id="8Lx-Kv-Aor">
                                                         <rect key="frame" x="0.0" y="0.0" width="678" height="158"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                         <collectionViewGridLayout key="collectionViewLayout" id="6bL-9Z-l0j">
@@ -112,7 +112,7 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Item 2" identifier="" id="10o-Pw-shK">
+                            <tabViewItem label="update" identifier="" id="10o-Pw-shK">
                                 <view key="view" id="aqL-eg-fCg">
                                     <rect key="frame" x="10" y="33" width="680" height="304"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,7 +130,11 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="amv-6B-aiz" firstAttribute="top" secondItem="aqL-eg-fCg" secondAttribute="top" constant="141" id="DPJ-ci-Rqj"/>
+                                        <constraint firstItem="amv-6B-aiz" firstAttribute="leading" secondItem="aqL-eg-fCg" secondAttribute="leading" constant="291" id="LN8-d2-MGl"/>
+                                        <constraint firstAttribute="bottom" secondItem="amv-6B-aiz" secondAttribute="bottom" constant="142" id="LfY-T1-wWR"/>
                                         <constraint firstItem="amv-6B-aiz" firstAttribute="leading" secondItem="aqL-eg-fCg" secondAttribute="leading" constant="291" id="TfQ-56-JRQ"/>
+                                        <constraint firstItem="amv-6B-aiz" firstAttribute="top" secondItem="aqL-eg-fCg" secondAttribute="top" constant="141" id="VMR-EM-omp"/>
+                                        <constraint firstAttribute="trailing" secondItem="amv-6B-aiz" secondAttribute="trailing" constant="278" id="i2e-5k-ll0"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
