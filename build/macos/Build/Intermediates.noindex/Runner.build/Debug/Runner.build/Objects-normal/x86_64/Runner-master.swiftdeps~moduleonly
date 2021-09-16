@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)"
+options: "3b1355d6f6d4d9d3ecc0e072dbbe7360"
+build_time: [1631799626, 993682000]
+inputs:
+  "/Users/kyusuke/Garage/switchsoulmonarch/macos/Runner/MainFlutterWindow.swift": [1625581689, 765131464]
+  "/Users/kyusuke/Garage/switchsoulmonarch/macos/Runner/AppDelegate.swift": [1625581689, 760905410]
+  "/Users/kyusuke/Garage/switchsoulmonarch/macos/Flutter/GeneratedPluginRegistrant.swift": [1631799607, 248756280]
