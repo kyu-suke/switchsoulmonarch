@@ -6,11 +6,11 @@
 	<dict>
 		<key>Resources/AppIcon.icns</key>
 		<data>
-		H4osk2kAsQW0CEQ3FVPjpzwY8+I=
+		PILEIjwM3tW4HuHj32iSEmF1hes=
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		M4adkUfQWVs55FExuLv3vx2oU8A=
+		T7OzWmahbNNMVrtLd1N4jHUUT+I=
 		</data>
 		<key>Resources/Base.lproj/MainMenu.nib</key>
 		<data>
@@ -23,10 +23,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			/YA5guh0uWQTcGEf9GsSGyxhv4g=
+			xf67TZ6iH1PtDFlz6xnpu3cjQ3o=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"e985955b487758b95dd00ddc17174dc8b1520963" or cdhash H"fd803982e874b9641370611ff46b121b2c61bf88"</string>
+			<string>cdhash H"b8a6ad941c195fd93f74254c7462ea1eedea97b4" or cdhash H"c5febb4d9ea21f53ed0c5973eb19e9bb7723437a"</string>
 		</dict>
 		<key>Frameworks/FlutterMacOS.framework</key>
 		<dict>
@@ -190,26 +190,44 @@
 			<key>requirement</key>
 			<string>cdhash H"a18612d2eccee6fe22332c3b57ae07e6635c3ef4" or cdhash H"fcd93d1721ef7fbc213bed3653c404d800ecae38"</string>
 		</dict>
+		<key>Frameworks/system_tray.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			nQLEe11DiqEee1+Khd8g5LMgQOs=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"47c5b661ac56ae7ffcd9cdace234035ece8eb1d3" or cdhash H"9d02c47b5d438aa11e7b5f8a85df20e4b32040eb"</string>
+		</dict>
+		<key>Frameworks/window_manager.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			RsGQ2ynBpW7r3Za22SKkyhoDhHY=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"3cf6422dcb039f4749737d34ed35976b49cf6784" or cdhash H"46c190db29c1a56eebdd96b6d922a4ca1a038476"</string>
+		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			H4osk2kAsQW0CEQ3FVPjpzwY8+I=
+			PILEIjwM3tW4HuHj32iSEmF1hes=
 			</data>
 			<key>hash2</key>
 			<data>
-			cNOcZfJM7nFaHVMl7JL0QphD9rVYByn+3XIjcLCBwIE=
+			PU/gjN7Z7BS6rfTTd948Ez/sbQhHXzrHhOT3EcYvEQs=
 			</data>
 		</dict>
 		<key>Resources/Assets.car</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			M4adkUfQWVs55FExuLv3vx2oU8A=
+			T7OzWmahbNNMVrtLd1N4jHUUT+I=
 			</data>
 			<key>hash2</key>
 			<data>
-			v9dJiePhb+v0Cv2K5Z0uUe5+l6APAqW/KVs3LJANd1o=
+			q/Uxmvq2E+XiZpg4m8bOc5NJBhX0LmO1z7PwxPqk/Fg=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/MainMenu.nib</key>

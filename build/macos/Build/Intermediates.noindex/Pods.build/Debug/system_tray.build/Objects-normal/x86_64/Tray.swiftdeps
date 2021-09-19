@@ -1,0 +1,899 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "kDefaultSizeWidth"
+- "kDefaultSizeHeight"
+- "kSystemTrayEventCallbackMethod"
+- "kSystemTrayEventLButtnUp"
+- "kSystemTrayEventLButtonDblClk"
+- "kSystemTrayEventRButtnUp"
+- "SystemTray"
+provides-nominal:
+- "11system_tray10SystemTrayC"
+provides-member:
+- ["11system_tray10SystemTrayC", ""]
+provides-dynamic-lookup:
+- "channel"
+- "initSystemTray"
+- "menuDidClose"
+- "onSystemTrayEventCallback"
+- "setContextMenu"
+- "setSystemTrayInfo"
+- "statusItem"
+- "statusItemMenu"
+depends-top-level:
+- !private "Array"
+- "AssignmentPrecedence"
+- "Bool"
+- !private "BooleanLiteralType"
+- "FloatLiteralType"
+- "FlutterMethodChannel"
+- "IntegerLiteralType"
+- !private "NSApp"
+- !private "NSImage"
+- "NSMenu"
+- "NSMenuDelegate"
+- "NSObject"
+- !private "NSSize"
+- !private "NSStatusBar"
+- "NSStatusBarButton"
+- "NSStatusItem"
+- "String"
+- "StringLiteralType"
+- "SystemTray"
+- !private "channel"
+- "kDefaultSizeHeight"
+- "kDefaultSizeWidth"
+- "kSystemTrayEventCallbackMethod"
+- "kSystemTrayEventLButtnUp"
+- "kSystemTrayEventLButtonDblClk"
+- "kSystemTrayEventRButtnUp"
+- !private "onSystemTrayEventCallback"
+- !private "statusItem"
+- !private "statusItemMenu"
+depends-member:
+- !private ["s18AdditiveArithmeticP", ""]
+- !private ["SK", ""]
+- !private ["Sz", ""]
+- !private ["So6CGSizeV", "init"]
+- !private ["s7CVarArgP", "NSApp"]
+- !private ["s7CVarArgP", "NSImage"]
+- !private ["s7CVarArgP", "NSSize"]
+- !private ["s7CVarArgP", "NSStatusBar"]
+- !private ["s7CVarArgP", "NSStatusItem"]
+- ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "action"]
+- !private ["s7CVarArgP", "button"]
+- !private ["s7CVarArgP", "channel"]
+- ["s7CVarArgP", "confinementRect"]
+- ["s7CVarArgP", "confinementRectForMenu"]
+- !private ["s7CVarArgP", "currentEvent"]
+- !private ["s7CVarArgP", "delegate"]
+- !private ["s7CVarArgP", "image"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "invokeMethod"]
+- !private ["s7CVarArgP", "kDefaultSizeHeight"]
+- !private ["s7CVarArgP", "kDefaultSizeWidth"]
+- !private ["s7CVarArgP", "kSystemTrayEventCallbackMethod"]
+- !private ["s7CVarArgP", "kSystemTrayEventLButtnUp"]
+- !private ["s7CVarArgP", "kSystemTrayEventRButtnUp"]
+- ["s7CVarArgP", "menu"]
+- ["s7CVarArgP", "menuDidClose"]
+- ["s7CVarArgP", "menuHasKeyEquivalent"]
+- ["s7CVarArgP", "menuNeedsUpdate"]
+- ["s7CVarArgP", "menuWillOpen"]
+- ["s7CVarArgP", "numberOfItems"]
+- ["s7CVarArgP", "numberOfItemsInMenu"]
+- !private ["s7CVarArgP", "onSystemTrayEventCallback"]
+- !private ["s7CVarArgP", "performClick"]
+- !private ["s7CVarArgP", "sendAction"]
+- !private ["s7CVarArgP", "size"]
+- !private ["s7CVarArgP", "statusItem"]
+- !private ["s7CVarArgP", "statusItemMenu"]
+- !private ["s7CVarArgP", "system"]
+- !private ["s7CVarArgP", "target"]
+- !private ["s7CVarArgP", "title"]
+- !private ["s7CVarArgP", "toolTip"]
+- !private ["s7CVarArgP", "type"]
+- !private ["s7CVarArgP", "variableLength"]
+- !private ["Sl", ""]
+- !private ["SL", ""]
+- !private ["s28CustomDebugStringConvertibleP", "NSApp"]
+- !private ["s28CustomDebugStringConvertibleP", "NSImage"]
+- !private ["s28CustomDebugStringConvertibleP", "NSSize"]
+- !private ["s28CustomDebugStringConvertibleP", "NSStatusBar"]
+- !private ["s28CustomDebugStringConvertibleP", "NSStatusItem"]
+- ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s28CustomDebugStringConvertibleP", "action"]
+- !private ["s28CustomDebugStringConvertibleP", "button"]
+- !private ["s28CustomDebugStringConvertibleP", "channel"]
+- ["s28CustomDebugStringConvertibleP", "confinementRect"]
+- ["s28CustomDebugStringConvertibleP", "confinementRectForMenu"]
+- !private ["s28CustomDebugStringConvertibleP", "currentEvent"]
+- !private ["s28CustomDebugStringConvertibleP", "delegate"]
+- !private ["s28CustomDebugStringConvertibleP", "image"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "invokeMethod"]
+- !private ["s28CustomDebugStringConvertibleP", "kDefaultSizeHeight"]
+- !private ["s28CustomDebugStringConvertibleP", "kDefaultSizeWidth"]
+- !private ["s28CustomDebugStringConvertibleP", "kSystemTrayEventCallbackMethod"]
+- !private ["s28CustomDebugStringConvertibleP", "kSystemTrayEventLButtnUp"]
+- !private ["s28CustomDebugStringConvertibleP", "kSystemTrayEventRButtnUp"]
+- ["s28CustomDebugStringConvertibleP", "menu"]
+- ["s28CustomDebugStringConvertibleP", "menuDidClose"]
+- ["s28CustomDebugStringConvertibleP", "menuHasKeyEquivalent"]
+- ["s28CustomDebugStringConvertibleP", "menuNeedsUpdate"]
+- ["s28CustomDebugStringConvertibleP", "menuWillOpen"]
+- ["s28CustomDebugStringConvertibleP", "numberOfItems"]
+- ["s28CustomDebugStringConvertibleP", "numberOfItemsInMenu"]
+- !private ["s28CustomDebugStringConvertibleP", "onSystemTrayEventCallback"]
+- !private ["s28CustomDebugStringConvertibleP", "performClick"]
+- !private ["s28CustomDebugStringConvertibleP", "sendAction"]
+- !private ["s28CustomDebugStringConvertibleP", "size"]
+- !private ["s28CustomDebugStringConvertibleP", "statusItem"]
+- !private ["s28CustomDebugStringConvertibleP", "statusItemMenu"]
+- !private ["s28CustomDebugStringConvertibleP", "system"]
+- !private ["s28CustomDebugStringConvertibleP", "target"]
+- !private ["s28CustomDebugStringConvertibleP", "title"]
+- !private ["s28CustomDebugStringConvertibleP", "toolTip"]
+- !private ["s28CustomDebugStringConvertibleP", "type"]
+- !private ["s28CustomDebugStringConvertibleP", "variableLength"]
+- !private ["s17CustomReflectableP", "currentEvent"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s23CustomStringConvertibleP", "NSApp"]
+- !private ["s23CustomStringConvertibleP", "NSImage"]
+- !private ["s23CustomStringConvertibleP", "NSSize"]
+- !private ["s23CustomStringConvertibleP", "NSStatusBar"]
+- !private ["s23CustomStringConvertibleP", "NSStatusItem"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "action"]
+- !private ["s23CustomStringConvertibleP", "button"]
+- !private ["s23CustomStringConvertibleP", "channel"]
+- ["s23CustomStringConvertibleP", "confinementRect"]
+- ["s23CustomStringConvertibleP", "confinementRectForMenu"]
+- !private ["s23CustomStringConvertibleP", "currentEvent"]
+- !private ["s23CustomStringConvertibleP", "delegate"]
+- !private ["s23CustomStringConvertibleP", "image"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "invokeMethod"]
+- !private ["s23CustomStringConvertibleP", "kDefaultSizeHeight"]
+- !private ["s23CustomStringConvertibleP", "kDefaultSizeWidth"]
+- !private ["s23CustomStringConvertibleP", "kSystemTrayEventCallbackMethod"]
+- !private ["s23CustomStringConvertibleP", "kSystemTrayEventLButtnUp"]
+- !private ["s23CustomStringConvertibleP", "kSystemTrayEventRButtnUp"]
+- ["s23CustomStringConvertibleP", "menu"]
+- ["s23CustomStringConvertibleP", "menuDidClose"]
+- ["s23CustomStringConvertibleP", "menuHasKeyEquivalent"]
+- ["s23CustomStringConvertibleP", "menuNeedsUpdate"]
+- ["s23CustomStringConvertibleP", "menuWillOpen"]
+- ["s23CustomStringConvertibleP", "numberOfItems"]
+- ["s23CustomStringConvertibleP", "numberOfItemsInMenu"]
+- !private ["s23CustomStringConvertibleP", "onSystemTrayEventCallback"]
+- !private ["s23CustomStringConvertibleP", "performClick"]
+- !private ["s23CustomStringConvertibleP", "sendAction"]
+- !private ["s23CustomStringConvertibleP", "size"]
+- !private ["s23CustomStringConvertibleP", "statusItem"]
+- !private ["s23CustomStringConvertibleP", "statusItemMenu"]
+- !private ["s23CustomStringConvertibleP", "system"]
+- !private ["s23CustomStringConvertibleP", "target"]
+- !private ["s23CustomStringConvertibleP", "title"]
+- !private ["s23CustomStringConvertibleP", "toolTip"]
+- !private ["s23CustomStringConvertibleP", "type"]
+- !private ["s23CustomStringConvertibleP", "variableLength"]
+- !private ["Se", "currentEvent"]
+- !private ["Se", "init"]
+- !private ["SE", "currentEvent"]
+- !private ["SE", "init"]
+- !private ["SQ", "ArrayLiteralElement"]
+- !private ["SQ", "Element"]
+- !private ["SQ", "NSApp"]
+- !private ["SQ", "NSImage"]
+- !private ["SQ", "NSSize"]
+- !private ["SQ", "NSStatusBar"]
+- !private ["SQ", "NSStatusItem"]
+- ["SQ", ""]
+- !private ["SQ", "action"]
+- !private ["SQ", "button"]
+- !private ["SQ", "channel"]
+- ["SQ", "confinementRect"]
+- ["SQ", "confinementRectForMenu"]
+- !private ["SQ", "currentEvent"]
+- !private ["SQ", "delegate"]
+- !private ["SQ", "image"]
+- !private ["SQ", "init"]
+- !private ["SQ", "invokeMethod"]
+- !private ["SQ", "kDefaultSizeHeight"]
+- !private ["SQ", "kDefaultSizeWidth"]
+- !private ["SQ", "kSystemTrayEventCallbackMethod"]
+- !private ["SQ", "kSystemTrayEventLButtnUp"]
+- !private ["SQ", "kSystemTrayEventRButtnUp"]
+- ["SQ", "leftMouseUp"]
+- ["SQ", "menu"]
+- ["SQ", "menuDidClose"]
+- ["SQ", "menuHasKeyEquivalent"]
+- ["SQ", "menuNeedsUpdate"]
+- ["SQ", "menuWillOpen"]
+- ["SQ", "numberOfItems"]
+- ["SQ", "numberOfItemsInMenu"]
+- !private ["SQ", "onSystemTrayEventCallback"]
+- !private ["SQ", "performClick"]
+- !private ["SQ", "rightMouseUp"]
+- !private ["SQ", "sendAction"]
+- !private ["SQ", "size"]
+- !private ["SQ", "statusItem"]
+- !private ["SQ", "statusItemMenu"]
+- !private ["SQ", "system"]
+- !private ["SQ", "target"]
+- !private ["SQ", "title"]
+- !private ["SQ", "toolTip"]
+- !private ["SQ", "type"]
+- !private ["SQ", "variableLength"]
+- ["So11NSEventTypeV", "leftMouseUp"]
+- !private ["So11NSEventMaskV", "ArrayLiteralElement"]
+- !private ["So11NSEventMaskV", "Element"]
+- !private ["So11NSEventMaskV", "init"]
+- !private ["So11NSEventMaskV", "leftMouseUp"]
+- !private ["So11NSEventMaskV", "rightMouseUp"]
+- !private ["s25ExpressibleByArrayLiteralP", "ArrayLiteralElement"]
+- !private ["s25ExpressibleByArrayLiteralP", "Element"]
+- !private ["s25ExpressibleByArrayLiteralP", ""]
+- !private ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["s25ExpressibleByArrayLiteralP", "leftMouseUp"]
+- !private ["s25ExpressibleByArrayLiteralP", "rightMouseUp"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
+- !private ["s27ExpressibleByIntegerLiteralP", ""]
+- !private ["s23ExpressibleByNilLiteralP", "currentEvent"]
+- !private ["s32ExpressibleByStringInterpolationP", ""]
+- !private ["s26ExpressibleByStringLiteralP", ""]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", ""]
+- !private ["So20FlutterMethodChannelC", "invokeMethod"]
+- !private ["SH", "NSApp"]
+- !private ["SH", "NSImage"]
+- !private ["SH", "NSSize"]
+- !private ["SH", "NSStatusBar"]
+- !private ["SH", "NSStatusItem"]
+- ["SH", ""]
+- !private ["SH", "action"]
+- !private ["SH", "button"]
+- !private ["SH", "channel"]
+- ["SH", "confinementRect"]
+- ["SH", "confinementRectForMenu"]
+- !private ["SH", "currentEvent"]
+- !private ["SH", "delegate"]
+- !private ["SH", "image"]
+- !private ["SH", "init"]
+- !private ["SH", "invokeMethod"]
+- !private ["SH", "kDefaultSizeHeight"]
+- !private ["SH", "kDefaultSizeWidth"]
+- !private ["SH", "kSystemTrayEventCallbackMethod"]
+- !private ["SH", "kSystemTrayEventLButtnUp"]
+- !private ["SH", "kSystemTrayEventRButtnUp"]
+- ["SH", "leftMouseUp"]
+- ["SH", "menu"]
+- ["SH", "menuDidClose"]
+- ["SH", "menuHasKeyEquivalent"]
+- ["SH", "menuNeedsUpdate"]
+- ["SH", "menuWillOpen"]
+- ["SH", "numberOfItems"]
+- ["SH", "numberOfItemsInMenu"]
+- !private ["SH", "onSystemTrayEventCallback"]
+- !private ["SH", "performClick"]
+- !private ["SH", "sendAction"]
+- !private ["SH", "size"]
+- !private ["SH", "statusItem"]
+- !private ["SH", "statusItemMenu"]
+- !private ["SH", "system"]
+- !private ["SH", "target"]
+- !private ["SH", "title"]
+- !private ["SH", "toolTip"]
+- !private ["SH", "type"]
+- !private ["SH", "variableLength"]
+- !private ["s25LosslessStringConvertibleP", ""]
+- !private ["So21NSAccessibilityButtonP", "action"]
+- !private ["So21NSAccessibilityButtonP", "image"]
+- !private ["So21NSAccessibilityButtonP", "performClick"]
+- !private ["So21NSAccessibilityButtonP", "sendAction"]
+- !private ["So21NSAccessibilityButtonP", "target"]
+- !private ["So21NSAccessibilityButtonP", "title"]
+- !private ["So21NSAccessibilityButtonP", "toolTip"]
+- ["So22NSAccessibilityElementP", ""]
+- !private ["So22NSAccessibilityElementP", "action"]
+- !private ["So22NSAccessibilityElementP", "currentEvent"]
+- !private ["So22NSAccessibilityElementP", "delegate"]
+- !private ["So22NSAccessibilityElementP", "image"]
+- !private ["So22NSAccessibilityElementP", "performClick"]
+- !private ["So22NSAccessibilityElementP", "sendAction"]
+- !private ["So22NSAccessibilityElementP", "sendActionOn"]
+- !private ["So22NSAccessibilityElementP", "target"]
+- !private ["So22NSAccessibilityElementP", "title"]
+- !private ["So22NSAccessibilityElementP", "toolTip"]
+- !private ["So15NSAccessibilityP", ""]
+- !private ["So15NSAccessibilityP", "action"]
+- !private ["So15NSAccessibilityP", "currentEvent"]
+- !private ["So15NSAccessibilityP", "delegate"]
+- !private ["So15NSAccessibilityP", "image"]
+- !private ["So15NSAccessibilityP", "performClick"]
+- !private ["So15NSAccessibilityP", "sendAction"]
+- !private ["So15NSAccessibilityP", "sendActionOn"]
+- !private ["So15NSAccessibilityP", "target"]
+- !private ["So15NSAccessibilityP", "title"]
+- !private ["So15NSAccessibilityP", "toolTip"]
+- !private ["So29NSAnimatablePropertyContainerP", ""]
+- !private ["So29NSAnimatablePropertyContainerP", "action"]
+- !private ["So29NSAnimatablePropertyContainerP", "image"]
+- !private ["So29NSAnimatablePropertyContainerP", "performClick"]
+- !private ["So29NSAnimatablePropertyContainerP", "sendAction"]
+- !private ["So29NSAnimatablePropertyContainerP", "sendActionOn"]
+- !private ["So29NSAnimatablePropertyContainerP", "target"]
+- !private ["So29NSAnimatablePropertyContainerP", "title"]
+- !private ["So29NSAnimatablePropertyContainerP", "toolTip"]
+- !private ["So25NSAppearanceCustomizationP", ""]
+- !private ["So25NSAppearanceCustomizationP", "action"]
+- !private ["So25NSAppearanceCustomizationP", "currentEvent"]
+- !private ["So25NSAppearanceCustomizationP", "image"]
+- !private ["So25NSAppearanceCustomizationP", "performClick"]
+- !private ["So25NSAppearanceCustomizationP", "sendAction"]
+- !private ["So25NSAppearanceCustomizationP", "sendActionOn"]
+- !private ["So25NSAppearanceCustomizationP", "target"]
+- !private ["So25NSAppearanceCustomizationP", "title"]
+- !private ["So25NSAppearanceCustomizationP", "toolTip"]
+- !private ["So13NSApplicationC", "currentEvent"]
+- ["So8NSButtonC", ""]
+- !private ["So8NSButtonC", "action"]
+- !private ["So8NSButtonC", "image"]
+- !private ["So8NSButtonC", "performClick"]
+- !private ["So8NSButtonC", "sendAction"]
+- !private ["So8NSButtonC", "target"]
+- !private ["So8NSButtonC", "title"]
+- !private ["So8NSButtonC", "toolTip"]
+- !private ["So8NSCodingP", ""]
+- !private ["So8NSCodingP", "action"]
+- !private ["So8NSCodingP", "currentEvent"]
+- !private ["So8NSCodingP", "delegate"]
+- !private ["So8NSCodingP", "image"]
+- !private ["So8NSCodingP", "init"]
+- !private ["So8NSCodingP", "performClick"]
+- !private ["So8NSCodingP", "sendAction"]
+- !private ["So8NSCodingP", "sendActionOn"]
+- !private ["So8NSCodingP", "size"]
+- !private ["So8NSCodingP", "target"]
+- !private ["So8NSCodingP", "title"]
+- !private ["So8NSCodingP", "toolTip"]
+- !private ["So8NSCodingP", "type"]
+- ["So9NSControlC", ""]
+- !private ["So9NSControlC", "action"]
+- !private ["So9NSControlC", "image"]
+- !private ["So9NSControlC", "performClick"]
+- !private ["So9NSControlC", "sendAction"]
+- !private ["So9NSControlC", "target"]
+- !private ["So9NSControlC", "title"]
+- !private ["So9NSControlC", "toolTip"]
+- !private ["So9NSCopyingP", "delegate"]
+- !private ["So9NSCopyingP", "init"]
+- !private ["So9NSCopyingP", "size"]
+- !private ["So9NSCopyingP", "type"]
+- !private ["So21NSDraggingDestinationP", ""]
+- !private ["So21NSDraggingDestinationP", "action"]
+- !private ["So21NSDraggingDestinationP", "image"]
+- !private ["So21NSDraggingDestinationP", "performClick"]
+- !private ["So21NSDraggingDestinationP", "sendAction"]
+- !private ["So21NSDraggingDestinationP", "sendActionOn"]
+- !private ["So21NSDraggingDestinationP", "target"]
+- !private ["So21NSDraggingDestinationP", "title"]
+- !private ["So21NSDraggingDestinationP", "toolTip"]
+- !private ["So7NSEventC", "type"]
+- !private ["So7NSImageC", "init"]
+- !private ["So7NSImageC", "size"]
+- !private ["So6NSMenuC", "delegate"]
+- !private ["So14NSMenuDelegateP", "NSApp"]
+- !private ["So14NSMenuDelegateP", "NSImage"]
+- !private ["So14NSMenuDelegateP", "NSSize"]
+- !private ["So14NSMenuDelegateP", "NSStatusBar"]
+- !private ["So14NSMenuDelegateP", "NSStatusItem"]
+- ["So14NSMenuDelegateP", ""]
+- ["So14NSMenuDelegateP", "channel"]
+- ["So14NSMenuDelegateP", "confinementRect"]
+- ["So14NSMenuDelegateP", "confinementRectForMenu"]
+- ["So14NSMenuDelegateP", "deinit"]
+- ["So14NSMenuDelegateP", "init"]
+- ["So14NSMenuDelegateP", "initSystemTray"]
+- !private ["So14NSMenuDelegateP", "kDefaultSizeHeight"]
+- !private ["So14NSMenuDelegateP", "kDefaultSizeWidth"]
+- !private ["So14NSMenuDelegateP", "kSystemTrayEventCallbackMethod"]
+- !private ["So14NSMenuDelegateP", "kSystemTrayEventLButtnUp"]
+- !private ["So14NSMenuDelegateP", "kSystemTrayEventRButtnUp"]
+- ["So14NSMenuDelegateP", "menu"]
+- ["So14NSMenuDelegateP", "menuDidClose"]
+- ["So14NSMenuDelegateP", "menuHasKeyEquivalent"]
+- ["So14NSMenuDelegateP", "menuNeedsUpdate"]
+- ["So14NSMenuDelegateP", "menuWillOpen"]
+- ["So14NSMenuDelegateP", "numberOfItems"]
+- ["So14NSMenuDelegateP", "numberOfItemsInMenu"]
+- ["So14NSMenuDelegateP", "onSystemTrayEventCallback"]
+- ["So14NSMenuDelegateP", "setContextMenu"]
+- ["So14NSMenuDelegateP", "setSystemTrayInfo"]
+- ["So14NSMenuDelegateP", "statusItem"]
+- ["So14NSMenuDelegateP", "statusItemMenu"]
+- !private ["So20NSMenuItemValidationP", "currentEvent"]
+- ["So8NSObjectC", "Bool"]
+- ["So8NSObjectC", "FlutterMethodChannel"]
+- !private ["So8NSObjectC", "NSApp"]
+- !private ["So8NSObjectC", "NSImage"]
+- ["So8NSObjectC", "NSMenu"]
+- !private ["So8NSObjectC", "NSSize"]
+- !private ["So8NSObjectC", "NSStatusBar"]
+- ["So8NSObjectC", "NSStatusBarButton"]
+- ["So8NSObjectC", "NSStatusItem"]
+- ["So8NSObjectC", "String"]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "action"]
+- !private ["So8NSObjectC", "button"]
+- ["So8NSObjectC", "channel"]
+- ["So8NSObjectC", "confinementRect"]
+- ["So8NSObjectC", "confinementRectForMenu"]
+- !private ["So8NSObjectC", "currentEvent"]
+- !private ["So8NSObjectC", "delegate"]
+- !private ["So8NSObjectC", "image"]
+- !private ["So8NSObjectC", "imageNamed"]
+- !private ["So8NSObjectC", "imageWithSize"]
+- ["So8NSObjectC", "init"]
+- ["So8NSObjectC", "initSystemTray"]
+- !private ["So8NSObjectC", "invokeMethod"]
+- !private ["So8NSObjectC", "kDefaultSizeHeight"]
+- !private ["So8NSObjectC", "kDefaultSizeWidth"]
+- !private ["So8NSObjectC", "kSystemTrayEventCallbackMethod"]
+- !private ["So8NSObjectC", "kSystemTrayEventLButtnUp"]
+- !private ["So8NSObjectC", "kSystemTrayEventRButtnUp"]
+- ["So8NSObjectC", "menu"]
+- ["So8NSObjectC", "menuDidClose"]
+- ["So8NSObjectC", "menuHasKeyEquivalent"]
+- ["So8NSObjectC", "menuNeedsUpdate"]
+- ["So8NSObjectC", "menuWillOpen"]
+- ["So8NSObjectC", "numberOfItems"]
+- ["So8NSObjectC", "numberOfItemsInMenu"]
+- ["So8NSObjectC", "onSystemTrayEventCallback"]
+- !private ["So8NSObjectC", "performClick"]
+- !private ["So8NSObjectC", "sendAction"]
+- !private ["So8NSObjectC", "sendActionOn"]
+- ["So8NSObjectC", "setContextMenu"]
+- ["So8NSObjectC", "setSystemTrayInfo"]
+- !private ["So8NSObjectC", "size"]
+- ["So8NSObjectC", "statusItem"]
+- ["So8NSObjectC", "statusItemMenu"]
+- !private ["So8NSObjectC", "statusItemWithLength"]
+- !private ["So8NSObjectC", "system"]
+- !private ["So8NSObjectC", "target"]
+- !private ["So8NSObjectC", "title"]
+- !private ["So8NSObjectC", "toolTip"]
+- !private ["So8NSObjectC", "type"]
+- !private ["So8NSObjectC", "variableLength"]
+- ["So8NSObjectP", "Bool"]
+- ["So8NSObjectP", "FlutterMethodChannel"]
+- !private ["So8NSObjectP", "NSApp"]
+- !private ["So8NSObjectP", "NSImage"]
+- ["So8NSObjectP", "NSMenu"]
+- !private ["So8NSObjectP", "NSSize"]
+- !private ["So8NSObjectP", "NSStatusBar"]
+- ["So8NSObjectP", "NSStatusBarButton"]
+- ["So8NSObjectP", "NSStatusItem"]
+- ["So8NSObjectP", "String"]
+- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "action"]
+- !private ["So8NSObjectP", "button"]
+- ["So8NSObjectP", "channel"]
+- ["So8NSObjectP", "confinementRect"]
+- ["So8NSObjectP", "confinementRectForMenu"]
+- !private ["So8NSObjectP", "currentEvent"]
+- ["So8NSObjectP", "deinit"]
+- !private ["So8NSObjectP", "delegate"]
+- !private ["So8NSObjectP", "image"]
+- !private ["So8NSObjectP", "imageNamed"]
+- !private ["So8NSObjectP", "imageWithSize"]
+- ["So8NSObjectP", "init"]
+- ["So8NSObjectP", "initSystemTray"]
+- !private ["So8NSObjectP", "invokeMethod"]
+- !private ["So8NSObjectP", "kDefaultSizeHeight"]
+- !private ["So8NSObjectP", "kDefaultSizeWidth"]
+- !private ["So8NSObjectP", "kSystemTrayEventCallbackMethod"]
+- !private ["So8NSObjectP", "kSystemTrayEventLButtnUp"]
+- !private ["So8NSObjectP", "kSystemTrayEventRButtnUp"]
+- ["So8NSObjectP", "menu"]
+- ["So8NSObjectP", "menuDidClose"]
+- ["So8NSObjectP", "menuHasKeyEquivalent"]
+- ["So8NSObjectP", "menuNeedsUpdate"]
+- ["So8NSObjectP", "menuWillOpen"]
+- ["So8NSObjectP", "numberOfItems"]
+- ["So8NSObjectP", "numberOfItemsInMenu"]
+- ["So8NSObjectP", "onSystemTrayEventCallback"]
+- !private ["So8NSObjectP", "performClick"]
+- !private ["So8NSObjectP", "sendAction"]
+- !private ["So8NSObjectP", "sendActionOn"]
+- ["So8NSObjectP", "setContextMenu"]
+- ["So8NSObjectP", "setSystemTrayInfo"]
+- !private ["So8NSObjectP", "size"]
+- ["So8NSObjectP", "statusItem"]
+- ["So8NSObjectP", "statusItemMenu"]
+- !private ["So8NSObjectP", "statusItemWithLength"]
+- !private ["So8NSObjectP", "system"]
+- !private ["So8NSObjectP", "target"]
+- !private ["So8NSObjectP", "title"]
+- !private ["So8NSObjectP", "toolTip"]
+- !private ["So8NSObjectP", "type"]
+- !private ["So8NSObjectP", "variableLength"]
+- !private ["So19NSPasteboardReadingP", "init"]
+- !private ["So19NSPasteboardReadingP", "size"]
+- !private ["So19NSPasteboardWritingP", "init"]
+- !private ["So19NSPasteboardWritingP", "size"]
+- ["So11NSResponderC", ""]
+- !private ["So11NSResponderC", "action"]
+- !private ["So11NSResponderC", "currentEvent"]
+- !private ["So11NSResponderC", "image"]
+- !private ["So11NSResponderC", "performClick"]
+- !private ["So11NSResponderC", "sendAction"]
+- !private ["So11NSResponderC", "sendActionOn"]
+- !private ["So11NSResponderC", "target"]
+- !private ["So11NSResponderC", "title"]
+- !private ["So11NSResponderC", "toolTip"]
+- !private ["So14NSSecureCodingP", "init"]
+- !private ["So14NSSecureCodingP", "size"]
+- !private ["So30NSStandardKeyBindingRespondingP", ""]
+- !private ["So30NSStandardKeyBindingRespondingP", "action"]
+- !private ["So30NSStandardKeyBindingRespondingP", "currentEvent"]
+- !private ["So30NSStandardKeyBindingRespondingP", "image"]
+- !private ["So30NSStandardKeyBindingRespondingP", "performClick"]
+- !private ["So30NSStandardKeyBindingRespondingP", "sendAction"]
+- !private ["So30NSStandardKeyBindingRespondingP", "sendActionOn"]
+- !private ["So30NSStandardKeyBindingRespondingP", "target"]
+- !private ["So30NSStandardKeyBindingRespondingP", "title"]
+- !private ["So30NSStandardKeyBindingRespondingP", "toolTip"]
+- !private ["So11NSStatusBarC", "statusItem"]
+- !private ["So11NSStatusBarC", "system"]
+- !private ["So17NSStatusBarButtonC", "action"]
+- !private ["So17NSStatusBarButtonC", "image"]
+- !private ["So17NSStatusBarButtonC", "performClick"]
+- !private ["So17NSStatusBarButtonC", "sendAction"]
+- !private ["So17NSStatusBarButtonC", "target"]
+- !private ["So17NSStatusBarButtonC", "title"]
+- !private ["So17NSStatusBarButtonC", "toolTip"]
+- !private ["So12NSStatusItemC", "button"]
+- !private ["So12NSStatusItemC", "menu"]
+- !private ["So12NSStatusItemC", "variableLength"]
+- !private ["So18NSTouchBarProviderP", ""]
+- !private ["So18NSTouchBarProviderP", "action"]
+- !private ["So18NSTouchBarProviderP", "currentEvent"]
+- !private ["So18NSTouchBarProviderP", "image"]
+- !private ["So18NSTouchBarProviderP", "performClick"]
+- !private ["So18NSTouchBarProviderP", "sendAction"]
+- !private ["So18NSTouchBarProviderP", "sendActionOn"]
+- !private ["So18NSTouchBarProviderP", "target"]
+- !private ["So18NSTouchBarProviderP", "title"]
+- !private ["So18NSTouchBarProviderP", "toolTip"]
+- !private ["So23NSUserActivityRestoringP", ""]
+- !private ["So23NSUserActivityRestoringP", "action"]
+- !private ["So23NSUserActivityRestoringP", "currentEvent"]
+- !private ["So23NSUserActivityRestoringP", "image"]
+- !private ["So23NSUserActivityRestoringP", "performClick"]
+- !private ["So23NSUserActivityRestoringP", "sendAction"]
+- !private ["So23NSUserActivityRestoringP", "sendActionOn"]
+- !private ["So23NSUserActivityRestoringP", "target"]
+- !private ["So23NSUserActivityRestoringP", "title"]
+- !private ["So23NSUserActivityRestoringP", "toolTip"]
+- !private ["So26NSUserInterfaceCompressionP", "action"]
+- !private ["So26NSUserInterfaceCompressionP", "image"]
+- !private ["So26NSUserInterfaceCompressionP", "performClick"]
+- !private ["So26NSUserInterfaceCompressionP", "sendAction"]
+- !private ["So26NSUserInterfaceCompressionP", "target"]
+- !private ["So26NSUserInterfaceCompressionP", "title"]
+- !private ["So26NSUserInterfaceCompressionP", "toolTip"]
+- !private ["So33NSUserInterfaceItemIdentificationP", ""]
+- !private ["So33NSUserInterfaceItemIdentificationP", "action"]
+- !private ["So33NSUserInterfaceItemIdentificationP", "delegate"]
+- !private ["So33NSUserInterfaceItemIdentificationP", "image"]
+- !private ["So33NSUserInterfaceItemIdentificationP", "performClick"]
+- !private ["So33NSUserInterfaceItemIdentificationP", "sendAction"]
+- !private ["So33NSUserInterfaceItemIdentificationP", "sendActionOn"]
+- !private ["So33NSUserInterfaceItemIdentificationP", "target"]
+- !private ["So33NSUserInterfaceItemIdentificationP", "title"]
+- !private ["So33NSUserInterfaceItemIdentificationP", "toolTip"]
+- !private ["So26NSUserInterfaceValidationsP", "action"]
+- !private ["So26NSUserInterfaceValidationsP", "currentEvent"]
+- !private ["So26NSUserInterfaceValidationsP", "image"]
+- !private ["So26NSUserInterfaceValidationsP", "performClick"]
+- !private ["So26NSUserInterfaceValidationsP", "sendAction"]
+- !private ["So26NSUserInterfaceValidationsP", "target"]
+- !private ["So26NSUserInterfaceValidationsP", "title"]
+- !private ["So26NSUserInterfaceValidationsP", "toolTip"]
+- ["So6NSViewC", ""]
+- !private ["So6NSViewC", "action"]
+- !private ["So6NSViewC", "image"]
+- !private ["So6NSViewC", "performClick"]
+- !private ["So6NSViewC", "sendAction"]
+- !private ["So6NSViewC", "sendActionOn"]
+- !private ["So6NSViewC", "target"]
+- !private ["So6NSViewC", "title"]
+- !private ["So6NSViewC", "toolTip"]
+- !private ["Sj", ""]
+- !private ["s9OptionSetP", "ArrayLiteralElement"]
+- !private ["s9OptionSetP", "Element"]
+- !private ["s9OptionSetP", "init"]
+- !private ["s9OptionSetP", "leftMouseUp"]
+- !private ["s9OptionSetP", "rightMouseUp"]
+- !private ["Sq", "currentEvent"]
+- !private ["SY", "ArrayLiteralElement"]
+- !private ["SY", "Element"]
+- !private ["SY", ""]
+- !private ["SY", "init"]
+- ["SY", "leftMouseUp"]
+- !private ["SY", "rightMouseUp"]
+- !private ["ST", ""]
+- !private ["s10SetAlgebraP", "ArrayLiteralElement"]
+- !private ["s10SetAlgebraP", "Element"]
+- !private ["s10SetAlgebraP", ""]
+- !private ["s10SetAlgebraP", "init"]
+- !private ["s10SetAlgebraP", "leftMouseUp"]
+- !private ["s10SetAlgebraP", "rightMouseUp"]
+- !private ["s13SignedNumericP", ""]
+- !private ["Sx", ""]
+- ["11system_tray10SystemTrayC", "Bool"]
+- ["11system_tray10SystemTrayC", "FlutterMethodChannel"]
+- !private ["11system_tray10SystemTrayC", "NSApp"]
+- !private ["11system_tray10SystemTrayC", "NSImage"]
+- ["11system_tray10SystemTrayC", "NSMenu"]
+- !private ["11system_tray10SystemTrayC", "NSSize"]
+- !private ["11system_tray10SystemTrayC", "NSStatusBar"]
+- ["11system_tray10SystemTrayC", "NSStatusBarButton"]
+- ["11system_tray10SystemTrayC", "NSStatusItem"]
+- ["11system_tray10SystemTrayC", "String"]
+- ["11system_tray10SystemTrayC", ""]
+- ["11system_tray10SystemTrayC", "channel"]
+- ["11system_tray10SystemTrayC", "confinementRect"]
+- ["11system_tray10SystemTrayC", "confinementRectForMenu"]
+- ["11system_tray10SystemTrayC", "deinit"]
+- ["11system_tray10SystemTrayC", "init"]
+- ["11system_tray10SystemTrayC", "initSystemTray"]
+- !private ["11system_tray10SystemTrayC", "kDefaultSizeHeight"]
+- !private ["11system_tray10SystemTrayC", "kDefaultSizeWidth"]
+- !private ["11system_tray10SystemTrayC", "kSystemTrayEventCallbackMethod"]
+- !private ["11system_tray10SystemTrayC", "kSystemTrayEventLButtnUp"]
+- !private ["11system_tray10SystemTrayC", "kSystemTrayEventRButtnUp"]
+- ["11system_tray10SystemTrayC", "menu"]
+- ["11system_tray10SystemTrayC", "menuDidClose"]
+- ["11system_tray10SystemTrayC", "menuHasKeyEquivalent"]
+- ["11system_tray10SystemTrayC", "menuNeedsUpdate"]
+- ["11system_tray10SystemTrayC", "menuWillOpen"]
+- ["11system_tray10SystemTrayC", "numberOfItems"]
+- ["11system_tray10SystemTrayC", "numberOfItemsInMenu"]
+- ["11system_tray10SystemTrayC", "onSystemTrayEventCallback"]
+- ["11system_tray10SystemTrayC", "setContextMenu"]
+- ["11system_tray10SystemTrayC", "setSystemTrayInfo"]
+- ["11system_tray10SystemTrayC", "statusItem"]
+- ["11system_tray10SystemTrayC", "statusItemMenu"]
+- !private ["s16TextOutputStreamP", ""]
+- !private ["s20TextOutputStreamableP", ""]
+- !private ["s30_CustomPlaygroundQuickLookableP", "init"]
+- !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "init"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
+- ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
+- !private ["s26_ExpressibleByImageLiteralP", "init"]
+- !private ["s26_ExpressibleByImageLiteralP", "size"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "NSApp"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "NSImage"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "NSSize"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "NSStatusBar"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "NSStatusItem"]
+- ["10Foundation27_KeyValueCodingAndObservingP", ""]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "action"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "button"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "channel"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "confinementRect"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "confinementRectForMenu"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "currentEvent"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "delegate"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "image"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "invokeMethod"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "kDefaultSizeHeight"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "kDefaultSizeWidth"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "kSystemTrayEventCallbackMethod"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "kSystemTrayEventLButtnUp"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "kSystemTrayEventRButtnUp"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "menu"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "menuDidClose"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "menuHasKeyEquivalent"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "menuNeedsUpdate"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "menuWillOpen"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "numberOfItems"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "numberOfItemsInMenu"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "onSystemTrayEventCallback"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "performClick"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "sendAction"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "size"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "statusItem"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "statusItemMenu"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "system"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "target"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "title"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "toolTip"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "type"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "variableLength"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "NSApp"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "NSImage"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "NSSize"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "NSStatusBar"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "NSStatusItem"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", ""]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "action"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "button"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "channel"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "confinementRect"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "confinementRectForMenu"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "currentEvent"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "delegate"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "image"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "init"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "invokeMethod"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "kDefaultSizeHeight"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "kDefaultSizeWidth"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "kSystemTrayEventCallbackMethod"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "kSystemTrayEventLButtnUp"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "kSystemTrayEventRButtnUp"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "menu"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "menuDidClose"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "menuHasKeyEquivalent"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "menuNeedsUpdate"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "menuWillOpen"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "numberOfItems"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "numberOfItemsInMenu"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "onSystemTrayEventCallback"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "performClick"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "sendAction"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "size"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "statusItem"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "statusItemMenu"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "system"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "target"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "title"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "toolTip"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "type"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "variableLength"]
+- !private ["s21_ObjectiveCBridgeableP", "currentEvent"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "action"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "image"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "performClick"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "sendAction"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "target"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "title"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "toolTip"]
+depends-nominal:
+- !private "s18AdditiveArithmeticP"
+- !private "SK"
+- !private "Sz"
+- !private "So6CGSizeV"
+- "s7CVarArgP"
+- !private "Sl"
+- !private "SL"
+- "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "SE"
+- "SQ"
+- "So11NSEventTypeV"
+- !private "So11NSEventMaskV"
+- !private "s25ExpressibleByArrayLiteralP"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "s23ExpressibleByNilLiteralP"
+- !private "s32ExpressibleByStringInterpolationP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "So20FlutterMethodChannelC"
+- "SH"
+- !private "s25LosslessStringConvertibleP"
+- !private "So21NSAccessibilityButtonP"
+- "So22NSAccessibilityElementP"
+- !private "So15NSAccessibilityP"
+- !private "So29NSAnimatablePropertyContainerP"
+- !private "So25NSAppearanceCustomizationP"
+- !private "So13NSApplicationC"
+- "So8NSButtonC"
+- !private "So8NSCodingP"
+- "So9NSControlC"
+- !private "So9NSCopyingP"
+- !private "So21NSDraggingDestinationP"
+- !private "So7NSEventC"
+- !private "So7NSImageC"
+- !private "So6NSMenuC"
+- "So14NSMenuDelegateP"
+- !private "So20NSMenuItemValidationP"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- !private "So19NSPasteboardReadingP"
+- !private "So19NSPasteboardWritingP"
+- "So11NSResponderC"
+- !private "So14NSSecureCodingP"
+- !private "So30NSStandardKeyBindingRespondingP"
+- !private "So11NSStatusBarC"
+- !private "So17NSStatusBarButtonC"
+- !private "So12NSStatusItemC"
+- !private "So18NSTouchBarProviderP"
+- !private "So23NSUserActivityRestoringP"
+- !private "So26NSUserInterfaceCompressionP"
+- !private "So33NSUserInterfaceItemIdentificationP"
+- !private "So26NSUserInterfaceValidationsP"
+- "So6NSViewC"
+- !private "Sj"
+- !private "s9OptionSetP"
+- !private "Sq"
+- "SY"
+- !private "ST"
+- !private "s10SetAlgebraP"
+- !private "s13SignedNumericP"
+- !private "Sx"
+- "11system_tray10SystemTrayC"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
+- !private "s30_CustomPlaygroundQuickLookableP"
+- !private "s35_ExpressibleByBuiltinBooleanLiteralP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- "s35_ExpressibleByBuiltinIntegerLiteralP"
+- "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s26_ExpressibleByImageLiteralP"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- !private "s21_ObjectiveCBridgeableP"
+- !private "s38__DefaultCustomPlaygroundQuickLookableP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/XPC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/ObjectiveC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreMedia.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreData.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreImage.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Combine.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/QuartzCore.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Dispatch.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Metal.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Darwin.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Foundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreFoundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreAudio.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreGraphics.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/IOKit.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/AppKit.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterPluginMacOS.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterPluginRegistrarMacOS.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterMacOS.h"
+- "/Users/kyusuke/Garage/switchsoulmonarch/macos/Pods/Target Support Files/system_tray/system_tray-umbrella.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterEngine.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterTexture.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterAppDelegate.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterBinaryMessenger.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterViewController.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterCodecs.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterChannels.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterMacros.h"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Headers/FlutterDartProject.h"
+- "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Intermediates.noindex/Pods.build/Debug/system_tray.build/unextended-module.modulemap"
+- "/Users/kyusuke/Garage/flutter/bin/cache/artifacts/engine/darwin-x64/FlutterMacOS.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/xpc/XPC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreMedia.framework/Headers/CoreMedia.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreAudioTypes.framework/Headers/CoreAudioTypes.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AppKit.framework/Headers/AppKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "61fdb1f9b675c2017c628392a09b89c4"

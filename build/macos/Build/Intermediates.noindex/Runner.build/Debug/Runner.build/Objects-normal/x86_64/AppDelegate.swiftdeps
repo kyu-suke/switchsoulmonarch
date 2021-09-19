@@ -6,62 +6,74 @@ provides-nominal:
 provides-member:
 - ["17switchsoulmonarch11AppDelegateC", ""]
 provides-dynamic-lookup:
-- "applicationShouldTerminateAfterLastWindowClosed"
+- "applicationDidFinishLaunching"
+- "applicationWillTerminate"
 depends-top-level:
 - "AppDelegate"
-- "Bool"
-- !private "BooleanLiteralType"
 - "FlutterAppDelegate"
-- "NSApplication"
+- "Notification"
 depends-member:
-- ["17switchsoulmonarch11AppDelegateC", "Bool"]
-- ["17switchsoulmonarch11AppDelegateC", "NSApplication"]
+- ["17switchsoulmonarch11AppDelegateC", "Notification"]
 - ["17switchsoulmonarch11AppDelegateC", ""]
-- ["17switchsoulmonarch11AppDelegateC", "applicationShouldTerminateAfterLastWindowClosed"]
+- ["17switchsoulmonarch11AppDelegateC", "applicationDidFinishLaunching"]
+- ["17switchsoulmonarch11AppDelegateC", "applicationWillTerminate"]
 - ["17switchsoulmonarch11AppDelegateC", "deinit"]
 - ["17switchsoulmonarch11AppDelegateC", "init"]
 - ["SK", ""]
 - ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "applicationDidFinishLaunching"]
+- !private ["s7CVarArgP", "applicationWillTerminate"]
 - ["Sl", ""]
 - ["SL", ""]
 - ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s28CustomDebugStringConvertibleP", "applicationDidFinishLaunching"]
+- !private ["s28CustomDebugStringConvertibleP", "applicationWillTerminate"]
 - ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "applicationDidFinishLaunching"]
+- !private ["s23CustomStringConvertibleP", "applicationWillTerminate"]
 - ["SQ", ""]
+- !private ["SQ", "applicationDidFinishLaunching"]
+- !private ["SQ", "applicationWillTerminate"]
 - ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
 - ["s32ExpressibleByStringInterpolationP", ""]
 - ["s26ExpressibleByStringLiteralP", ""]
 - ["s33ExpressibleByUnicodeScalarLiteralP", ""]
-- ["So18FlutterAppDelegateC", "Bool"]
-- ["So18FlutterAppDelegateC", "NSApplication"]
+- ["So18FlutterAppDelegateC", "Notification"]
 - ["So18FlutterAppDelegateC", ""]
-- ["So18FlutterAppDelegateC", "applicationShouldTerminateAfterLastWindowClosed"]
+- ["So18FlutterAppDelegateC", "applicationDidFinishLaunching"]
+- ["So18FlutterAppDelegateC", "applicationWillTerminate"]
 - ["So18FlutterAppDelegateC", "init"]
 - ["SH", ""]
+- !private ["SH", "applicationDidFinishLaunching"]
+- !private ["SH", "applicationWillTerminate"]
 - ["s25LosslessStringConvertibleP", ""]
-- ["So21NSApplicationDelegateP", "Bool"]
-- ["So21NSApplicationDelegateP", "NSApplication"]
+- ["So21NSApplicationDelegateP", "Notification"]
 - ["So21NSApplicationDelegateP", ""]
-- ["So21NSApplicationDelegateP", "applicationShouldTerminateAfterLastWindowClosed"]
+- ["So21NSApplicationDelegateP", "applicationDidFinishLaunching"]
+- ["So21NSApplicationDelegateP", "applicationWillTerminate"]
 - ["So21NSApplicationDelegateP", "init"]
 - ["So8NSCodingP", ""]
-- ["So8NSObjectC", "Bool"]
-- ["So8NSObjectC", "NSApplication"]
+- ["So8NSObjectC", "Notification"]
 - ["So8NSObjectC", ""]
-- ["So8NSObjectC", "applicationShouldTerminateAfterLastWindowClosed"]
+- ["So8NSObjectC", "applicationDidFinishLaunching"]
+- ["So8NSObjectC", "applicationWillTerminate"]
 - ["So8NSObjectC", "init"]
-- ["So8NSObjectP", "Bool"]
-- ["So8NSObjectP", "NSApplication"]
+- ["So8NSObjectP", "Notification"]
 - ["So8NSObjectP", ""]
-- ["So8NSObjectP", "applicationShouldTerminateAfterLastWindowClosed"]
+- ["So8NSObjectP", "applicationDidFinishLaunching"]
+- ["So8NSObjectP", "applicationWillTerminate"]
 - ["So8NSObjectP", "init"]
 - ["ST", ""]
 - ["s16TextOutputStreamP", ""]
 - ["s20TextOutputStreamableP", ""]
-- !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "init"]
 - ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
 - ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
 - ["10Foundation27_KeyValueCodingAndObservingP", ""]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "applicationDidFinishLaunching"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "applicationWillTerminate"]
 - ["10Foundation37_KeyValueCodingAndObservingPublishingP", ""]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "applicationDidFinishLaunching"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "applicationWillTerminate"]
 depends-nominal:
 - "17switchsoulmonarch11AppDelegateC"
 - "SK"
@@ -85,7 +97,6 @@ depends-nominal:
 - "ST"
 - "s16TextOutputStreamP"
 - "s20TextOutputStreamableP"
-- !private "s35_ExpressibleByBuiltinBooleanLiteralP"
 - "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
 - "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
 - "10Foundation27_KeyValueCodingAndObservingP"
@@ -105,13 +116,18 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Foundation.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreFoundation.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreAudio.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/window_manager/window_manager.framework/Modules/window_manager.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreGraphics.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Swift.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/IOKit.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/AppKit.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/system_tray/system_tray.framework/Modules/system_tray.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/FlutterMacOS.framework/Headers/FlutterPluginMacOS.h"
 - "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/FlutterMacOS.framework/Headers/FlutterPluginRegistrarMacOS.h"
 - "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/FlutterMacOS.framework/Headers/FlutterMacOS.h"
+- "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/window_manager/window_manager.framework/Headers/window_manager-umbrella.h"
+- "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/system_tray/system_tray.framework/Headers/system_tray-umbrella.h"
 - "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/FlutterMacOS.framework/Headers/FlutterEngine.h"
 - "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/FlutterMacOS.framework/Headers/FlutterTexture.h"
 - "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/FlutterMacOS.framework/Headers/FlutterAppDelegate.h"
@@ -121,7 +137,11 @@ depends-external:
 - "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/FlutterMacOS.framework/Headers/FlutterChannels.h"
 - "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/FlutterMacOS.framework/Headers/FlutterMacros.h"
 - "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/FlutterMacOS.framework/Headers/FlutterDartProject.h"
+- "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/window_manager/window_manager.framework/Headers/window_manager-Swift.h"
+- "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/system_tray/system_tray.framework/Headers/system_tray-Swift.h"
 - "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/FlutterMacOS.framework/Modules/module.modulemap"
+- "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/window_manager/window_manager.framework/Modules/module.modulemap"
+- "/Users/kyusuke/Garage/switchsoulmonarch/build/macos/Build/Products/Debug/system_tray/system_tray.framework/Modules/module.modulemap"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/xpc/XPC.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/objc/ObjectiveC.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreMedia.framework/Headers/CoreMedia.apinotes"
@@ -138,4 +158,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AppKit.framework/Headers/AppKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "5dc19c50ff2ef38b1bab085e10caca2c"
+interface-hash: "a920d7cf7465e924e929d741391111f2"

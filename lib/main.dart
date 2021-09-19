@@ -1,115 +1,243 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:io';
 
-void main() {
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path/path.dart' as p;
+import 'package:preference_list/preference_list.dart';
+import 'package:system_tray/system_tray.dart';
+import 'package:window_manager/window_manager.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final SystemTray _systemTray = SystemTray();
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    initSystemTray();
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  void dispose() {
+    super.dispose();
+    _timer?.cancel();
+  }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  Future<void> initSystemTray() async {
+    String path;
+    if (Platform.isMacOS) {
+      path = p.joinAll(['AppIcon']);
+    } else {
+      throw ("not supported platform");
+    }
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+    // We first init the systray menu and then add the menu entries
+    await _systemTray.initSystemTray("system tray2",
+        iconPath: path, toolTip: "How to use system tray with Flutter");
+
+    await _systemTray.setContextMenu(
+      [
+        MenuItem(
+          label: 'Show',
+          onClicked: () {
+            // appWindow.show();
+            windowManager.show();
+          },
+        ),
+        MenuSeparator(),
+        SubMenu(
+          label: "SubMenu",
+          children: [
+            MenuItem(
+              label: 'SubItem1',
+              enabled: false,
+              onClicked: () {
+                print("click SubItem1");
+              },
+            ),
+            MenuItem(label: 'SubItem2'),
+            MenuItem(label: 'SubItem3'),
+          ],
+        ),
+        MenuSeparator(),
+        MenuItem(
+          label: 'Exit',
+          onClicked: () {
+            // appWindow.hide();
+            // appWindow.close();
+            windowManager.terminate();
+          },
+        ),
+      ],
+    );
+
+    // handle system tray event
+    _systemTray.registerSystemTrayEventHandler((eventName) {
+      print("eventName: $eventName");
+      if (eventName == "leftMouseUp") {
+        windowManager.show();
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: HomePage(), // blur, focus etc.
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    );
+  }
+}
+
+final windowManager = WindowManager.instance;
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with WindowListener {
+  // Size? _minSize;
+  // Size? _maxSize;
+  // bool _isMovable = true;
+  // bool _isAlwaysOnTop = false;
+  // bool _hasShadow = true;
+  // Size _size = _kSizes.first;
+
+  bool _isFullScreen = false;
+  bool _isResizable = false;
+  bool _isMinimizable = false;
+  bool _isClosable = false;
+
+  @override
+  void initState() {
+    windowManager.addListener(this);
+    windowManager.setFullScreen(_isFullScreen);
+    windowManager.setResizable(_isResizable);
+    windowManager.setMinimizable(_isMinimizable);
+    windowManager.setClosable(_isClosable);
+    windowManager.setSize(Size(1000, 600));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
+  // call swift code
+  static const platform = const MethodChannel('samples.flutter.dev/battery');
+  String _batteryLevel = 'Unknown battery level.';
+
+  Future<void> _getBatteryLevel() async {
+    // Get battery level.
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
+  }
+
+  Widget _buildHotkeyPane() {
+    return PreferenceList(
+      children: <Widget>[
+        PreferenceListSection(
+          children: [
+            PreferenceListItem(
+              title: Text('plugin'),
+              onTap: () async {
+                print("yes?");
+                _getBatteryLevel();
+              },
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            PreferenceListItem(
+              title: Text('terminate'),
+              onTap: () async {
+                await windowManager.terminate();
+              },
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ],
     );
+  }
+
+  Widget _buildPane() {
+    Widget pane;
+    if (true) {
+      pane = _buildHotkeyPane();
+    } else if (false) {
+      // pane = _buildAppsPane();
+    } else {
+      // pane = _buildUpdatePane();
+    }
+    return pane;
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+            flex: 1,
+            child: Container(
+                child: Column(
+              children: [
+                Text("Hotkey"),
+                Text("Apps"),
+                Text("Update"),
+              ],
+            ))),
+        Expanded(flex: 9, child: _buildPane()),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // switch preference or keyboard window
+    final showPreference = true;
+    return Scaffold(
+      body: Container(
+          child: showPreference
+              ? _buildBody(context)
+              : /*_buildKeyboard(context)*/ _buildBody(context)),
+    );
+  }
+
+  final Map<String, Function> eventFuncs = {
+    "blur": () => {windowManager.hide()},
+  };
+
+  @override
+  void onWindowEvent(String eventName) {
+    print('[WindowManager] onWindowEvent: $eventName');
+    final eventFunc = eventFuncs[eventName];
+    if (eventFunc != null) {
+      // eventFunc();
+    }
   }
 }

@@ -1,3 +1,11 @@
+system_tray
+2.12
+file:///Users/kyusuke/.pub-cache/git/system_tray-f6818b8388029d8bdfb35531c1597517859a5b14/
+file:///Users/kyusuke/.pub-cache/git/system_tray-f6818b8388029d8bdfb35531c1597517859a5b14/lib/
+window_manager
+2.12
+file:///Users/kyusuke/.pub-cache/git/window_manager-a7d3b80f202a2fb0873d3d21d61bfea4ab8630f7/
+file:///Users/kyusuke/.pub-cache/git/window_manager-a7d3b80f202a2fb0873d3d21d61bfea4ab8630f7/lib/
 async
 2.12
 file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/async-2.7.0/
@@ -6,6 +14,10 @@ boolean_selector
 2.12
 file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/
 file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/lib/
+bot_toast
+2.12
+file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/bot_toast-4.0.1/
+file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/bot_toast-4.0.1/lib/
 characters
 2.12
 file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0/
@@ -34,6 +46,10 @@ flutter_lints
 2.12
 file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/
 file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/lib/
+js
+2.12
+file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/
+file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/lib/
 lints
 2.12
 file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/
@@ -50,6 +66,10 @@ path
 2.12
 file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/path-1.8.0/
 file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/path-1.8.0/lib/
+preference_list
+2.12
+file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/preference_list-0.0.1/
+file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/preference_list-0.0.1/lib/
 source_span
 2.12
 file:///Users/kyusuke/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.1/
@@ -94,6 +114,10 @@ flutter_test
 2.12
 file:///Users/kyusuke/Garage/flutter/packages/flutter_test/
 file:///Users/kyusuke/Garage/flutter/packages/flutter_test/lib/
+flutter_web_plugins
+2.12
+file:///Users/kyusuke/Garage/flutter/packages/flutter_web_plugins/
+file:///Users/kyusuke/Garage/flutter/packages/flutter_web_plugins/lib/
 switchsoulmonarch
 2.12
 file:///Users/kyusuke/Garage/switchsoulmonarch/

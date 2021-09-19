@@ -46,6 +46,8 @@
 	<string>12A7403</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.11</string>
+	<key>LSUIElement</key>
+	<false/>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2021 com.example. All rights reserved.</string>
 	<key>NSMainNibFile</key>

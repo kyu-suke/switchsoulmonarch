@@ -208,11 +208,11 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class NSApplication;
 
 SWIFT_CLASS("_TtC17switchsoulmonarch11AppDelegate")
 @interface AppDelegate : FlutterAppDelegate
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication * _Nonnull)sender SWIFT_WARN_UNUSED_RESULT;
+- (void)applicationDidFinishLaunching:(NSNotification * _Nonnull)aNotification;
+- (void)applicationWillTerminate:(NSNotification * _Nonnull)aNotification;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

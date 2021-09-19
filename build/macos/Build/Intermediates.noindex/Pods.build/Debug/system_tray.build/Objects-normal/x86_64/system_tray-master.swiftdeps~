@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)"
+options: "bf9443a7368b705d85431ee5052b4cc5"
+build_time: [1632053700, 244120000]
+inputs:
+  "/Users/kyusuke/.pub-cache/git/system_tray-f6818b8388029d8bdfb35531c1597517859a5b14/macos/Classes/AppWindow.swift": [1630915443, 98873398]
+  "/Users/kyusuke/.pub-cache/git/system_tray-f6818b8388029d8bdfb35531c1597517859a5b14/macos/Classes/SystemTrayPlugin.swift": [1630915443, 99028964]
+  "/Users/kyusuke/.pub-cache/git/system_tray-f6818b8388029d8bdfb35531c1597517859a5b14/macos/Classes/Tray.swift": [1630915443, 99179661]
