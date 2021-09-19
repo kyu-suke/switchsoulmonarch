@@ -1,6 +1,0 @@
-version: "Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)"
-options: "6fbbf60826d151315463cafd3b87c979"
-build_time: [1632053770, 3321000]
-inputs:
-  "/Users/kyusuke/.pub-cache/git/window_manager-a7d3b80f202a2fb0873d3d21d61bfea4ab8630f7/macos/Classes/NativeWindow.swift": [1632044884, 6219003]
-  "/Users/kyusuke/.pub-cache/git/window_manager-a7d3b80f202a2fb0873d3d21d61bfea4ab8630f7/macos/Classes/WindowManagerPlugin.swift": [1632044884, 6391069]

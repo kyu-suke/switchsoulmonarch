@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:path/path.dart' as p;
 import 'package:preference_list/preference_list.dart';
+import 'package:switchsoulmonarch/system_tray.dart';
+import 'package:switchsoulmonarch/keyboard.dart';
 import 'package:system_tray/system_tray.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -23,76 +23,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final SystemTray _systemTray = SystemTray();
-  Timer? _timer;
+  SystemTray _systemTray = SystemTray();
 
   @override
   void initState() {
     super.initState();
-    initSystemTray();
+    final SsmSystemTray systemTray = SsmSystemTray();
+    systemTray
+        .getSystemTray(windowManager.show, windowManager.terminate)
+        .then((value) => _systemTray = value);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _timer?.cancel();
-  }
-
-  Future<void> initSystemTray() async {
-    String path;
-    if (Platform.isMacOS) {
-      path = p.joinAll(['AppIcon']);
-    } else {
-      throw ("not supported platform");
-    }
-
-    // We first init the systray menu and then add the menu entries
-    await _systemTray.initSystemTray("system tray2",
-        iconPath: path, toolTip: "How to use system tray with Flutter");
-
-    await _systemTray.setContextMenu(
-      [
-        MenuItem(
-          label: 'Show',
-          onClicked: () {
-            // appWindow.show();
-            windowManager.show();
-          },
-        ),
-        MenuSeparator(),
-        SubMenu(
-          label: "SubMenu",
-          children: [
-            MenuItem(
-              label: 'SubItem1',
-              enabled: false,
-              onClicked: () {
-                print("click SubItem1");
-              },
-            ),
-            MenuItem(label: 'SubItem2'),
-            MenuItem(label: 'SubItem3'),
-          ],
-        ),
-        MenuSeparator(),
-        MenuItem(
-          label: 'Exit',
-          onClicked: () {
-            // appWindow.hide();
-            // appWindow.close();
-            windowManager.terminate();
-          },
-        ),
-      ],
-    );
-
-    // handle system tray event
-    _systemTray.registerSystemTrayEventHandler((eventName) {
-      print("eventName: $eventName");
-      if (eventName == "leftMouseUp") {
-        windowManager.show();
-      }
-    });
   }
 
   @override
@@ -121,6 +65,9 @@ class _HomePageState extends State<HomePage> with WindowListener {
   // bool _hasShadow = true;
   // Size _size = _kSizes.first;
 
+  String selectedPane = "hotkey";
+  String selectedWindow = "preference";
+
   bool _isFullScreen = false;
   bool _isResizable = false;
   bool _isMinimizable = false;
@@ -133,7 +80,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
     windowManager.setResizable(_isResizable);
     windowManager.setMinimizable(_isMinimizable);
     windowManager.setClosable(_isClosable);
-    windowManager.setSize(Size(1000, 600));
+    windowManager.setSize(Size(1200, 600));
     super.initState();
   }
 
@@ -186,16 +133,56 @@ class _HomePageState extends State<HomePage> with WindowListener {
     );
   }
 
+
+  Widget _buildAppsPane() {
+    return Center(
+      child: Text("here will be put keyboard layout container")
+    );
+  }
+  Widget _buildUpdatePane() {
+    return Center(
+      child: OutlinedButton(
+        child: Text("Check for updates"),
+        style: OutlinedButton.styleFrom(
+            primary: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(0),
+              ),
+            )),
+        onPressed: () => setState(()=> {}),
+      ),
+    );
+  }
   Widget _buildPane() {
     Widget pane;
-    if (true) {
+    if (selectedPane == "hotkey") {
       pane = _buildHotkeyPane();
-    } else if (false) {
-      // pane = _buildAppsPane();
+    } else if (selectedPane == "apps") {
+      pane = _buildAppsPane();
     } else {
-      // pane = _buildUpdatePane();
+      pane = _buildUpdatePane();
     }
     return pane;
+  }
+
+  Widget _leftSideButton(String label, String pane) {
+    return Row(
+      children: [
+        Expanded(
+            child: OutlinedButton(
+          child: Text(label),
+          style: OutlinedButton.styleFrom(
+              primary: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(0),
+                ),
+              )),
+          onPressed: () => setState(()=> selectedPane = pane),
+        )),
+      ],
+    );
   }
 
   Widget _buildBody(BuildContext context) {
@@ -206,9 +193,9 @@ class _HomePageState extends State<HomePage> with WindowListener {
             child: Container(
                 child: Column(
               children: [
-                Text("Hotkey"),
-                Text("Apps"),
-                Text("Update"),
+                _leftSideButton("Hotkey", "hotkey"),
+                _leftSideButton("Apps", "apps"),
+                _leftSideButton("Update", "update"),
               ],
             ))),
         Expanded(flex: 9, child: _buildPane()),
@@ -216,15 +203,19 @@ class _HomePageState extends State<HomePage> with WindowListener {
     );
   }
 
+
+  Widget _buildKeyboard(BuildContext context) {
+    return KeyboardPage();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // switch preference or keyboard window
-    final showPreference = true;
     return Scaffold(
       body: Container(
-          child: showPreference
+          // child: selectedWindow == "preference"
+          child: selectedWindow != "preference"
               ? _buildBody(context)
-              : /*_buildKeyboard(context)*/ _buildBody(context)),
+              : _buildKeyboard(context)),
     );
   }
 
