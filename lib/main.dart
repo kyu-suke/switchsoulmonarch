@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:preference_list/preference_list.dart';
 import 'package:switchsoulmonarch/system_tray.dart';
 import 'package:switchsoulmonarch/keyboard.dart';
+import 'package:switchsoulmonarch/hotkey_pane.dart';
+import 'package:switchsoulmonarch/apps_pane.dart';
 import 'package:system_tray/system_tray.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -109,35 +111,44 @@ class _HomePageState extends State<HomePage> with WindowListener {
     });
   }
 
+  void showShortcutWindow() {
+    setState((){
+      selectedWindow = "shortcuts";
+    });
+    windowManager.show();
+  }
+
   Widget _buildHotkeyPane() {
-    return PreferenceList(
-      children: <Widget>[
-        PreferenceListSection(
-          children: [
-            PreferenceListItem(
-              title: Text('plugin'),
-              onTap: () async {
-                print("yes?");
-                _getBatteryLevel();
-              },
-            ),
-            PreferenceListItem(
-              title: Text('terminate'),
-              onTap: () async {
-                await windowManager.terminate();
-              },
-            ),
-          ],
-        ),
-      ],
-    );
+    return HotKeyPane(fn: showShortcutWindow);
+    // return PreferenceList(
+    //   children: <Widget>[
+    //     PreferenceListSection(
+    //       children: [
+    //         PreferenceListItem(
+    //           title: Text('plugin'),
+    //           onTap: () async {
+    //             print("yes?");
+    //             _getBatteryLevel();
+    //           },
+    //         ),
+    //         PreferenceListItem(
+    //           title: Text('terminate'),
+    //           onTap: () async {
+    //             await windowManager.terminate();
+    //           },
+    //         ),
+    //       ],
+    //     ),
+    //   ],
+    // );
   }
 
 
   Widget _buildAppsPane() {
-    return Center(
-      child: Text("here will be put keyboard layout container")
-    );
+    return AppsPane();
+    // return Center(
+    //   child: Text("here will be put keyboard layout container")
+    // );
   }
   Widget _buildUpdatePane() {
     return Center(
@@ -212,8 +223,8 @@ class _HomePageState extends State<HomePage> with WindowListener {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          // child: selectedWindow == "preference"
-          child: selectedWindow != "preference"
+          child: selectedWindow == "preference"
+          // child: selectedWindow != "preference"
               ? _buildBody(context)
               : _buildKeyboard(context)),
     );

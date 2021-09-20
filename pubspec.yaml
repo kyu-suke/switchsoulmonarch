@@ -50,6 +50,13 @@ dependencies:
   bot_toast: ^4.0.1
   preference_list: ^0.0.1
 
+  hotkey_manager: ^0.1.2
+
+  file_picker:
+    git:
+      url: https://github.com/kyu-suke/flutter_file_picker.git
+      ref: mod/getDirectoryPath
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
