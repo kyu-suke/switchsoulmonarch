@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class KeyboardPage extends StatefulWidget {
+
+import 'package:switchsoulmonarch/keycode.dart';class KeyboardPage extends StatefulWidget {
   const KeyboardPage({Key? key, required Function fn}) : fn = fn;
 
   final Function fn;
@@ -153,7 +154,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       buildKey("⌃", fn, width: 90),
-                      ...["a", "s", "d", "f", "g", "h", "j", "k", "l", ";", ":", "]"].map((e) => buildKey(e, fn)),
+                      ...[SsmKeys.a.label!, "s", "d", "f", "g", "h", "j", "k", "l", ";", ":", "]"].map((e) => buildKey(e, fn)),
                       buildEnterKey("↩", fn,  "bottom"),
                     ],
                   ),
