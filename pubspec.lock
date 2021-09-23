@@ -82,8 +82,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "mod/getDirectoryPath"
-      resolved-ref: "4e23a18006c2f6bc00bad5df3aa78c3817405bf8"
+      ref: "0f2b4d2044e8428ad3dfadf1f9ec1adac229efde"
+      resolved-ref: "0f2b4d2044e8428ad3dfadf1f9ec1adac229efde"
       url: "https://github.com/kyu-suke/flutter_file_picker.git"
     source: git
     version: "4.1.0"

@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
     windowManager.setResizable(_isResizable);
     windowManager.setMinimizable(_isMinimizable);
     windowManager.setClosable(_isClosable);
-    windowManager.setSize(Size(1200, 600));
+    windowManager.setSize(Size(1300, 600));
     super.initState();
   }
 
@@ -216,7 +216,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
 
 
   Widget _buildKeyboard(BuildContext context) {
-    return KeyboardPage();
+    return KeyboardPage(fn:(){});
   }
 
   @override

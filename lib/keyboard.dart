@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class KeyboardPage extends StatefulWidget {
-  const KeyboardPage({Key? key}) : super(key: key);
+  const KeyboardPage({Key? key, required Function fn}) : fn = fn;
+
+  final Function fn;
 
   @override
-  State<KeyboardPage> createState() => _KeyboardPageState();
+  State<KeyboardPage> createState() => _KeyboardPageState(fn: fn);
 }
 
 class IncrementIntent extends Intent {
@@ -21,50 +23,51 @@ class Hoge extends Intent {
 }
 
 class _KeyboardPageState extends State<KeyboardPage> {
+  _KeyboardPageState({required Function fn}) : fn = fn;
 
-  Widget buildArrowKey(String keyName) {
+  Function fn;
+
+  Widget _keyLabel(String keyName) {
+    return Text(
+      keyName,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        color: Theme.of(context).primaryColor,
+        decoration: TextDecoration.none,
+      ),
+    );
+  }
+
+  Widget _gestureDetector(String keyName, Function fn, double width, double height, EdgeInsetsGeometry margin, BoxDecoration decoration) {
     return GestureDetector(
-        onTap: () {
-          print("Container clicked at ${keyName}");
-        },
+        onTap: () => {fn()},
         child: Container(
-          width: 70,
-          height: 30,
-          margin: EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
+          width: width,
+          height: height,
+          margin: margin,
           // color: Colors.red,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.red),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Text(
-            keyName,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Theme.of(context).primaryColor,
-              decoration: TextDecoration.none,
-            ),
-          ),
+          decoration: decoration,
+          child: _keyLabel(keyName),
         ));
   }
 
-  Widget buildEnterKey(String keyName, String position) {
+  Widget buildArrowKey(String keyName, Function fn) {
+    return _gestureDetector(keyName, fn, 70, 30, EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2), BoxDecoration(
+      border: Border.all(color: Colors.red),
+      borderRadius: BorderRadius.circular(10),
+    ));
+  }
+
+  Widget buildEnterKey(String keyName, Function fn, String position) {
     double width = 0;
     double height = 85;
-    BorderRadius radius;
-    BoxBorder border;
     EdgeInsetsGeometry? margin;
     BoxDecoration decoration;
     if (position == "top") {
       width = 100;
-      radius = BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-          bottomLeft: Radius.circular(10));
       margin = EdgeInsets.only(top: 5, left: 5);
-
       decoration = const BoxDecoration(
-        // border: Border(top: BorderSide(color: Colors.red), left: BorderSide(color: Colors.red),right: BorderSide(color: Colors.red),bottom: BorderSide(color: Colors.transparent)),
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
@@ -73,64 +76,21 @@ class _KeyboardPageState extends State<KeyboardPage> {
       );
     } else {
       width = 80;
-      // height = 85;
-      radius = BorderRadius.only(
-          bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10));
       margin = EdgeInsets.only(bottom: 5, left: 5);
-
       decoration = const BoxDecoration(
-        // border: Border(top: BorderSide(color: Colors.transparent), left: BorderSide(color: Colors.red),right: BorderSide(color: Colors.red),bottom: BorderSide(color: Colors.red)),
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
         color: Colors.white,
       );
     }
-    return GestureDetector(
-        onTap: () {
-          print("Container clicked at ${keyName}");
-        },
-        child: Container(
-          width: width,
-          height: height,
-          margin: margin,
-          // color: Colors.red,
-          decoration: decoration,
-          child: Text(
-            keyName,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Theme.of(context).primaryColor,
-              decoration: TextDecoration.none,
-            ),
-          ),
-        ));
+    return _gestureDetector(keyName, fn, width, height, margin, decoration);
   }
 
-  Widget buildKey(String keyName, {double width = 70, double height = 65}) {
-    return GestureDetector(
-        onTap: () {
-          print("Container clicked at ${keyName}");
-        },
-        child: Container(
-          width: width,
-          height: height,
-          margin: EdgeInsets.all(5),
-          // color: Colors.red,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.red),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Text(
-            keyName,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Theme.of(context).primaryColor,
-              decoration: TextDecoration.none,
-            ),
-          ),
-        ));
+  Widget buildKey(String keyName, Function fn, {double width = 70, double height = 65}) {
+    return _gestureDetector(keyName, fn, width, height, EdgeInsets.all(5), BoxDecoration(
+      border: Border.all(color: Colors.red),
+      borderRadius: BorderRadius.circular(10),
+    ));
   }
 
   @override
@@ -166,38 +126,15 @@ class _KeyboardPageState extends State<KeyboardPage> {
               children: [
                 Row(
                   children: [
-                    buildKey("ESC", width: 100),
-                    buildKey("F1"),
-                    buildKey("F2"),
-                    buildKey("F3"),
-                    buildKey("F4"),
-                    buildKey("F5"),
-                    buildKey("F6"),
-                    buildKey("F7"),
-                    buildKey("F8"),
-                    buildKey("F9"),
-                    buildKey("F10"),
-                    buildKey("F11"),
-                    buildKey("F12"),
-                    buildKey("鍵"),
+                    buildKey("ESC", fn, width: 100),
+                    ...["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "鍵"].map((e) => buildKey(e, fn)),
                   ],
                 ),
                 Row(
                   children: [
-                    buildKey("1", width: 85),
-                    buildKey("2"),
-                    buildKey("3"),
-                    buildKey("4"),
-                    buildKey("5"),
-                    buildKey("6"),
-                    buildKey("7"),
-                    buildKey("8"),
-                    buildKey("9"),
-                    buildKey("0"),
-                    buildKey("-"),
-                    buildKey("^"),
-                    buildKey("\\"),
-                    buildKey("⌫", width: 85),
+                    buildKey("1", fn, width: 85),
+                    ...["2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "^", "\\"].map((e) => buildKey(e, fn)),
+                    buildKey("⌫", fn, width: 85),
                   ],
                 ),
                 Container(
@@ -205,20 +142,8 @@ class _KeyboardPageState extends State<KeyboardPage> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      buildKey("→"),
-                      buildKey("q"),
-                      buildKey("w"),
-                      buildKey("e"),
-                      buildKey("r"),
-                      buildKey("t"),
-                      buildKey("y"),
-                      buildKey("u"),
-                      buildKey("i"),
-                      buildKey("o"),
-                      buildKey("p"),
-                      buildKey("@"),
-                      buildKey("["),
-                      buildEnterKey("↩", "top"),
+                      ...["→", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "@", "["].map((e) => buildKey(e, fn)),
+                      buildEnterKey("↩", fn, "top"),
                     ],
                   ),
                 ),
@@ -227,58 +152,37 @@ class _KeyboardPageState extends State<KeyboardPage> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      buildKey("⌃", width: 90),
-                      buildKey("a"),
-                      buildKey("s"),
-                      buildKey("d"),
-                      buildKey("f"),
-                      buildKey("g"),
-                      buildKey("h"),
-                      buildKey("j"),
-                      buildKey("k"),
-                      buildKey("l"),
-                      buildKey(";"),
-                      buildKey(":"),
-                      buildKey("]"),
-                      buildEnterKey("↩", "bottom"),
+                      buildKey("⌃", fn, width: 90),
+                      ...["a", "s", "d", "f", "g", "h", "j", "k", "l", ";", ":", "]"].map((e) => buildKey(e, fn)),
+                      buildEnterKey("↩", fn,  "bottom"),
                     ],
                   ),
                 ),
                 Row(
                   children: [
-                    buildKey("⇧", width: 125),
-                    buildKey("z"),
-                    buildKey("x"),
-                    buildKey("c"),
-                    buildKey("v"),
-                    buildKey("b"),
-                    buildKey("n"),
-                    buildKey("m"),
-                    buildKey(","),
-                    buildKey("."),
-                    buildKey("/"),
-                    buildKey("_"),
-                    buildKey("⇧", width: 125),
+                    buildKey("⇧", fn, width: 125),
+                    ...["z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "_"].map((e) => buildKey(e, fn)),
+                    buildKey("⇧", fn, width: 125),
                   ],
                 ),
                 Row(
                   children: [
-                    buildKey("⬆"),
-                    buildKey("⌥"),
-                    buildKey("⌘", width: 85),
-                    buildKey("英数", width: 85),
-                    buildKey("　", width: 280),
-                    buildKey("かな", width: 85),
-                    buildKey("⌘", width: 85),
-                    buildKey("fn"),
-                    buildKey("←"),
+                    buildKey("⬆", fn),
+                    buildKey("⌥", fn),
+                    buildKey("⌘", fn, width: 85),
+                    buildKey("英数", fn, width: 85),
+                    buildKey("　", fn, width: 280),
+                    buildKey("かな", fn, width: 85),
+                    buildKey("⌘", fn, width: 85),
+                    buildKey("fn", fn),
+                    buildKey("←", fn),
                     Column(
                       children: [
-                        buildArrowKey("↑"),
-                        buildArrowKey("↓"),
+                        buildArrowKey("↑", fn),
+                        buildArrowKey("↓", fn),
                       ],
                     ),
-                    buildKey("→"),
+                    buildKey("→", fn),
                   ],
                 ),
               ],
@@ -289,3 +193,4 @@ class _KeyboardPageState extends State<KeyboardPage> {
     );
   }
 }
+

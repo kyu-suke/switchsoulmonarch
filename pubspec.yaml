@@ -55,7 +55,8 @@ dependencies:
   file_picker:
     git:
       url: https://github.com/kyu-suke/flutter_file_picker.git
-      ref: mod/getDirectoryPath
+      ref: 0f2b4d2044e8428ad3dfadf1f9ec1adac229efde
+#      ref: mod/getDirectoryPath
 
 dev_dependencies:
   flutter_test:
