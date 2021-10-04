@@ -14,43 +14,48 @@ import 'package:window_manager/window_manager.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(const MyApp());
+  runApp(HomePage());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  SystemTray _systemTray = SystemTray();
-
-  @override
-  void initState() {
-    super.initState();
-    final SsmSystemTray systemTray = SsmSystemTray();
-    systemTray
-        .getSystemTray(windowManager.show, windowManager.terminate)
-        .then((value) => _systemTray = value);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: HomePage(), // blur, focus etc.
-      ),
-    );
-  }
-}
+// class MyApp extends StatefulWidget {
+//   const MyApp({Key? key}) : super(key: key);
+//
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
+//
+// class _MyAppState extends State<MyApp> {
+//   SystemTray _systemTray = SystemTray();
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     final SsmSystemTray systemTray = SsmSystemTray();
+//     systemTray
+//         .getSystemTray(() {
+//       setState((){
+//         selectedWindow = "shortcuts";
+//       });
+//       windowManager.show();
+//     }, windowManager.terminate)
+//         .then((value) => _systemTray = value);
+//   }
+//
+//   @override
+//   void dispose() {
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         body: HomePage(), // blur, focus etc.
+//       ),
+//     );
+//   }
+// }
 
 final windowManager = WindowManager.instance;
 
@@ -75,6 +80,11 @@ class _HomePageState extends State<HomePage> with WindowListener {
   bool _isMinimizable = false;
   bool _isClosable = false;
 
+
+
+  SystemTray _systemTray = SystemTray();
+
+
   @override
   void initState() {
     windowManager.addListener(this);
@@ -83,6 +93,18 @@ class _HomePageState extends State<HomePage> with WindowListener {
     windowManager.setMinimizable(_isMinimizable);
     windowManager.setClosable(_isClosable);
     windowManager.setSize(Size(1300, 600));
+
+
+    final SsmSystemTray systemTray = SsmSystemTray();
+    systemTray
+        .getSystemTray(() {
+      setState((){
+        selectedWindow = "preference";
+        print("hoge");
+        windowManager.show();
+      });
+    }, windowManager.terminate)
+        .then((value) => _systemTray = value);
     super.initState();
   }
 
@@ -150,6 +172,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
     //   child: Text("here will be put keyboard layout container")
     // );
   }
+
   Widget _buildUpdatePane() {
     return Center(
       child: OutlinedButton(
@@ -221,14 +244,26 @@ class _HomePageState extends State<HomePage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          child: selectedWindow == "preference"
-          // child: selectedWindow != "preference"
-              ? _buildBody(context)
-              : _buildKeyboard(context)),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Container(
+            child: selectedWindow == "preference"
+            // child: selectedWindow != "preference"
+                ? _buildBody(context)
+                : _buildKeyboard(context)),
+      ),
     );
   }
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     body: Container(
+  //         child: selectedWindow == "preference"
+  //         // child: selectedWindow != "preference"
+  //             ? _buildBody(context)
+  //             : _buildKeyboard(context)),
+  //   );
+  // }
 
   final Map<String, Function> eventFuncs = {
     "blur": () => {windowManager.hide()},
