@@ -266,7 +266,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
   // }
 
   final Map<String, Function> eventFuncs = {
-    "blur": () => {windowManager.hide()},
+    "blur": () => {/*can i use hideOnDeactives?*/windowManager.hide()},
   };
 
   @override
