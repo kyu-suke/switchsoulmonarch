@@ -22,6 +22,31 @@ class _AppsPaneState extends State<AppsPane> {
   FileType _pickingType = FileType.custom;
   TextEditingController _controller = TextEditingController(text: "app");
 
+
+  Image? sampleimage;
+
+
+  // call swift code
+  static const platform = const MethodChannel('samples.flutter.dev/hoge');
+  String _batteryLevel = 'Unknown battery level.';
+
+  Future<void> _getHoge(String hoge) async {
+    print("fuga");
+    // Get battery level.
+    String batteryLevel;
+    try {
+      final result = await platform.invokeMethod('getBatteryLevel', <String, dynamic>{
+        "hoge": hoge,
+      });
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      print(result);
+      sampleimage = Image.memory(result);
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +64,7 @@ class _AppsPaneState extends State<AppsPane> {
       setState(() {
         _directoryPath = path;
         _userAborted = path == null;
+        _getHoge(path!);
       });
     } on PlatformException catch (e) {
       _logException('Unsupported operation' + e.toString());
@@ -167,6 +193,7 @@ class _AppsPaneState extends State<AppsPane> {
                     )
                         : const SizedBox(),
                   ),
+                  sampleimage == null ? Text("noneeeeeeeeeeeeeeeeeeee") : sampleimage!
                 ],
               ),
             ),
