@@ -3,108 +3,55 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:preference_list/preference_list.dart';
-import 'package:switchsoulmonarch/system_tray.dart';
-import 'package:switchsoulmonarch/keyboard.dart';
-import 'package:switchsoulmonarch/hotkey_pane.dart';
 import 'package:switchsoulmonarch/apps_pane.dart';
-import 'package:system_tray/system_tray.dart';
+import 'package:switchsoulmonarch/hotkey_pane.dart';
+import 'package:switchsoulmonarch/keyboard.dart';
+import 'package:switchsoulmonarch/system_tray.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(HomePage());
+  runApp(const HomePage());
 }
-
-// class MyApp extends StatefulWidget {
-//   const MyApp({Key? key}) : super(key: key);
-//
-//   @override
-//   State<MyApp> createState() => _MyAppState();
-// }
-//
-// class _MyAppState extends State<MyApp> {
-//   SystemTray _systemTray = SystemTray();
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     final SsmSystemTray systemTray = SsmSystemTray();
-//     systemTray
-//         .getSystemTray(() {
-//       setState((){
-//         selectedWindow = "shortcuts";
-//       });
-//       windowManager.show();
-//     }, windowManager.terminate)
-//         .then((value) => _systemTray = value);
-//   }
-//
-//   @override
-//   void dispose() {
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: Scaffold(
-//         body: HomePage(), // blur, focus etc.
-//       ),
-//     );
-//   }
-// }
 
 final windowManager = WindowManager.instance;
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> with WindowListener {
-  // Size? _minSize;
-  // Size? _maxSize;
-  // bool _isMovable = true;
-  // bool _isAlwaysOnTop = false;
-  // bool _hasShadow = true;
-  // Size _size = _kSizes.first;
-
   String selectedPane = "hotkey";
   String selectedWindow = "preference";
 
-  bool _isFullScreen = false;
-  bool _isResizable = false;
-  bool _isMinimizable = false;
-  bool _isClosable = false;
-
-
-
-  SystemTray _systemTray = SystemTray();
-
+  final bool _isFullScreen = false;
+  final bool _isResizable = false;
+  final bool _isMinimizable = false;
+  final bool _isClosable = false;
 
   @override
   void initState() {
+    // window setting
     windowManager.addListener(this);
     windowManager.setFullScreen(_isFullScreen);
     windowManager.setResizable(_isResizable);
     windowManager.setMinimizable(_isMinimizable);
     windowManager.setClosable(_isClosable);
-    windowManager.setSize(Size(1300, 600));
+    windowManager.setSize(const Size(1300, 600));
 
-
+    // system tray setting
     final SsmSystemTray systemTray = SsmSystemTray();
-    systemTray
-        .getSystemTray(() {
-      setState((){
+    systemTray.getSystemTray(() {
+      setState(() {
         selectedWindow = "preference";
         print("hoge");
         windowManager.show();
       });
-    }, windowManager.terminate)
-        .then((value) => _systemTray = value);
+    }, windowManager.terminate);
     super.initState();
   }
 
@@ -115,8 +62,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
   }
 
   // call swift code
-  static const platform = const MethodChannel('samples.flutter.dev/battery');
-  String _batteryLevel = 'Unknown battery level.';
+  static const platform = MethodChannel('samples.flutter.dev/battery');
 
   Future<void> _getBatteryLevel() async {
     // Get battery level.
@@ -128,13 +74,11 @@ class _HomePageState extends State<HomePage> with WindowListener {
       batteryLevel = "Failed to get battery level: '${e.message}'.";
     }
 
-    setState(() {
-      _batteryLevel = batteryLevel;
-    });
+    setState(() {});
   }
 
   void showShortcutWindow() {
-    setState((){
+    setState(() {
       selectedWindow = "shortcuts";
     });
     windowManager.show();
@@ -142,35 +86,10 @@ class _HomePageState extends State<HomePage> with WindowListener {
 
   Widget _buildHotkeyPane() {
     return HotKeyPane(fn: showShortcutWindow);
-    // return PreferenceList(
-    //   children: <Widget>[
-    //     PreferenceListSection(
-    //       children: [
-    //         PreferenceListItem(
-    //           title: Text('plugin'),
-    //           onTap: () async {
-    //             print("yes?");
-    //             _getBatteryLevel();
-    //           },
-    //         ),
-    //         PreferenceListItem(
-    //           title: Text('terminate'),
-    //           onTap: () async {
-    //             await windowManager.terminate();
-    //           },
-    //         ),
-    //       ],
-    //     ),
-    //   ],
-    // );
   }
-
 
   Widget _buildAppsPane() {
     return AppsPane();
-    // return Center(
-    //   child: Text("here will be put keyboard layout container")
-    // );
   }
 
   Widget _buildUpdatePane() {
@@ -184,10 +103,11 @@ class _HomePageState extends State<HomePage> with WindowListener {
                 Radius.circular(0),
               ),
             )),
-        onPressed: () => setState(()=> {}),
+        onPressed: () => setState(() => {}),
       ),
     );
   }
+
   Widget _buildPane() {
     Widget pane;
     if (selectedPane == "hotkey") {
@@ -208,12 +128,12 @@ class _HomePageState extends State<HomePage> with WindowListener {
           child: Text(label),
           style: OutlinedButton.styleFrom(
               primary: Colors.black,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(0),
                 ),
               )),
-          onPressed: () => setState(()=> selectedPane = pane),
+          onPressed: () => setState(() => selectedPane = pane),
         )),
       ],
     );
@@ -237,9 +157,8 @@ class _HomePageState extends State<HomePage> with WindowListener {
     );
   }
 
-
   Widget _buildKeyboard(BuildContext context) {
-    return KeyboardPage(fn:(){});
+    return KeyboardPage(fn: () {});
   }
 
   @override
@@ -249,24 +168,15 @@ class _HomePageState extends State<HomePage> with WindowListener {
       home: Scaffold(
         body: Container(
             child: selectedWindow == "preference"
-            // child: selectedWindow != "preference"
+                // child: selectedWindow != "preference"
                 ? _buildBody(context)
                 : _buildKeyboard(context)),
       ),
     );
   }
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     body: Container(
-  //         child: selectedWindow == "preference"
-  //         // child: selectedWindow != "preference"
-  //             ? _buildBody(context)
-  //             : _buildKeyboard(context)),
-  //   );
-  // }
 
   final Map<String, Function> eventFuncs = {
-    "blur": () => {/*can i use hideOnDeactives?*/windowManager.hide()},
+    "blur": () => {/*can i use hideOnDeactives?*/ windowManager.hide()},
   };
 
   @override

@@ -20,4 +20,3 @@ extension GetCode on SsmKeys {
 
   String? get code => labels[this];
 }
-

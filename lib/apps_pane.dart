@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:switchsoulmonarch/keyboard.dart';
 
 class AppsPane extends StatefulWidget {
+  const AppsPane({Key? key}) : super(key: key);
+
   @override
   _AppsPaneState createState() => _AppsPaneState();
 }
@@ -15,27 +17,21 @@ class _AppsPaneState extends State<AppsPane> {
   String? _saveAsFileName;
   List<PlatformFile>? _paths;
   String? _directoryPath;
-  String? _extension;
   bool _isLoading = false;
   bool _userAborted = false;
-  bool _multiPick = false;
-  FileType _pickingType = FileType.custom;
-  TextEditingController _controller = TextEditingController(text: "app");
-
 
   Image? sampleimage;
 
-
   // call swift code
-  static const platform = const MethodChannel('samples.flutter.dev/hoge');
-  String _batteryLevel = 'Unknown battery level.';
+  static const platform = MethodChannel('samples.flutter.dev/hoge');
 
   Future<void> _getHoge(String hoge) async {
     print("fuga");
     // Get battery level.
     String batteryLevel;
     try {
-      final result = await platform.invokeMethod('getBatteryLevel', <String, dynamic>{
+      final result =
+          await platform.invokeMethod('getBatteryLevel', <String, dynamic>{
         "hoge": hoge,
       });
       print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
@@ -50,7 +46,6 @@ class _AppsPaneState extends State<AppsPane> {
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() => _extension = _controller.text);
   }
 
   void _selectFolder() async {
@@ -59,8 +54,7 @@ class _AppsPaneState extends State<AppsPane> {
       String? path = await FilePicker.platform.getDirectoryPath(
           pickDirectory: false,
           allowedExtensions: ["app"],
-          type: FileType.custom
-      );
+          type: FileType.custom);
       setState(() {
         _directoryPath = path;
         _userAborted = path == null;
@@ -74,7 +68,6 @@ class _AppsPaneState extends State<AppsPane> {
       setState(() => _isLoading = false);
     }
   }
-
 
   void _logException(String message) {
     print(message);
@@ -127,73 +120,75 @@ class _AppsPaneState extends State<AppsPane> {
                   ),
                   Builder(
                     builder: (BuildContext context) => _isLoading
-                        ? Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: const CircularProgressIndicator(),
-                    )
+                        ? const Padding(
+                            padding: EdgeInsets.only(bottom: 10.0),
+                            child: CircularProgressIndicator(),
+                          )
                         : _userAborted
-                        ? Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: const Text(
-                        'User has aborted the dialog',
-                      ),
-                    )
-                        : _directoryPath != null
-                        ? ListTile(
-                      title: const Text('Directory path'),
-                      subtitle: Text(_directoryPath!),
-                    )
-                        : _paths != null
-                        ? Container(
-                      padding:
-                      const EdgeInsets.only(bottom: 30.0),
-                      height:
-                      MediaQuery.of(context).size.height *
-                          0.50,
-                      child: Scrollbar(
-                          child: ListView.separated(
-                            itemCount: _paths != null &&
-                                _paths!.isNotEmpty
-                                ? _paths!.length
-                                : 1,
-                            itemBuilder: (BuildContext context,
-                                int index) {
-                              final bool isMultiPath =
-                                  _paths != null &&
-                                      _paths!.isNotEmpty;
-                              final String name =
-                                  'File $index: ' +
-                                      (isMultiPath
-                                          ? _paths!
-                                          .map((e) => e.name)
-                                          .toList()[index]
-                                          : _fileName ?? '...');
-                              final path = _paths!
-                                  .map((e) => e.path)
-                                  .toList()[index]
-                                  .toString();
-
-                              return ListTile(
-                                title: Text(
-                                  name,
+                            ? const Padding(
+                                padding: EdgeInsets.only(bottom: 10.0),
+                                child: Text(
+                                  'User has aborted the dialog',
                                 ),
-                                subtitle: Text(path),
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context,
-                                int index) =>
-                            const Divider(),
-                          )),
-                    )
-                        : _saveAsFileName != null
-                        ? ListTile(
-                      title: const Text('Save file'),
-                      subtitle: Text(_saveAsFileName!),
-                    )
-                        : const SizedBox(),
+                              )
+                            : _directoryPath != null
+                                ? ListTile(
+                                    title: const Text('Directory path'),
+                                    subtitle: Text(_directoryPath!),
+                                  )
+                                : _paths != null
+                                    ? Container(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 30.0),
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.50,
+                                        child: Scrollbar(
+                                            child: ListView.separated(
+                                          itemCount: _paths != null &&
+                                                  _paths!.isNotEmpty
+                                              ? _paths!.length
+                                              : 1,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            final bool isMultiPath =
+                                                _paths != null &&
+                                                    _paths!.isNotEmpty;
+                                            final String name =
+                                                'File $index: ' +
+                                                    (isMultiPath
+                                                        ? _paths!
+                                                            .map((e) => e.name)
+                                                            .toList()[index]
+                                                        : _fileName ?? '...');
+                                            final path = _paths!
+                                                .map((e) => e.path)
+                                                .toList()[index]
+                                                .toString();
+
+                                            return ListTile(
+                                              title: Text(
+                                                name,
+                                              ),
+                                              subtitle: Text(path),
+                                            );
+                                          },
+                                          separatorBuilder:
+                                              (BuildContext context,
+                                                      int index) =>
+                                                  const Divider(),
+                                        )),
+                                      )
+                                    : _saveAsFileName != null
+                                        ? ListTile(
+                                            title: const Text('Save file'),
+                                            subtitle: Text(_saveAsFileName!),
+                                          )
+                                        : const SizedBox(),
                   ),
-                  sampleimage == null ? Text("noneeeeeeeeeeeeeeeeeeee") : sampleimage!
+                  sampleimage == null
+                      ? Text("noneeeeeeeeeeeeeeeeeeee")
+                      : sampleimage!
                 ],
               ),
             ),

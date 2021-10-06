@@ -1,25 +1,25 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:preference_list/preference_list.dart';
 
 class HotKeyPane extends StatefulWidget {
-  HotKeyPane({Key? key, required Function fn}) :
-    showFunc = fn;
+  const HotKeyPane({Key? key, required Function fn})
+      : showFunc = fn,
+        super(key: key);
 
-  Function showFunc;
+  final Function showFunc;
+
   @override
   _HotKeyPaneState createState() => _HotKeyPaneState(showFunc: showFunc);
 }
 
 class _HotKeyPaneState extends State<HotKeyPane> {
-  _HotKeyPaneState({Key? key, required Function showFunc}) : showFunc = showFunc;
-
+  _HotKeyPaneState({required this.showFunc});
 
   List<HotKey> _registeredHotKeyList = [];
 
-  Function showFunc;
+  final Function showFunc;
 
   @override
   void initState() {
@@ -29,14 +29,12 @@ class _HotKeyPaneState extends State<HotKeyPane> {
 
   void _keyDownHandler(HotKey hotKey) {
     String log = 'keyDown ${hotKey.toString()} (${hotKey.scope})';
-    // BotToast.showText(text: log);
     print(log);
     showFunc();
   }
 
   void _keyUpHandler(HotKey hotKey) {
     String log = 'keyUp   ${hotKey.toString()} (${hotKey.scope})';
-    // BotToast.showText(text: log);
     print(log);
   }
 
@@ -74,18 +72,18 @@ class _HotKeyPaneState extends State<HotKeyPane> {
     return PreferenceList(
       children: <Widget>[
         PreferenceListSection(
-          title: Text('REGISTERED HOTKEY LIST'),
+          title: const Text('REGISTERED HOTKEY LIST'),
           children: [
             for (var registeredHotKey in _registeredHotKeyList)
               PreferenceListItem(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 title: Row(
                   children: [
                     HotKeyVirtualView(hotKey: registeredHotKey),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Text(
                       registeredHotKey.scope.toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 12,
                       ),
@@ -99,7 +97,7 @@ class _HotKeyPaneState extends State<HotKeyPane> {
                     padding: EdgeInsets.zero,
                     child: Stack(
                       alignment: Alignment.center,
-                      children: [
+                      children: const [
                         Icon(
                           CupertinoIcons.delete,
                           size: 18,
@@ -150,7 +148,7 @@ class _HotKeyPaneState extends State<HotKeyPane> {
 
   @override
   Widget build(BuildContext context) {
-    return  _buildBody(context);
+    return _buildBody(context);
   }
 }
 
@@ -176,11 +174,11 @@ class _RecordHotKeyDialogState extends State<RecordHotKeyDialog> {
       content: SingleChildScrollView(
         child: ListBody(
           children: <Widget>[
-            Text('The `HotKeyRecorder` widget will record your hotkey.'),
+            const Text('The `HotKeyRecorder` widget will record your hotkey.'),
             Container(
               width: 100,
               height: 60,
-              margin: EdgeInsets.only(top: 20),
+              margin: const EdgeInsets.only(top: 20),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Theme.of(context).primaryColor,
@@ -216,13 +214,13 @@ class _RecordHotKeyDialogState extends State<RecordHotKeyDialog> {
       ),
       actions: <Widget>[
         TextButton(
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         TextButton(
-          child: Text('OK'),
+          child: const Text('OK'),
           onPressed: !_hotKey.isSetted
               ? null
               : () {
@@ -234,5 +232,3 @@ class _RecordHotKeyDialogState extends State<RecordHotKeyDialog> {
     );
   }
 }
-
-
