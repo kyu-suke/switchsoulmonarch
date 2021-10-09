@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.14.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -58,6 +58,10 @@ dependencies:
       ref: 0f2b4d2044e8428ad3dfadf1f9ec1adac229efde
 #      ref: mod/getDirectoryPath
 
+  sqflite: ^2.0.0+4
+  flutter_riverpod: ^0.14.0+3
+  freezed_annotation: ^0.14.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,6 +72,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+
+  build_runner: ^2.1.4
+#  freezed: ^0.15.0+1
+  freezed: ^0.14.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
