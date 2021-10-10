@@ -16,39 +16,44 @@ class SettingDatabaseProvider extends DatabaseProvider {
 
   @override
   Map<String, List<String>> get onUpgradeQueries => {
-    // '2' : ['ALTER TABLE xxxxx RENAME COLUMN yyyyyyy TO zzzzz;'],
-  };
+        // '2' : ['ALTER TABLE xxxxx RENAME COLUMN yyyyyyy TO zzzzz;'],
+      };
 
   createDatabase(Database db, int version) => db.execute(
         """
           CREATE TABLE $tableName(
-            hotKey TEXT DEFAULT "",
+            hotKey TEXT DEFAULT ""
           )
         """,
       );
 
-  Future<int> insert(WindowHotKey setting) async {
+  Future<int> insert(WindowHotKey wHotKey) async {
     final SettingDatabaseProvider provider = SettingDatabaseProvider();
     final database = await (provider.database);
-    return await database!.insert(provider.tableName, setting.toMap());
+    return await database!.insert(provider.tableName, wHotKey.toMap());
   }
 
-  Future<int> update(WindowHotKey setting) async {
+  // Future<int> update(WindowHotKey setting) async {
+  //   final SettingDatabaseProvider provider = SettingDatabaseProvider();
+  //   final database = await (provider.database);
+  //   return await database!.update(provider.tableName, setting.toMap());
+  // }
+
+  Future<int> delete(WindowHotKey setting) async {
     final SettingDatabaseProvider provider = SettingDatabaseProvider();
     final database = await (provider.database);
-    return await database!.update(provider.tableName, setting.toMap());
+    return await database!
+        .delete(provider.tableName);
   }
 
   Future<WindowHotKey?> get() async {
     final SettingDatabaseProvider provider = SettingDatabaseProvider();
     final database = await (provider.database);
-    final List<Map<String, dynamic>> maps = await database!.query('setting');
+    final List<Map<String, dynamic>> maps = await database!.query('show_window');
     if (maps.length == 0) {
       return null;
     }
     final setting = maps[0];
     return WindowHotKey().fromMap(setting);
   }
-
 }
-

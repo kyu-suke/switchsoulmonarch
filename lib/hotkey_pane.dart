@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:preference_list/preference_list.dart';
+import 'package:switchsoulmonarch/state/window_hotkey_state.dart';
 
 class HotKeyPane extends StatefulWidget {
   const HotKeyPane({Key? key, required Function fn})
@@ -38,12 +40,13 @@ class _HotKeyPaneState extends State<HotKeyPane> {
     print(log);
   }
 
-  void _handleHotKeyRegister(HotKey hotKey) async {
+  void _handleHotKeyRegister(BuildContext context, HotKey hotKey) async {
     await HotKeyManager.instance.register(
       hotKey,
       keyDownHandler: _keyDownHandler,
       keyUpHandler: _keyUpHandler,
     );
+    context.read(windowHotKeyStateNotifier.notifier).register(hotKey);
     setState(() {
       _registeredHotKeyList = HotKeyManager.instance.registeredHotKeyList;
     });
@@ -62,7 +65,8 @@ class _HotKeyPaneState extends State<HotKeyPane> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return RecordHotKeyDialog(
-          onHotKeyRecorded: (newHotKey) => _handleHotKeyRegister(newHotKey),
+          onHotKeyRecorded: (newHotKey) =>
+              _handleHotKeyRegister(context, newHotKey),
         );
       },
     );
@@ -169,66 +173,75 @@ class _RecordHotKeyDialogState extends State<RecordHotKeyDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      // title: Text('Rewind and remember'),
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: <Widget>[
-            const Text('The `HotKeyRecorder` widget will record your hotkey.'),
-            Container(
-              width: 100,
-              height: 60,
-              margin: const EdgeInsets.only(top: 20),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).primaryColor,
+    return Consumer(builder: (context, watch, child) {
+      final hk = watch(windowHotKeyStateNotifier).hotKey;
+      print("~~~~~~~~~~~~~~~~~~~~~~~");
+      print(hk);
+      return AlertDialog(
+        // title: Text('Rewind and remember'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text("!!!!"),
+              Text(hk.toString()),
+              Text("=========="),
+              const Text(
+                  'The `HotKeyRecorder` widget will record your hotkey.'),
+              Container(
+                width: 100,
+                height: 60,
+                margin: const EdgeInsets.only(top: 20),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    HotKeyRecorder(
+                      onHotKeyRecorded: (hotKey) {
+                        _hotKey = hotKey;
+                        setState(() {});
+                      },
+                    ),
+                  ],
                 ),
               ),
-              child: Stack(
-                alignment: Alignment.center,
+              Row(
                 children: [
-                  HotKeyRecorder(
-                    onHotKeyRecorded: (hotKey) {
-                      _hotKey = hotKey;
+                  Checkbox(
+                    value: _hotKey.scope == HotKeyScope.inapp,
+                    onChanged: (newValue) {
+                      _hotKey.scope =
+                          newValue! ? HotKeyScope.inapp : HotKeyScope.system;
                       setState(() {});
                     },
                   ),
+                  Text('Set as inapp-wide hotkey. (default is system-wide)'),
                 ],
               ),
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  value: _hotKey.scope == HotKeyScope.inapp,
-                  onChanged: (newValue) {
-                    _hotKey.scope =
-                        newValue! ? HotKeyScope.inapp : HotKeyScope.system;
-                    setState(() {});
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: const Text('OK'),
+            onPressed: !_hotKey.isSetted
+                ? null
+                : () {
+                    widget.onHotKeyRecorded(_hotKey);
+                    Navigator.of(context).pop();
                   },
-                ),
-                Text('Set as inapp-wide hotkey. (default is system-wide)'),
-              ],
-            ),
-          ],
-        ),
-      ),
-      actions: <Widget>[
-        TextButton(
-          child: const Text('Cancel'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
-          child: const Text('OK'),
-          onPressed: !_hotKey.isSetted
-              ? null
-              : () {
-                  widget.onHotKeyRecorded(_hotKey);
-                  Navigator.of(context).pop();
-                },
-        ),
-      ],
-    );
+          ),
+        ],
+      );
+    });
   }
 }

@@ -7,12 +7,15 @@ import 'package:switchsoulmonarch/apps_pane.dart';
 import 'package:switchsoulmonarch/hotkey_pane.dart';
 import 'package:switchsoulmonarch/keyboard.dart';
 import 'package:switchsoulmonarch/system_tray.dart';
+import 'package:switchsoulmonarch/state/window_hotkey_state.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(const HomePage());
+  runApp(ProviderScope(
+    child: const HomePage()),
+  );
 }
 
 final windowManager = WindowManager.instance;
@@ -163,6 +166,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
+    context.read(windowHotKeyStateNotifier.notifier).init();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(

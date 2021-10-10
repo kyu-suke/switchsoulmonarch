@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$WindowHotKeyStateTearOff {
   const _$WindowHotKeyStateTearOff();
 
-  _WindowHotKeyState call({String hotKey = ""}) {
+  _WindowHotKeyState call({HotKey? hotKey = null}) {
     return _WindowHotKeyState(
       hotKey: hotKey,
     );
@@ -29,7 +29,7 @@ const $WindowHotKeyState = _$WindowHotKeyStateTearOff();
 
 /// @nodoc
 mixin _$WindowHotKeyState {
-  String get hotKey => throw _privateConstructorUsedError;
+  HotKey? get hotKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $WindowHotKeyStateCopyWith<WindowHotKeyState> get copyWith =>
@@ -41,7 +41,7 @@ abstract class $WindowHotKeyStateCopyWith<$Res> {
   factory $WindowHotKeyStateCopyWith(
           WindowHotKeyState value, $Res Function(WindowHotKeyState) then) =
       _$WindowHotKeyStateCopyWithImpl<$Res>;
-  $Res call({String hotKey});
+  $Res call({HotKey? hotKey});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$WindowHotKeyStateCopyWithImpl<$Res>
       hotKey: hotKey == freezed
           ? _value.hotKey
           : hotKey // ignore: cast_nullable_to_non_nullable
-              as String,
+              as HotKey?,
     ));
   }
 }
@@ -73,7 +73,7 @@ abstract class _$WindowHotKeyStateCopyWith<$Res>
           _WindowHotKeyState value, $Res Function(_WindowHotKeyState) then) =
       __$WindowHotKeyStateCopyWithImpl<$Res>;
   @override
-  $Res call({String hotKey});
+  $Res call({HotKey? hotKey});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class __$WindowHotKeyStateCopyWithImpl<$Res>
       hotKey: hotKey == freezed
           ? _value.hotKey
           : hotKey // ignore: cast_nullable_to_non_nullable
-              as String,
+              as HotKey?,
     ));
   }
 }
@@ -103,11 +103,11 @@ class __$WindowHotKeyStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_WindowHotKeyState implements _WindowHotKeyState {
-  _$_WindowHotKeyState({this.hotKey = ""});
+  _$_WindowHotKeyState({this.hotKey = null});
 
-  @JsonKey(defaultValue: "")
+  @JsonKey(defaultValue: null)
   @override
-  final String hotKey;
+  final HotKey? hotKey;
 
   @override
   String toString() {
@@ -133,10 +133,10 @@ class _$_WindowHotKeyState implements _WindowHotKeyState {
 }
 
 abstract class _WindowHotKeyState implements WindowHotKeyState {
-  factory _WindowHotKeyState({String hotKey}) = _$_WindowHotKeyState;
+  factory _WindowHotKeyState({HotKey? hotKey}) = _$_WindowHotKeyState;
 
   @override
-  String get hotKey => throw _privateConstructorUsedError;
+  HotKey? get hotKey => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$WindowHotKeyStateCopyWith<_WindowHotKeyState> get copyWith =>

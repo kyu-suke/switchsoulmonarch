@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:switchsoulmonarch/database/window_hotkey_provider.dart';
 
@@ -7,7 +11,7 @@ part 'window_hotkey_state.freezed.dart';
 @freezed
 abstract class WindowHotKeyState with _$WindowHotKeyState {
   factory WindowHotKeyState({
-    @Default("") String hotKey,
+    @Default(null) HotKey? hotKey,
   }) = _WindowHotKeyState;
 }
 
@@ -16,38 +20,69 @@ class WindowHotKeyStateNotifier extends StateNotifier<WindowHotKeyState> {
 
   final settingDatabaseProvider = SettingDatabaseProvider();
 
-  void set(WindowHotKey windowHotKey) {
-    state = state.copyWith(
-      hotKey: windowHotKey.hotKey,
-    );
+  void init() async {
+    final wHotKey = await _get();
+    print("??????????????????????????????????????????/");
+    print(wHotKey);
   }
 
-  void removePostTypes(String type) async {
-    state = state.copyWith(hotKey: "");
-    await _save();
+  void register(HotKey hotKey) async {
+    state = state.copyWith(hotKey: hotKey);
+    await _delete();
+    await _insert();
   }
 
-  String get hotKey => state.hotKey;
+  // void removePostTypes(String type) async {
+  //   state = state.copyWith(hotKey: "");
+  //   await _save();
+  // }
 
-  Future<void> _save() async {
-    await settingDatabaseProvider.update(WindowHotKey(
+  HotKey? get hotKey => state.hotKey;
+
+  Future<void> _delete() async {
+    await settingDatabaseProvider.delete(WindowHotKey(
       hotKey: state.hotKey,
     ));
+  }
+
+  Future<void> _insert() async {
+    await settingDatabaseProvider.insert(WindowHotKey(
+      hotKey: state.hotKey,
+    ));
+  }
+
+  Future<WindowHotKey?> _get() async {
+    return await settingDatabaseProvider.get();
   }
 }
 
 class WindowHotKey {
-  final String hotKey;
+  final HotKey? hotKey;
 
-  WindowHotKey({this.hotKey = ""});
+  WindowHotKey({this.hotKey});
 
   Map<String, dynamic> toMap() {
+    print("Z");
+    print(hotKey);
+    print("ZX");
+    print(hotKey?.toJson());
+    print("ZC");
+    print(jsonEncode(hotKey?.toJson()));
     return {
-      'hotKey': hotKey,
+      'hotKey': jsonEncode(hotKey?.toJson()),
     };
   }
 
   WindowHotKey fromMap(Map<String, dynamic> map) {
-    return WindowHotKey(hotKey: map["hotKey"]);
+    print("A");
+    print(map["hotKey"]);
+    print("AB");
+    print(jsonDecode(map["hotKey"]));
+    print("AC");
+    return WindowHotKey(hotKey: HotKey.fromJson(jsonDecode(map["hotKey"])));
   }
 }
+
+final windowHotKeyStateNotifier =
+    StateNotifierProvider<WindowHotKeyStateNotifier, WindowHotKeyState>(
+        (ref) => WindowHotKeyStateNotifier());

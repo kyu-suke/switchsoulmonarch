@@ -1,9 +1,15 @@
 PODS:
   - FlutterMacOS (1.0.0)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - HotKey (0.1.2)
   - hotkey_manager (0.0.1):
     - FlutterMacOS
     - HotKey
+  - sqflite (0.0.2):
+    - FlutterMacOS
+    - FMDB (>= 2.7.5)
   - system_tray (0.0.1):
     - FlutterMacOS
   - window_manager (0.0.1):
@@ -12,11 +18,13 @@ PODS:
 DEPENDENCIES:
   - FlutterMacOS (from `Flutter/ephemeral`)
   - hotkey_manager (from `Flutter/ephemeral/.symlinks/plugins/hotkey_manager/macos`)
+  - sqflite (from `Flutter/ephemeral/.symlinks/plugins/sqflite/macos`)
   - system_tray (from `Flutter/ephemeral/.symlinks/plugins/system_tray/macos`)
   - window_manager (from `Flutter/ephemeral/.symlinks/plugins/window_manager/macos`)
 
 SPEC REPOS:
   trunk:
+    - FMDB
     - HotKey
 
 EXTERNAL SOURCES:
@@ -24,6 +32,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral
   hotkey_manager:
     :path: Flutter/ephemeral/.symlinks/plugins/hotkey_manager/macos
+  sqflite:
+    :path: Flutter/ephemeral/.symlinks/plugins/sqflite/macos
   system_tray:
     :path: Flutter/ephemeral/.symlinks/plugins/system_tray/macos
   window_manager:
@@ -31,8 +41,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HotKey: ad59450195936c10992438c4210f673de5aee43e
   hotkey_manager: ad673457691f4d39e481be04a61da2ae07d81c62
+  sqflite: a5789cceda41d54d23f31d6de539d65bb14100ea
   system_tray: e53c972838c69589ff2e77d6d3abfd71332f9e5d
   window_manager: f5fa14814635f059571527ddd5e676f688af552c
 
