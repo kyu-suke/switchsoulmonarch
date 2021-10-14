@@ -152,6 +152,17 @@ class _HotKeyPaneState extends State<HotKeyPane> {
 
   @override
   Widget build(BuildContext context) {
+    print("AAAAAAAAAAAAAAAAAAA");
+    context.read(windowHotKeyStateNotifier.notifier).get().then((windowHotKey) async {
+      if (windowHotKey?.hotKey != null) {
+        await context.read(windowHotKeyStateNotifier.notifier).register(windowHotKey!.hotKey!);
+        await HotKeyManager.instance.register(
+          windowHotKey!.hotKey!,
+          keyDownHandler: _keyDownHandler,
+          keyUpHandler: (HotKey hotKey){},
+        );
+      }
+    });
     return _buildBody(context);
   }
 }
@@ -175,8 +186,6 @@ class _RecordHotKeyDialogState extends State<RecordHotKeyDialog> {
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
       final hk = watch(windowHotKeyStateNotifier).hotKey;
-      print("~~~~~~~~~~~~~~~~~~~~~~~");
-      print(hk);
       return AlertDialog(
         // title: Text('Rewind and remember'),
         content: SingleChildScrollView(

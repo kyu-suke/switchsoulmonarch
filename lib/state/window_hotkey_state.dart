@@ -20,13 +20,17 @@ class WindowHotKeyStateNotifier extends StateNotifier<WindowHotKeyState> {
 
   final settingDatabaseProvider = SettingDatabaseProvider();
 
-  void init() async {
+  Future<WindowHotKey?> get() async {
+    return await _get();
+  }
+
+  Future<void> init() async {
     final wHotKey = await _get();
     print("??????????????????????????????????????????/");
     print(wHotKey);
+    state = state.copyWith(hotKey: wHotKey?.hotKey);
   }
-
-  void register(HotKey hotKey) async {
+  Future<void> register(HotKey hotKey) async {
     state = state.copyWith(hotKey: hotKey);
     await _delete();
     await _insert();
