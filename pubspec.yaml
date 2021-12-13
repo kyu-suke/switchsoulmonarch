@@ -62,6 +62,16 @@ dependencies:
   flutter_riverpod: ^0.14.0+3
   freezed_annotation: ^0.14.2
 
+  magnetica:
+    git:
+      url: https://github.com/kyu-suke/magnetica.git
+      ref: main
+
+  hotkey_holder:
+    git:
+      url: https://github.com/kyu-suke/hotkey_holder.git
+      ref: main
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

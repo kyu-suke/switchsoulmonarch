@@ -4,9 +4,18 @@ PODS:
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - HotKey (0.1.2)
+  - hotkey_holder (0.0.1):
+    - FlutterMacOS
+    - Magnet
   - hotkey_manager (0.0.1):
     - FlutterMacOS
     - HotKey
+  - Magnet (3.3.0):
+    - Sauce (~> 2.2.0)
+  - magnetica (0.0.1):
+    - FlutterMacOS
+    - Magnet
+  - Sauce (2.2.0)
   - sqflite (0.0.2):
     - FlutterMacOS
     - FMDB (>= 2.7.5)
@@ -17,7 +26,9 @@ PODS:
 
 DEPENDENCIES:
   - FlutterMacOS (from `Flutter/ephemeral`)
+  - hotkey_holder (from `Flutter/ephemeral/.symlinks/plugins/hotkey_holder/macos`)
   - hotkey_manager (from `Flutter/ephemeral/.symlinks/plugins/hotkey_manager/macos`)
+  - magnetica (from `Flutter/ephemeral/.symlinks/plugins/magnetica/macos`)
   - sqflite (from `Flutter/ephemeral/.symlinks/plugins/sqflite/macos`)
   - system_tray (from `Flutter/ephemeral/.symlinks/plugins/system_tray/macos`)
   - window_manager (from `Flutter/ephemeral/.symlinks/plugins/window_manager/macos`)
@@ -26,12 +37,18 @@ SPEC REPOS:
   trunk:
     - FMDB
     - HotKey
+    - Magnet
+    - Sauce
 
 EXTERNAL SOURCES:
   FlutterMacOS:
     :path: Flutter/ephemeral
+  hotkey_holder:
+    :path: Flutter/ephemeral/.symlinks/plugins/hotkey_holder/macos
   hotkey_manager:
     :path: Flutter/ephemeral/.symlinks/plugins/hotkey_manager/macos
+  magnetica:
+    :path: Flutter/ephemeral/.symlinks/plugins/magnetica/macos
   sqflite:
     :path: Flutter/ephemeral/.symlinks/plugins/sqflite/macos
   system_tray:
@@ -43,11 +60,15 @@ SPEC CHECKSUMS:
   FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HotKey: ad59450195936c10992438c4210f673de5aee43e
+  hotkey_holder: c7cf78002b8140c077f1b1786c35b6871171df74
   hotkey_manager: ad673457691f4d39e481be04a61da2ae07d81c62
+  Magnet: a44a5a14eecc77433cbaad1431b78f7d20725bf2
+  magnetica: c5942312396c5d994096362c99b9bb4599d1027b
+  Sauce: 3ade51738563f86b08888cf4b91ae5943012088b
   sqflite: a5789cceda41d54d23f31d6de539d65bb14100ea
   system_tray: e53c972838c69589ff2e77d6d3abfd71332f9e5d
   window_manager: f5fa14814635f059571527ddd5e676f688af552c
 
 PODFILE CHECKSUM: 6eac6b3292e5142cfc23bdeb71848a40ec51c14c
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

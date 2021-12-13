@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:sqflite/sqflite.dart';
 import 'package:switchsoulmonarch/database/database_provider.dart';
-import 'package:switchsoulmonarch/state/window_hotkey_state.dart';
+import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
 
 class SettingDatabaseProvider extends DatabaseProvider {
   @override
@@ -27,7 +27,7 @@ class SettingDatabaseProvider extends DatabaseProvider {
         """,
       );
 
-  Future<int> insert(WindowHotKey wHotKey) async {
+  Future<int> insert(SsmKeyCombo wHotKey) async {
     final SettingDatabaseProvider provider = SettingDatabaseProvider();
     final database = await (provider.database);
     return await database!.insert(provider.tableName, wHotKey.toMap());
@@ -39,21 +39,21 @@ class SettingDatabaseProvider extends DatabaseProvider {
   //   return await database!.update(provider.tableName, setting.toMap());
   // }
 
-  Future<int> delete(WindowHotKey setting) async {
+  Future<int> delete(SsmKeyCombo setting) async {
     final SettingDatabaseProvider provider = SettingDatabaseProvider();
     final database = await (provider.database);
-    return await database!
-        .delete(provider.tableName);
+    return await database!.delete(provider.tableName);
   }
 
-  Future<WindowHotKey?> get() async {
+  Future<SsmKeyCombo?> get() async {
     final SettingDatabaseProvider provider = SettingDatabaseProvider();
     final database = await (provider.database);
-    final List<Map<String, dynamic>> maps = await database!.query('show_window');
+    final List<Map<String, dynamic>> maps =
+        await database!.query('show_window');
     if (maps.length == 0) {
       return null;
     }
     final setting = maps[0];
-    return WindowHotKey().fromMap(setting);
+    return SsmKeyCombo().fromMap(setting);
   }
 }
