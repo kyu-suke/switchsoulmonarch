@@ -100,3 +100,11 @@ extension CGImage {
         return mutableData as Data
     }
 }
+
+
+/*
+ terminate method is like this
+ public func terminate() {
+     NSApplication.shared.terminate(nil)
+ }
+ */

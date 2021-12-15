@@ -21,7 +21,7 @@ PODS:
     - FMDB (>= 2.7.5)
   - system_tray (0.0.1):
     - FlutterMacOS
-  - window_manager (0.0.1):
+  - window_manager (0.1.0):
     - FlutterMacOS
 
 DEPENDENCIES:
@@ -67,7 +67,7 @@ SPEC CHECKSUMS:
   Sauce: 3ade51738563f86b08888cf4b91ae5943012088b
   sqflite: a5789cceda41d54d23f31d6de539d65bb14100ea
   system_tray: e53c972838c69589ff2e77d6d3abfd71332f9e5d
-  window_manager: f5fa14814635f059571527ddd5e676f688af552c
+  window_manager: db713621c322d52e96064336a4ba2b7e4e30c94f
 
 PODFILE CHECKSUM: 6eac6b3292e5142cfc23bdeb71848a40ec51c14c
 

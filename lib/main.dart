@@ -8,21 +8,25 @@ import 'package:switchsoulmonarch/hotkey_pane.dart';
 import 'package:switchsoulmonarch/keyboard.dart';
 import 'package:switchsoulmonarch/system_tray.dart';
 import 'package:switchsoulmonarch/state/window_hotkey_state.dart';
+import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
+import 'package:switchsoulmonarch/database/show_keyboard_window_provider.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 
+final windowManager = WindowManager.instance;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(ProviderScope(
-    child: const HomePage()),
-  );
+      child: HomePage(keyCombo: await getKeyCombo()),
+      // child: const HomePage()),
+  ));
 }
 
-final windowManager = WindowManager.instance;
-
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, this.keyCombo}): super(key: key);
+  final SsmKeyCombo? keyCombo;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -39,13 +43,17 @@ class _HomePageState extends State<HomePage> with WindowListener {
 
   @override
   void initState() {
+    print("!!!!!!!!!!!!!!!!");
+    context.read(windowHotKeyStateNotifier.notifier).set(widget.keyCombo!.keyCombo!);
+    print("===================");
+
     // window setting
-    windowManager.addListener(this);
-    windowManager.setFullScreen(_isFullScreen);
-    windowManager.setResizable(_isResizable);
-    windowManager.setMinimizable(_isMinimizable);
-    windowManager.setClosable(_isClosable);
-    windowManager.setSize(const Size(1300, 600));
+    // windowManager.addListener(this);
+    // windowManager.setFullScreen(_isFullScreen);
+    // windowManager.setResizable(_isResizable);
+    // windowManager.setMinimizable(_isMinimizable);
+    // windowManager.setClosable(_isClosable);
+    // windowManager.setSize(const Size(1300, 600));
 
     // system tray setting
     final SsmSystemTray systemTray = SsmSystemTray();
@@ -55,7 +63,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
         print("hoge");
         windowManager.show();
       });
-    }, windowManager.terminate);
+    }, (){}/*windowManager.terminate*//* TODO implement terminate in swift */);
     super.initState();
   }
 

@@ -20,7 +20,7 @@ class SsmSystemTray {
     }
 
     // We first init the systray menu and then add the menu entries
-    await _systemTray.initSystemTray("system tray2",
+    await _systemTray.initSystemTray(title: "system tray2",
         iconPath: path, toolTip: "How to use system tray with Flutter");
 
     await _systemTray.setContextMenu(

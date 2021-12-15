@@ -4,8 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:magnetica/magnetica.dart';
+import 'package:hotkey_holder/hotkey_holder.dart';
 import 'package:state_notifier/state_notifier.dart';
-import 'package:switchsoulmonarch/database/window_hotkey_provider.dart';
+import 'package:switchsoulmonarch/database/show_keyboard_window_provider.dart';
 
 part 'hotkey_holder_state.freezed.dart';
 
@@ -28,15 +29,20 @@ class HotKeyHolderStateNotifier extends StateNotifier<HotKeyHolderState> {
   KeyCombo? get keyCombo => state.keyCombo;
   Function? get event => state.event;
 
+  void set(HotKeyHolderKeyCombo setting) {
+    state = state.copyWith(
+        keyCombo: setting);
+  }
+
   Future<SsmKeyCombo?> get() async {
     return await _get();
   }
 
   Future<void> init() async {
     final keyCombo = await _get();
-    state = state.copyWith(hotKeyName: keyCombo?.hotKeyName, keyCombo: keyCombo?.keyCombo, event: keyCombo?.event);
+    state = state.copyWith(keyCombo: keyCombo?.keyCombo);
   }
-  Future<void> register(String hotKeyName, KeyCombo keyCombo, Function event) async {
+  Future<void> register(String hotKeyName, HotKeyHolderKeyCombo keyCombo, Function event) async {
     state = state.copyWith(hotKeyName: hotKeyName, keyCombo: keyCombo, event: event);
     await _delete();
     await _insert();
@@ -50,12 +56,12 @@ class HotKeyHolderStateNotifier extends StateNotifier<HotKeyHolderState> {
 
   Future<void> _delete() async {
     await settingDatabaseProvider.delete(SsmKeyCombo(
-      hotKeyName: null, keyCombo: null, event: null,
+      keyCombo: null,
     ));
   }
 
   Future<void> _insert() async {
-    await settingDatabaseProvider.insert(SsmKeyCombo(hotKeyName: hotKeyName, keyCombo: keyCombo, event: event));
+    await settingDatabaseProvider.insert(SsmKeyCombo(keyCombo: HotKeyHolderKeyCombo(key: keyCombo!.key, modifiers: keyCombo!.modifiers)));
   }
 
   Future<SsmKeyCombo?> _get() async {
@@ -64,21 +70,37 @@ class HotKeyHolderStateNotifier extends StateNotifier<HotKeyHolderState> {
 }
 
 class SsmKeyCombo {
-  // final HotKey? hotKey;
-  String? hotKeyName;
-  KeyCombo? keyCombo;
-  Function? event;
+  HotKeyHolderKeyCombo? keyCombo;
 
-  SsmKeyCombo({this.hotKeyName, this.keyCombo, this.event});
+  SsmKeyCombo({ this.keyCombo});
 
   Map<String, dynamic> toMap() {
     return {
-      // 'hotKey': jsonEncode(hotKey?.toJson()),
+      'key': keyCombo?.key.encode(),
+      'modifiers': jsonEncode(keyCombo?.modifiers.map((e) => e.encode()).toList()),
     };
   }
 
   SsmKeyCombo fromMap(Map<String, dynamic> map) {
-    return SsmKeyCombo();
+    return SsmKeyCombo(
+      keyCombo: HotKeyHolderKeyCombo(
+        key: KeyCharacterExtension.fromString(map["key"]) ,
+        modifiers: (jsonDecode(map["modifiers"]).cast<int>() as List<int>).map((e) {
+          switch (e) {
+            case 512:
+              return Modifier.shift;
+            case 4096:
+              return Modifier.control;
+            case 2048:
+              return Modifier.option;
+            case 256:
+              return Modifier.command;
+            default:
+              return Modifier.command;
+          }
+        }).toList()
+      )
+    );
     // return SsmKeyCombo(hotKey: HotKey.fromJson(jsonDecode(map["hotKey"])));
   }
 }
@@ -86,3 +108,6 @@ class SsmKeyCombo {
 final windowHotKeyStateNotifier =
 StateNotifierProvider<HotKeyHolderStateNotifier, HotKeyHolderState>(
         (ref) => HotKeyHolderStateNotifier());
+// final tmblPostStateProvider =
+// StateNotifierProvider<TmblPostStateNotifier, TmblPostState>(
+//         (ref) => TmblPostStateNotifier());
