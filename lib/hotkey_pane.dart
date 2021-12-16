@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotkey_holder/hotkey_holder.dart';
+import 'package:switchsoulmonarch/main.dart';
 import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
 
 class HotKeyPane extends StatefulWidget {
@@ -61,6 +62,7 @@ class _HotKeyPaneState extends State<HotKeyPane> {
             onInput: insertKeyCombo,
             onDelete: deleteKeyCombo,
             event: () {
+              this.showFunc();
               print("this is shortcut A");
             });
       },

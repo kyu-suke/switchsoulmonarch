@@ -16,6 +16,16 @@ final windowManager = WindowManager.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+
+  // Use it only after calling `hiddenWindowAtLaunch`
+  windowManager.waitUntilReadyToShow().then((_) async {
+    // await windowManager.setAsFrameless();
+    await windowManager.setSize(Size(800, 600));
+    await windowManager.show();
+  });
+
+
   runApp(ProviderScope(
     child: HomePage(keyCombo: await getKeyCombo()),
   ));
@@ -47,12 +57,12 @@ class _HomePageState extends State<HomePage> with WindowListener {
     print("===================");
 
     // window setting
-    // windowManager.addListener(this);
+    windowManager.addListener(this);
     // windowManager.setFullScreen(_isFullScreen);
     // windowManager.setResizable(_isResizable);
     // windowManager.setMinimizable(_isMinimizable);
     // windowManager.setClosable(_isClosable);
-    // windowManager.setSize(const Size(1300, 600));
+    windowManager.setSize(const Size(1300, 500));
 
     // system tray setting
     final SsmSystemTray systemTray = SsmSystemTray();
@@ -60,8 +70,9 @@ class _HomePageState extends State<HomePage> with WindowListener {
       setState(() {
         selectedWindow = "preference";
         print("hoge");
-        windowManager.show();
       });
+      windowManager.setSize(const Size(1300, 500));
+      windowManager.show();
     }, () {} /*windowManager.terminate*/ /* TODO implement terminate in swift */);
     super.initState();
   }
@@ -88,10 +99,11 @@ class _HomePageState extends State<HomePage> with WindowListener {
     setState(() {});
   }
 
-  void showShortcutWindow() {
+  Future<void> showShortcutWindow() async {
     setState(() {
       selectedWindow = "shortcuts";
     });
+    windowManager.setSize(const Size(1200, 500));
     windowManager.show();
   }
 
