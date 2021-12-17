@@ -24,16 +24,16 @@ class AppDelegate: FlutterAppDelegate/*, NSObject, NSApplicationDelegate*/ {
         let channel = FlutterMethodChannel.init(name: "samples.flutter.dev/hoge", binaryMessenger: controller.engine.binaryMessenger)
         channel.setMethodCallHandler({
             (_ call: FlutterMethodCall, _ result: FlutterResult) -> Void in
-            print("hgoehogehogeogeoho")
+//            print("hgoehogehogeogeoho")
             
             let args = call.arguments as! Dictionary<String, Any>
             let name = args["hoge"] as! String
-            print("=======================")
-            print(name)
-            print("-------------------------")
+//            print("=======================")
+//            print(name)
+//            print("-------------------------")
             let url = URL(fileURLWithPath: name)
-            print(url)
-            print("~~~~~~~~~~~~~~~~~~~~~~~")
+//            print(url)
+//            print("~~~~~~~~~~~~~~~~~~~~~~~")
             let res = NSWorkspace.shared.icon(forFile: url.path)
             print(res)
 

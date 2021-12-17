@@ -5,28 +5,9 @@ import 'package:switchsoulmonarch/database/database_provider.dart';
 import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
 
 class SettingDatabaseProvider extends DatabaseProvider {
-  @override
-  String get databaseName => "ssm.db";
 
   @override
   String get tableName => "show_keyboard_window";
-
-  @override
-  int get version => 1;
-
-  @override
-  Map<String, List<String>> get onUpgradeQueries => {
-        // '2' : ['ALTER TABLE xxxxx RENAME COLUMN yyyyyyy TO zzzzz;'],
-      };
-
-  createDatabase(Database db, int version) => db.execute(
-        """
-          CREATE TABLE $tableName(
-            key TEXT DEFAULT "",
-            modifiers TEXT DEFAULT ""
-          )
-        """,
-      );
 
   Future<int> insert(SsmKeyCombo keyCombo) async {
     final SettingDatabaseProvider provider = SettingDatabaseProvider();

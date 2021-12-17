@@ -30,9 +30,9 @@ class AppsStateNotifier extends StateNotifier<AppsState> {
   }
 
   void set(ShortcutApp app) {
-    var apps = state.apps;
-    apps?[app.key] = app;
-    setAll(apps!);
+    var apps = state.apps ?? {};
+    apps[app.key] = app;
+    setAll(apps);
   }
 
   Future<ShortcutApps?> get() async {
@@ -68,7 +68,7 @@ class ShortcutApp {
   Map<String, dynamic> toMap() {
     return {
        'key': key,
-       'icon':base64Encode(icon),
+       'iconBase64':base64Encode(icon),
        'path':path,
     };
   }
@@ -76,7 +76,7 @@ class ShortcutApp {
   static ShortcutApp fromMap(Map<String, dynamic> map) {
     return ShortcutApp(
         key: map["key"],
-        icon: base64Decode(map["icon"]),
+        icon: base64Decode(map["iconBase64"]),
         path: map["path"]);
   }
 

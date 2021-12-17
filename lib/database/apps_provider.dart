@@ -5,29 +5,9 @@ import 'package:switchsoulmonarch/database/database_provider.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
 
 class AppsProvider extends DatabaseProvider {
-  @override
-  String get databaseName => "ssm.db";
 
   @override
   String get tableName => "apps";
-
-  @override
-  int get version => 1;
-
-  @override
-  Map<String, List<String>> get onUpgradeQueries => {
-        // '2' : ['ALTER TABLE xxxxx RENAME COLUMN yyyyyyy TO zzzzz;'],
-      };
-
-  createDatabase(Database db, int version) => db.execute(
-        """
-          CREATE TABLE $tableName(
-            key TEXT DEFAULT "",
-            iconBase64 TEXT DEFAULT "",
-            path TEXT DEFAULT ""
-          )
-        """,
-      );
 
   Future<int> insert(ShortcutApp app) async {
     final AppsProvider provider = AppsProvider();

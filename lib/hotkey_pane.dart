@@ -54,7 +54,7 @@ class _HotKeyPaneState extends State<HotKeyPane> {
         HotKeyHolderKeyCombo? kc;
         if (keyCombo != null) {
           kc = HotKeyHolderKeyCombo(
-              key: keyCombo!.key, modifiers: keyCombo.modifiers);
+              key: keyCombo.key, modifiers: keyCombo.modifiers);
         }
         return HotKeyHolder(
             hotKeyName: "shortcutA",

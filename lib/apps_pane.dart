@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:switchsoulmonarch/keyboard.dart';
+import 'package:switchsoulmonarch/state/apps_state.dart';
 
 class AppsPane extends StatefulWidget {
   const AppsPane({Key? key}) : super(key: key);
@@ -14,7 +17,7 @@ class AppsPane extends StatefulWidget {
 
 class _AppsPaneState extends State<AppsPane> {
   final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-  final Map<String, Image?> _icons = {};
+  final ShortcutApps _icons = {};
 
   // call swift code
   static const platform = MethodChannel('samples.flutter.dev/hoge');
@@ -33,8 +36,11 @@ class _AppsPaneState extends State<AppsPane> {
       // final bbb = base64Decode(aaa);
       // print(bbb);
 
+      context.read(appsStateNotifier.notifier).register(
+          ShortcutApp(key: key, icon: result, path: ""));
       setState(() {
-        _icons[key] = Image.memory(result);
+
+        _icons[key] = ShortcutApp(key: key, icon: result, path: "");
       });
     } on PlatformException catch (e) {
       print(e);
@@ -86,7 +92,13 @@ class _AppsPaneState extends State<AppsPane> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Consumer(
+      builder: (context, watch, child) {
+        final _icons = watch(appsStateNotifier).apps ?? {};
+
+print("==~~~~~~~=======~~~~~~~~=~=");
+print(_icons);
+        return Center(
           child: Padding(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0),
             child: SingleChildScrollView(
@@ -99,5 +111,7 @@ class _AppsPaneState extends State<AppsPane> {
             ),
           ),
         );
+      },
+    );
   }
 }

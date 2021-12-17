@@ -6,8 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:switchsoulmonarch/apps_pane.dart';
 import 'package:switchsoulmonarch/database/show_keyboard_window_provider.dart';
+import 'package:switchsoulmonarch/database/apps_provider.dart';
 import 'package:switchsoulmonarch/hotkey_pane.dart';
 import 'package:switchsoulmonarch/keyboard.dart';
+import 'package:switchsoulmonarch/state/apps_state.dart';
 import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
 import 'package:switchsoulmonarch/system_tray.dart';
 import 'package:window_manager/window_manager.dart';
@@ -25,15 +27,15 @@ void main() async {
     await windowManager.show();
   });
 
-
   runApp(ProviderScope(
-    child: HomePage(keyCombo: await getKeyCombo()),
+    child: HomePage(keyCombo: await getKeyCombo(), apps: await getApps()),
   ));
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, this.keyCombo}) : super(key: key);
+  const HomePage({Key? key, this.keyCombo, this.apps}) : super(key: key);
   final SsmKeyCombo? keyCombo;
+  final ShortcutApps? apps;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -51,9 +53,16 @@ class _HomePageState extends State<HomePage> with WindowListener {
   @override
   void initState() {
     print("!!!!!!!!!!!!!!!!");
-    context
-        .read(windowHotKeyStateNotifier.notifier)
-        .set(widget.keyCombo!.keyCombo!);
+    if (widget.keyCombo != null) {
+      context
+          .read(windowHotKeyStateNotifier.notifier)
+          .set(widget.keyCombo!.keyCombo!);
+    }
+    if (widget.apps != null) {
+      context
+          .read(appsStateNotifier.notifier)
+          .setAll(widget.apps!);
+    }
     print("===================");
 
     // window setting

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:switchsoulmonarch/keycode.dart';
+import 'package:switchsoulmonarch/state/apps_state.dart';
 
 class KeyboardPage extends StatefulWidget {
   KeyboardPage({Key? key, required this.fn, required this.icons}) : super(key: key);
 
   final Function fn;
-  Map<String, Image?> icons = {};
+  ShortcutApps icons = {};
 
   @override
   State<KeyboardPage> createState() => _KeyboardPageState();
@@ -32,7 +33,11 @@ class _KeyboardPageState extends State<KeyboardPage> {
 
   Widget _keyLabel(String keyName) {
     return Stack(
-      children: [Text(
+      children: [
+        widget.icons[keyName] == null
+            ? Text("")
+            : Image.memory(widget.icons[keyName]!.icon),
+        Text(
         keyName,
         style: TextStyle(
           fontWeight: FontWeight.bold,
@@ -41,9 +46,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
           decoration: TextDecoration.none,
         ),
       ),
-        widget.icons[keyName] == null
-            ? Text("")
-            : widget.icons[keyName]!
+
       ],
     );
   }
