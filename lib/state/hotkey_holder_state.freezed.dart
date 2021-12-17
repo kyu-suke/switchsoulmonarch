@@ -17,14 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$HotKeyHolderStateTearOff {
   const _$HotKeyHolderStateTearOff();
 
-  _HotKeyHolderState call(
-      {String? hotKeyName = null,
-      KeyCombo? keyCombo = null,
-      Function? event = null}) {
+  _HotKeyHolderState call({KeyCombo? keyCombo = null}) {
     return _HotKeyHolderState(
-      hotKeyName: hotKeyName,
       keyCombo: keyCombo,
-      event: event,
     );
   }
 }
@@ -34,9 +29,7 @@ const $HotKeyHolderState = _$HotKeyHolderStateTearOff();
 
 /// @nodoc
 mixin _$HotKeyHolderState {
-  String? get hotKeyName => throw _privateConstructorUsedError;
   KeyCombo? get keyCombo => throw _privateConstructorUsedError;
-  Function? get event => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HotKeyHolderStateCopyWith<HotKeyHolderState> get copyWith =>
@@ -48,7 +41,7 @@ abstract class $HotKeyHolderStateCopyWith<$Res> {
   factory $HotKeyHolderStateCopyWith(
           HotKeyHolderState value, $Res Function(HotKeyHolderState) then) =
       _$HotKeyHolderStateCopyWithImpl<$Res>;
-  $Res call({String? hotKeyName, KeyCombo? keyCombo, Function? event});
+  $Res call({KeyCombo? keyCombo});
 }
 
 /// @nodoc
@@ -62,23 +55,13 @@ class _$HotKeyHolderStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? hotKeyName = freezed,
     Object? keyCombo = freezed,
-    Object? event = freezed,
   }) {
     return _then(_value.copyWith(
-      hotKeyName: hotKeyName == freezed
-          ? _value.hotKeyName
-          : hotKeyName // ignore: cast_nullable_to_non_nullable
-              as String?,
       keyCombo: keyCombo == freezed
           ? _value.keyCombo
           : keyCombo // ignore: cast_nullable_to_non_nullable
               as KeyCombo?,
-      event: event == freezed
-          ? _value.event
-          : event // ignore: cast_nullable_to_non_nullable
-              as Function?,
     ));
   }
 }
@@ -90,7 +73,7 @@ abstract class _$HotKeyHolderStateCopyWith<$Res>
           _HotKeyHolderState value, $Res Function(_HotKeyHolderState) then) =
       __$HotKeyHolderStateCopyWithImpl<$Res>;
   @override
-  $Res call({String? hotKeyName, KeyCombo? keyCombo, Function? event});
+  $Res call({KeyCombo? keyCombo});
 }
 
 /// @nodoc
@@ -106,23 +89,13 @@ class __$HotKeyHolderStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? hotKeyName = freezed,
     Object? keyCombo = freezed,
-    Object? event = freezed,
   }) {
     return _then(_HotKeyHolderState(
-      hotKeyName: hotKeyName == freezed
-          ? _value.hotKeyName
-          : hotKeyName // ignore: cast_nullable_to_non_nullable
-              as String?,
       keyCombo: keyCombo == freezed
           ? _value.keyCombo
           : keyCombo // ignore: cast_nullable_to_non_nullable
               as KeyCombo?,
-      event: event == freezed
-          ? _value.event
-          : event // ignore: cast_nullable_to_non_nullable
-              as Function?,
     ));
   }
 }
@@ -130,44 +103,29 @@ class __$HotKeyHolderStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_HotKeyHolderState implements _HotKeyHolderState {
-  _$_HotKeyHolderState(
-      {this.hotKeyName = null, this.keyCombo = null, this.event = null});
+  _$_HotKeyHolderState({this.keyCombo = null});
 
-  @JsonKey(defaultValue: null)
-  @override
-  final String? hotKeyName;
   @JsonKey(defaultValue: null)
   @override
   final KeyCombo? keyCombo;
-  @JsonKey(defaultValue: null)
-  @override
-  final Function? event;
 
   @override
   String toString() {
-    return 'HotKeyHolderState(hotKeyName: $hotKeyName, keyCombo: $keyCombo, event: $event)';
+    return 'HotKeyHolderState(keyCombo: $keyCombo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _HotKeyHolderState &&
-            (identical(other.hotKeyName, hotKeyName) ||
-                const DeepCollectionEquality()
-                    .equals(other.hotKeyName, hotKeyName)) &&
             (identical(other.keyCombo, keyCombo) ||
                 const DeepCollectionEquality()
-                    .equals(other.keyCombo, keyCombo)) &&
-            (identical(other.event, event) ||
-                const DeepCollectionEquality().equals(other.event, event)));
+                    .equals(other.keyCombo, keyCombo)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(hotKeyName) ^
-      const DeepCollectionEquality().hash(keyCombo) ^
-      const DeepCollectionEquality().hash(event);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(keyCombo);
 
   @JsonKey(ignore: true)
   @override
@@ -176,17 +134,10 @@ class _$_HotKeyHolderState implements _HotKeyHolderState {
 }
 
 abstract class _HotKeyHolderState implements HotKeyHolderState {
-  factory _HotKeyHolderState(
-      {String? hotKeyName,
-      KeyCombo? keyCombo,
-      Function? event}) = _$_HotKeyHolderState;
+  factory _HotKeyHolderState({KeyCombo? keyCombo}) = _$_HotKeyHolderState;
 
   @override
-  String? get hotKeyName => throw _privateConstructorUsedError;
-  @override
   KeyCombo? get keyCombo => throw _privateConstructorUsedError;
-  @override
-  Function? get event => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$HotKeyHolderStateCopyWith<_HotKeyHolderState> get copyWith =>

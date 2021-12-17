@@ -3,12 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:switchsoulmonarch/keycode.dart';
 
 class KeyboardPage extends StatefulWidget {
-  const KeyboardPage({Key? key, required this.fn}) : super(key: key);
+  KeyboardPage({Key? key, required this.fn, required this.icons}) : super(key: key);
 
   final Function fn;
+  Map<String, Image?> icons = {};
 
   @override
-  State<KeyboardPage> createState() => _KeyboardPageState(fn: fn);
+  State<KeyboardPage> createState() => _KeyboardPageState();
 }
 
 class IncrementIntent extends Intent {
@@ -24,26 +25,33 @@ class Hoge extends Intent {
 }
 
 class _KeyboardPageState extends State<KeyboardPage> {
-  _KeyboardPageState({required this.fn});
+  // _KeyboardPageState({required this.fn, required this.icons});
 
-  Function fn;
+  // Function fn;
+  // Map<String, Image?> icons = {};
 
   Widget _keyLabel(String keyName) {
-    return Text(
-      keyName,
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-        color: Theme.of(context).primaryColor,
-        decoration: TextDecoration.none,
+    return Stack(
+      children: [Text(
+        keyName,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          color: Theme.of(context).primaryColor,
+          decoration: TextDecoration.none,
+        ),
       ),
+        widget.icons[keyName] == null
+            ? Text("")
+            : widget.icons[keyName]!
+      ],
     );
   }
 
-  Widget _gestureDetector(String keyName, Function fn, double width,
+  Widget _gestureDetector(String keyName, Function fn, String key, double width,
       double height, EdgeInsetsGeometry margin, BoxDecoration decoration) {
     return GestureDetector(
-        onTap: () => {fn()},
+        onTap: () => {fn(key)},
         child: Container(
           width: width,
           height: height,
@@ -58,6 +66,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
     return _gestureDetector(
         keyName,
         fn,
+        keyName,
         70,
         30,
         const EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
@@ -91,7 +100,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
         color: Colors.white,
       );
     }
-    return _gestureDetector(keyName, fn, width, height, margin, decoration);
+    return _gestureDetector(keyName, fn, keyName, width, height, margin, decoration);
   }
 
   Widget buildKey(String keyName, Function fn,
@@ -99,6 +108,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
     return _gestureDetector(
         keyName,
         fn,
+        keyName,
         width,
         height,
         const EdgeInsets.all(5),
@@ -141,7 +151,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
               children: [
                 Row(
                   children: [
-                    buildKey("ESC", fn, width: 100),
+                    buildKey("ESC", widget.fn, width: 100),
                     ...[
                       "F1",
                       "F2",
@@ -156,12 +166,12 @@ class _KeyboardPageState extends State<KeyboardPage> {
                       "F11",
                       "F12",
                       "鍵"
-                    ].map((e) => buildKey(e, fn)),
+                    ].map((e) => buildKey(e, widget.fn)),
                   ],
                 ),
                 Row(
                   children: [
-                    buildKey("1", fn, width: 85),
+                    buildKey("1", widget.fn, width: 85),
                     ...[
                       "2",
                       "3",
@@ -175,8 +185,8 @@ class _KeyboardPageState extends State<KeyboardPage> {
                       "-",
                       "^",
                       "\\"
-                    ].map((e) => buildKey(e, fn)),
-                    buildKey("⌫", fn, width: 85),
+                    ].map((e) => buildKey(e, widget.fn)),
+                    buildKey("⌫", widget.fn, width: 85),
                   ],
                 ),
                 Container(
@@ -198,8 +208,8 @@ class _KeyboardPageState extends State<KeyboardPage> {
                         "p",
                         "@",
                         "["
-                      ].map((e) => buildKey(e, fn)),
-                      buildEnterKey("↩", fn, "top"),
+                      ].map((e) => buildKey(e, widget.fn)),
+                      buildEnterKey("↩", widget.fn, "top"),
                     ],
                   ),
                 ),
@@ -208,7 +218,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      buildKey("⌃", fn, width: 90),
+                      buildKey("⌃", widget.fn, width: 90),
                       ...[
                         SsmKeys.a.label!,
                         "s",
@@ -222,37 +232,37 @@ class _KeyboardPageState extends State<KeyboardPage> {
                         ";",
                         ":",
                         "]"
-                      ].map((e) => buildKey(e, fn)),
-                      buildEnterKey("↩", fn, "bottom"),
+                      ].map((e) => buildKey(e, widget.fn)),
+                      buildEnterKey("↩", widget.fn, "bottom"),
                     ],
                   ),
                 ),
                 Row(
                   children: [
-                    buildKey("⇧", fn, width: 125),
+                    buildKey("⇧", widget.fn, width: 125),
                     ...["z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "_"]
-                        .map((e) => buildKey(e, fn)),
-                    buildKey("⇧", fn, width: 125),
+                        .map((e) => buildKey(e, widget.fn)),
+                    buildKey("⇧", widget.fn, width: 125),
                   ],
                 ),
                 Row(
                   children: [
-                    buildKey("⬆", fn),
-                    buildKey("⌥", fn),
-                    buildKey("⌘", fn, width: 85),
-                    buildKey("英数", fn, width: 85),
-                    buildKey("　", fn, width: 280),
-                    buildKey("かな", fn, width: 85),
-                    buildKey("⌘", fn, width: 85),
-                    buildKey("fn", fn),
-                    buildKey("←", fn),
+                    buildKey("⬆", widget.fn),
+                    buildKey("⌥", widget.fn),
+                    buildKey("⌘", widget.fn, width: 85),
+                    buildKey("英数", widget.fn, width: 85),
+                    buildKey("　", widget.fn, width: 280),
+                    buildKey("かな", widget.fn, width: 85),
+                    buildKey("⌘", widget.fn, width: 85),
+                    buildKey("fn", widget.fn),
+                    buildKey("←", widget.fn),
                     Column(
                       children: [
-                        buildArrowKey("↑", fn),
-                        buildArrowKey("↓", fn),
+                        buildArrowKey("↑", widget.fn),
+                        buildArrowKey("↓", widget.fn),
                       ],
                     ),
-                    buildKey("→", fn),
+                    buildKey("→", widget.fn),
                   ],
                 ),
               ],

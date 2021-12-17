@@ -31,11 +31,6 @@ class HotKeyHolderStateNotifier extends StateNotifier<HotKeyHolderState> {
     return await _get();
   }
 
-  Future<void> init() async {
-    final keyCombo = await _get();
-    state = state.copyWith(keyCombo: keyCombo?.keyCombo);
-  }
-
   Future<void> register(
       HotKeyHolderKeyCombo keyCombo) async {
     state = state.copyWith(

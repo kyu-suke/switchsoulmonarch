@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
   }
 
   Widget _buildKeyboard(BuildContext context) {
-    return KeyboardPage(fn: () {});
+    return KeyboardPage(fn: () {}, icons: {});
   }
 
   @override
