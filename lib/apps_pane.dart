@@ -37,7 +37,7 @@ class _AppsPaneState extends State<AppsPane> {
       // print(bbb);
 
       context.read(appsStateNotifier.notifier).register(
-          ShortcutApp(key: key, icon: result, path: ""));
+          ShortcutApp(key: key, icon: result["image"], path: result["path"]));
       setState(() {
 
         _icons[key] = ShortcutApp(key: key, icon: result, path: "");
@@ -73,6 +73,11 @@ class _AppsPaneState extends State<AppsPane> {
     }
   }
 
+  void _deleteApp(String key) async {
+
+      context.read(appsStateNotifier.notifier).delete(key);
+  }
+
   void _logException(String message) {
     _scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
     _scaffoldMessengerKey.currentState?.showSnackBar(
@@ -105,7 +110,7 @@ print(_icons);
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  KeyboardPage(fn: _selectFolder, icons: _icons),
+                  KeyboardPage(fn: _selectFolder, icons: _icons, deleteApp: _deleteApp),
                 ],
               ),
             ),

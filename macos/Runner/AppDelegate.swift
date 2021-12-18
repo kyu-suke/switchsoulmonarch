@@ -32,17 +32,20 @@ class AppDelegate: FlutterAppDelegate/*, NSObject, NSApplicationDelegate*/ {
 //            print(name)
 //            print("-------------------------")
             let url = URL(fileURLWithPath: name)
-//            print(url)
+            print(url)
 //            print("~~~~~~~~~~~~~~~~~~~~~~~")
             let res = NSWorkspace.shared.icon(forFile: url.path)
-            print(res)
+//            print(res)
 
 
             
-            var image = res
+            let image = res
             let cgimage = image.toCGImage
 
-            result(FlutterStandardTypedData(bytes: cgimage.png!))
+            result([
+                "image": FlutterStandardTypedData(bytes: cgimage.png!),
+                "path": url.absoluteString
+                   ])
             
             
             

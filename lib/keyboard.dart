@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:switchsoulmonarch/keycode.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
+import 'dart:math' as math;
 
 class KeyboardPage extends StatefulWidget {
-  KeyboardPage({Key? key, required this.fn, required this.icons}) : super(key: key);
+  KeyboardPage({Key? key, required this.fn, required this.icons, this.deleteApp}) : super(key: key);
 
   final Function fn;
   ShortcutApps icons = {};
+  final Function? deleteApp;
 
   @override
   State<KeyboardPage> createState() => _KeyboardPageState();
@@ -37,6 +39,19 @@ class _KeyboardPageState extends State<KeyboardPage> {
         widget.icons[keyName] == null
             ? Text("")
             : Image.memory(widget.icons[keyName]!.icon),
+        widget.icons[keyName] == null
+            ? Text("")
+        : Transform.rotate(
+          angle: 45 * math.pi / 180,
+          child: IconButton(
+            splashRadius: 10,
+            iconSize: 30,
+            onPressed: widget.deleteApp != null ? () =>{widget.deleteApp!(keyName)} : ()=>{},
+            // onPressed: () => {print("delete buttooooooon")},
+            icon: const Icon(Icons.add_circle_outline_outlined,
+                color: Colors.red),
+          ),
+        ),
         Text(
         keyName,
         style: TextStyle(

@@ -45,6 +45,12 @@ class AppsStateNotifier extends StateNotifier<AppsState> {
     await _insert(app);
   }
 
+  Future<void> delete(String key) async {
+    await _delete(key);
+    var apps = state.apps ?? {};
+    apps.removeWhere((k, v) => k == key);
+    setAll(apps);
+  }
   Future<void> _delete(String key) async {
     await appsProvider.delete(key);
   }
