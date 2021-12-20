@@ -25,27 +25,39 @@ class AppDelegate: FlutterAppDelegate/*, NSObject, NSApplicationDelegate*/ {
         channel.setMethodCallHandler({
             (_ call: FlutterMethodCall, _ result: FlutterResult) -> Void in
 //            print("hgoehogehogeogeoho")
-            
-            let args = call.arguments as! Dictionary<String, Any>
-            let name = args["hoge"] as! String
-//            print("=======================")
-//            print(name)
-//            print("-------------------------")
-            let url = URL(fileURLWithPath: name)
-            print(url)
-//            print("~~~~~~~~~~~~~~~~~~~~~~~")
-            let res = NSWorkspace.shared.icon(forFile: url.path)
-//            print(res)
+            switch (call.method) {
+            case "getBatteryLevel":
+                let args = call.arguments as! Dictionary<String, Any>
+                let name = args["hoge"] as! String
+    //            print("=======================")
+    //            print(name)
+    //            print("-------------------------")
+                let url = URL(fileURLWithPath: name)
+                print(url)
+    //            print("~~~~~~~~~~~~~~~~~~~~~~~")
+                let res = NSWorkspace.shared.icon(forFile: url.path)
+    //            print(res)
 
 
-            
-            let image = res
-            let cgimage = image.toCGImage
+                
+                let image = res
+                let cgimage = image.toCGImage
 
-            result([
-                "image": FlutterStandardTypedData(bytes: cgimage.png!),
-                "path": url.absoluteString
-                   ])
+                result([
+                    "image": FlutterStandardTypedData(bytes: cgimage.png!),
+                    "path": url.absoluteString
+                       ])
+
+                break;
+            case "launch":
+                let args = call.arguments as! Dictionary<String, Any>
+                let name = args["path"] as! String
+                NSWorkspace.shared.launchApplication(name)
+                break;
+
+            default:
+                break;
+            }
             
             
             

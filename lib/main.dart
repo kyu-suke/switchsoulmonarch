@@ -12,20 +12,21 @@ import 'package:switchsoulmonarch/keyboard.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
 import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
 import 'package:switchsoulmonarch/system_tray.dart';
+import 'package:switchsoulmonarch/shortcut_window.dart';
 import 'package:window_manager/window_manager.dart';
 
 final windowManager = WindowManager.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await windowManager.ensureInitialized();
+  await windowManager.ensureInitialized();
 
-  // // Use it only after calling `hiddenWindowAtLaunch`
-  // windowManager.waitUntilReadyToShow().then((_) async {
-  //   // await windowManager.setAsFrameless();
-  //   await windowManager.setSize(Size(800, 600));
-  //   await windowManager.show();
-  // });
+  // Use it only after calling `hiddenWindowAtLaunch`
+  windowManager.waitUntilReadyToShow().then((_) async {
+    // await windowManager.setAsFrameless();
+    await windowManager.setSize(Size(800, 600));
+    await windowManager.show();
+  });
 
   runApp(ProviderScope(
     child: HomePage(keyCombo: await getKeyCombo(), apps: await getApps()),
@@ -65,13 +66,13 @@ class _HomePageState extends State<HomePage> with WindowListener {
     }
     print("===================");
 
-    // // window setting
-    // windowManager.addListener(this);
-    // // windowManager.setFullScreen(_isFullScreen);
-    // // windowManager.setResizable(_isResizable);
-    // // windowManager.setMinimizable(_isMinimizable);
-    // // windowManager.setClosable(_isClosable);
-    // windowManager.setSize(const Size(1300, 500));
+    // window setting
+    windowManager.addListener(this);
+    // windowManager.setFullScreen(_isFullScreen);
+    // windowManager.setResizable(_isResizable);
+    // windowManager.setMinimizable(_isMinimizable);
+    // windowManager.setClosable(_isClosable);
+    windowManager.setSize(const Size(1300, 500));
 
     // system tray setting
     final SsmSystemTray systemTray = SsmSystemTray();
@@ -190,7 +191,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
   }
 
   Widget _buildKeyboard(BuildContext context) {
-    return KeyboardPage(fn: () {}, icons: {});
+    return ShortcutWindow();
   }
 
   @override
