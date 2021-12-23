@@ -18,14 +18,14 @@ class _AppsPaneState extends State<AppsPane> {
 
   static const platform = MethodChannel('samples.flutter.dev/hoge');
 
-  Future<void> _getHoge(String hoge, String key) async {
+  Future<void> _getHoge(String hoge, String key, WidgetRef ref) async {
     try {
       final result =
           await platform.invokeMethod('getBatteryLevel', <String, dynamic>{
         "hoge": hoge,
       });
 
-      context.read(appsStateNotifier.notifier).register(
+      ref.read(appsStateNotifier.notifier).register(
           ShortcutApp(key: key, icon: result["image"], path: result["path"]));
       setState(() {
         _icons[key] = ShortcutApp(key: key, icon: result, path: "");
@@ -40,7 +40,7 @@ class _AppsPaneState extends State<AppsPane> {
     super.initState();
   }
 
-  void _selectFolder(String key) async {
+  void _selectFolder(String key, WidgetRef ref) async {
     _resetState();
     try {
       String? path = await FilePicker.platform.getDirectoryPath(
@@ -48,7 +48,7 @@ class _AppsPaneState extends State<AppsPane> {
           allowedExtensions: ["app"],
           type: FileType.custom);
       setState(() {
-        _getHoge(path!, key);
+        _getHoge(path!, key, ref);
       });
     } on PlatformException catch (e) {
       _logException('Unsupported operation' + e.toString());
@@ -59,8 +59,8 @@ class _AppsPaneState extends State<AppsPane> {
     }
   }
 
-  void _deleteApp(String key) async {
-    context.read(appsStateNotifier.notifier).delete(key);
+  void _deleteApp(String key, WidgetRef ref) async {
+    ref.read(appsStateNotifier.notifier).delete(key);
   }
 
   void _logException(String message) {
@@ -82,8 +82,8 @@ class _AppsPaneState extends State<AppsPane> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
-        final _icons = watch(appsStateNotifier).apps ?? {};
+      builder: (context, ref, child) {
+        final _icons = ref.watch(appsStateNotifier).apps ?? {};
         return Center(
           child: Padding(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0),

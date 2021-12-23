@@ -21,8 +21,8 @@ class _HotKeyPaneState extends State<HotKeyPane> {
     super.initState();
   }
 
-  void insertKeyCombo(HotKeyHolderKeyCombo keyCombo) {
-    context.read(windowHotKeyStateNotifier.notifier).register(
+  void insertKeyCombo(HotKeyHolderKeyCombo keyCombo, WidgetRef ref) {
+    ref.read(windowHotKeyStateNotifier.notifier).register(
         HotKeyHolderKeyCombo(key: keyCombo.key, modifiers: keyCombo.modifiers));
   }
 
@@ -33,8 +33,8 @@ class _HotKeyPaneState extends State<HotKeyPane> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
-        final keyCombo = watch(windowHotKeyStateNotifier).keyCombo;
+      builder: (context, ref, child) {
+        final keyCombo = ref.watch(windowHotKeyStateNotifier).keyCombo;
         HotKeyHolderKeyCombo? kc;
         if (keyCombo != null) {
           kc = HotKeyHolderKeyCombo(
@@ -43,7 +43,7 @@ class _HotKeyPaneState extends State<HotKeyPane> {
         return HotKeyHolder(
             hotKeyName: "shortcutA",
             keyCombo: kc,
-            onInput: insertKeyCombo,
+            onInput: (HotKeyHolderKeyCombo keyCombo) {insertKeyCombo(keyCombo, ref);},
             onDelete: deleteKeyCombo,
             event: widget.showFunc);
       },

@@ -59,8 +59,8 @@ print('Pressed ${event.logicalKey.debugName}');
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
-        final _icons = watch(appsStateNotifier).apps ?? {};
+      builder: (context, ref, child) {
+        final _icons = ref.watch(appsStateNotifier.notifier).apps ?? {};
 
         _icons.forEach((key, value) {
           var path = value.path.split("/").toList();
