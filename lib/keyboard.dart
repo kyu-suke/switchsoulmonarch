@@ -1,38 +1,23 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:switchsoulmonarch/keycode.dart';
-import 'package:switchsoulmonarch/state/apps_state.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
+import 'package:switchsoulmonarch/keycode.dart';
+import 'package:switchsoulmonarch/state/apps_state.dart';
+
 class KeyboardPage extends StatefulWidget {
-  KeyboardPage({Key? key, required this.fn, required this.icons, this.deleteApp}) : super(key: key);
+  const KeyboardPage(
+      {Key? key, required this.fn, required this.icons, this.deleteApp})
+      : super(key: key);
 
   final Function fn;
-  ShortcutApps icons = {};
+  final ShortcutApps icons;
   final Function? deleteApp;
 
   @override
   State<KeyboardPage> createState() => _KeyboardPageState();
 }
 
-class IncrementIntent extends Intent {
-  const IncrementIntent();
-}
-
-class DecrementIntent extends Intent {
-  const DecrementIntent();
-}
-
-class Hoge extends Intent {
-  const Hoge();
-}
-
 class _KeyboardPageState extends State<KeyboardPage> {
-  // _KeyboardPageState({required this.fn, required this.icons});
-
-  // Function fn;
-  // Map<String, Image?> icons = {};
-
   Widget _keyLabel(String keyName) {
     return Stack(
       children: [
@@ -41,27 +26,27 @@ class _KeyboardPageState extends State<KeyboardPage> {
             : Image.memory(widget.icons[keyName]!.icon),
         widget.icons[keyName] == null
             ? Text("")
-        : Transform.rotate(
-          angle: 45 * math.pi / 180,
-          child: IconButton(
-            splashRadius: 10,
-            iconSize: 30,
-            onPressed: widget.deleteApp != null ? () =>{widget.deleteApp!(keyName)} : ()=>{},
-            // onPressed: () => {print("delete buttooooooon")},
-            icon: const Icon(Icons.add_circle_outline_outlined,
-                color: Colors.red),
+            : Transform.rotate(
+                angle: 45 * math.pi / 180,
+                child: IconButton(
+                  splashRadius: 10,
+                  iconSize: 30,
+                  onPressed: widget.deleteApp != null
+                      ? () => {widget.deleteApp!(keyName)}
+                      : () => {},
+                  icon: const Icon(Icons.add_circle_outline_outlined,
+                      color: Colors.red),
+                ),
+              ),
+        Text(
+          keyName,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Theme.of(context).primaryColor,
+            decoration: TextDecoration.none,
           ),
         ),
-        Text(
-        keyName,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-          color: Theme.of(context).primaryColor,
-          decoration: TextDecoration.none,
-        ),
-      ),
-
       ],
     );
   }
@@ -118,7 +103,8 @@ class _KeyboardPageState extends State<KeyboardPage> {
         color: Colors.white,
       );
     }
-    return _gestureDetector(keyName, fn, keyName, width, height, margin, decoration);
+    return _gestureDetector(
+        keyName, fn, keyName, width, height, margin, decoration);
   }
 
   Widget buildKey(String keyName, Function fn,
@@ -138,155 +124,114 @@ class _KeyboardPageState extends State<KeyboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Shortcuts(
-      shortcuts: <ShortcutActivator, Intent>{
-        LogicalKeySet(LogicalKeyboardKey.arrowUp): const IncrementIntent(),
-        LogicalKeySet(LogicalKeyboardKey.arrowDown): const DecrementIntent(),
-        LogicalKeySet(LogicalKeyboardKey.keyA): const Hoge(),
-      },
-      child: Actions(
-        actions: <Type, Action<Intent>>{
-          IncrementIntent: CallbackAction<IncrementIntent>(
-            onInvoke: (IncrementIntent intent) => setState(() {
-              print("AAA");
-            }),
+    return Container(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              buildKey("ESC", widget.fn, width: 100),
+              ...[
+                "F1",
+                "F2",
+                "F3",
+                "F4",
+                "F5",
+                "F6",
+                "F7",
+                "F8",
+                "F9",
+                "F10",
+                "F11",
+                "F12",
+                "鍵"
+              ].map((e) => buildKey(e, widget.fn)),
+            ],
           ),
-          DecrementIntent: CallbackAction<DecrementIntent>(
-            onInvoke: (DecrementIntent intent) => setState(() {
-              print("BBB");
-            }),
+          Row(
+            children: [
+              buildKey("1", widget.fn, width: 85),
+              ...["2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "^", "\\"]
+                  .map((e) => buildKey(e, widget.fn)),
+              buildKey("⌫", widget.fn, width: 85),
+            ],
           ),
-          Hoge: CallbackAction<Hoge>(
-            onInvoke: (Hoge intent) => setState(() {
-              print("this is A");
-            }),
-          ),
-        },
-        child: Focus(
-          autofocus: true,
-          child: Container(
-            child: Column(
+          Container(
+            height: 75,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    buildKey("ESC", widget.fn, width: 100),
-                    ...[
-                      "F1",
-                      "F2",
-                      "F3",
-                      "F4",
-                      "F5",
-                      "F6",
-                      "F7",
-                      "F8",
-                      "F9",
-                      "F10",
-                      "F11",
-                      "F12",
-                      "鍵"
-                    ].map((e) => buildKey(e, widget.fn)),
-                  ],
-                ),
-                Row(
-                  children: [
-                    buildKey("1", widget.fn, width: 85),
-                    ...[
-                      "2",
-                      "3",
-                      "4",
-                      "5",
-                      "6",
-                      "7",
-                      "8",
-                      "9",
-                      "0",
-                      "-",
-                      "^",
-                      "\\"
-                    ].map((e) => buildKey(e, widget.fn)),
-                    buildKey("⌫", widget.fn, width: 85),
-                  ],
-                ),
-                Container(
-                  height: 75,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ...[
-                        "→",
-                        "q",
-                        "w",
-                        "e",
-                        "r",
-                        "t",
-                        "y",
-                        "u",
-                        "i",
-                        "o",
-                        "p",
-                        "@",
-                        "["
-                      ].map((e) => buildKey(e, widget.fn)),
-                      buildEnterKey("↩", widget.fn, "top"),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 75,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      buildKey("⌃", widget.fn, width: 90),
-                      ...[
-                        SsmKeys.a.label!,
-                        "s",
-                        "d",
-                        "f",
-                        "g",
-                        "h",
-                        "j",
-                        "k",
-                        "l",
-                        ";",
-                        ":",
-                        "]"
-                      ].map((e) => buildKey(e, widget.fn)),
-                      buildEnterKey("↩", widget.fn, "bottom"),
-                    ],
-                  ),
-                ),
-                Row(
-                  children: [
-                    buildKey("⇧", widget.fn, width: 125),
-                    ...["z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "_"]
-                        .map((e) => buildKey(e, widget.fn)),
-                    buildKey("⇧", widget.fn, width: 125),
-                  ],
-                ),
-                Row(
-                  children: [
-                    buildKey("⬆", widget.fn),
-                    buildKey("⌥", widget.fn),
-                    buildKey("⌘", widget.fn, width: 85),
-                    buildKey("英数", widget.fn, width: 85),
-                    buildKey("　", widget.fn, width: 280),
-                    buildKey("かな", widget.fn, width: 85),
-                    buildKey("⌘", widget.fn, width: 85),
-                    buildKey("fn", widget.fn),
-                    buildKey("←", widget.fn),
-                    Column(
-                      children: [
-                        buildArrowKey("↑", widget.fn),
-                        buildArrowKey("↓", widget.fn),
-                      ],
-                    ),
-                    buildKey("→", widget.fn),
-                  ],
-                ),
+                ...[
+                  "→",
+                  "q",
+                  "w",
+                  "e",
+                  "r",
+                  "t",
+                  "y",
+                  "u",
+                  "i",
+                  "o",
+                  "p",
+                  "@",
+                  "["
+                ].map((e) => buildKey(e, widget.fn)),
+                buildEnterKey("↩", widget.fn, "top"),
               ],
             ),
           ),
-        ),
+          Container(
+            height: 75,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                buildKey("⌃", widget.fn, width: 90),
+                ...[
+                  SsmKeys.a.label!,
+                  "s",
+                  "d",
+                  "f",
+                  "g",
+                  "h",
+                  "j",
+                  "k",
+                  "l",
+                  ";",
+                  ":",
+                  "]"
+                ].map((e) => buildKey(e, widget.fn)),
+                buildEnterKey("↩", widget.fn, "bottom"),
+              ],
+            ),
+          ),
+          Row(
+            children: [
+              buildKey("⇧", widget.fn, width: 125),
+              ...["z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "_"]
+                  .map((e) => buildKey(e, widget.fn)),
+              buildKey("⇧", widget.fn, width: 125),
+            ],
+          ),
+          Row(
+            children: [
+              buildKey("⬆", widget.fn),
+              buildKey("⌥", widget.fn),
+              buildKey("⌘", widget.fn, width: 85),
+              buildKey("英数", widget.fn, width: 85),
+              buildKey("　", widget.fn, width: 280),
+              buildKey("かな", widget.fn, width: 85),
+              buildKey("⌘", widget.fn, width: 85),
+              buildKey("fn", widget.fn),
+              buildKey("←", widget.fn),
+              Column(
+                children: [
+                  buildArrowKey("↑", widget.fn),
+                  buildArrowKey("↓", widget.fn),
+                ],
+              ),
+              buildKey("→", widget.fn),
+            ],
+          ),
+        ],
       ),
     );
   }

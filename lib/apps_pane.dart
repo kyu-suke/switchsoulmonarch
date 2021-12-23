@@ -1,10 +1,7 @@
-import 'dart:convert';
-
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:switchsoulmonarch/keyboard.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
 
@@ -19,27 +16,18 @@ class _AppsPaneState extends State<AppsPane> {
   final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   final ShortcutApps _icons = {};
 
-  // call swift code
   static const platform = MethodChannel('samples.flutter.dev/hoge');
 
   Future<void> _getHoge(String hoge, String key) async {
-
     try {
       final result =
           await platform.invokeMethod('getBatteryLevel', <String, dynamic>{
         "hoge": hoge,
       });
 
-      // print(result);
-      //     final aaa = base64Encode(result);
-      //     print(aaa);
-      // final bbb = base64Decode(aaa);
-      // print(bbb);
-
       context.read(appsStateNotifier.notifier).register(
           ShortcutApp(key: key, icon: result["image"], path: result["path"]));
       setState(() {
-
         _icons[key] = ShortcutApp(key: key, icon: result, path: "");
       });
     } on PlatformException catch (e) {
@@ -60,8 +48,6 @@ class _AppsPaneState extends State<AppsPane> {
           allowedExtensions: ["app"],
           type: FileType.custom);
       setState(() {
-        // _directoryPath = path;
-        // _userAborted = path == null;
         _getHoge(path!, key);
       });
     } on PlatformException catch (e) {
@@ -74,8 +60,7 @@ class _AppsPaneState extends State<AppsPane> {
   }
 
   void _deleteApp(String key) async {
-
-      context.read(appsStateNotifier.notifier).delete(key);
+    context.read(appsStateNotifier.notifier).delete(key);
   }
 
   void _logException(String message) {
@@ -91,8 +76,7 @@ class _AppsPaneState extends State<AppsPane> {
     if (!mounted) {
       return;
     }
-    setState(() {
-    });
+    setState(() {});
   }
 
   @override
@@ -100,9 +84,6 @@ class _AppsPaneState extends State<AppsPane> {
     return Consumer(
       builder: (context, watch, child) {
         final _icons = watch(appsStateNotifier).apps ?? {};
-
-print("==~~~~~~~=======~~~~~~~~=~=");
-print(_icons);
         return Center(
           child: Padding(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -110,7 +91,8 @@ print(_icons);
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  KeyboardPage(fn: _selectFolder, icons: _icons, deleteApp: _deleteApp),
+                  KeyboardPage(
+                      fn: _selectFolder, icons: _icons, deleteApp: _deleteApp),
                 ],
               ),
             ),

@@ -2,17 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:switchsoulmonarch/apps_pane.dart';
-import 'package:switchsoulmonarch/database/show_keyboard_window_provider.dart';
 import 'package:switchsoulmonarch/database/apps_provider.dart';
+import 'package:switchsoulmonarch/database/show_keyboard_window_provider.dart';
 import 'package:switchsoulmonarch/hotkey_pane.dart';
-import 'package:switchsoulmonarch/keyboard.dart';
+import 'package:switchsoulmonarch/shortcut_window.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
 import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
 import 'package:switchsoulmonarch/system_tray.dart';
-import 'package:switchsoulmonarch/shortcut_window.dart';
 import 'package:window_manager/window_manager.dart';
 
 final windowManager = WindowManager.instance;
@@ -60,11 +58,8 @@ class _HomePageState extends State<HomePage> with WindowListener {
           .set(widget.keyCombo!.keyCombo!);
     }
     if (widget.apps != null) {
-      context
-          .read(appsStateNotifier.notifier)
-          .setAll(widget.apps!);
+      context.read(appsStateNotifier.notifier).setAll(widget.apps!);
     }
-    print("===================");
 
     // window setting
     windowManager.addListener(this);
@@ -79,7 +74,6 @@ class _HomePageState extends State<HomePage> with WindowListener {
     systemTray.getSystemTray(() {
       setState(() {
         selectedWindow = "preference";
-        print("hoge");
       });
       windowManager.setSize(const Size(1300, 500));
       windowManager.show();
@@ -91,22 +85,6 @@ class _HomePageState extends State<HomePage> with WindowListener {
   void dispose() {
     windowManager.removeListener(this);
     super.dispose();
-  }
-
-  // call swift code
-  static const platform = MethodChannel('samples.flutter.dev/battery');
-
-  Future<void> _getBatteryLevel() async {
-    // Get battery level.
-    String batteryLevel;
-    try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
-    } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
-    }
-
-    setState(() {});
   }
 
   Future<void> showShortcutWindow() async {
@@ -201,7 +179,6 @@ class _HomePageState extends State<HomePage> with WindowListener {
       home: Scaffold(
         body: Container(
             child: selectedWindow == "preference"
-                // child: selectedWindow != "preference"
                 ? _buildBody(context)
                 : _buildKeyboard(context)),
       ),
