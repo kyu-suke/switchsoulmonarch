@@ -5,8 +5,8 @@ enum SsmKeys {
 
 extension GetLabel on SsmKeys {
   static final labels = {
-    SsmKeys.a: 'A',
-    SsmKeys.b: 'B',
+    SsmKeys.a: 'a',
+    SsmKeys.b: 'b',
   };
 
   String? get label => labels[this];

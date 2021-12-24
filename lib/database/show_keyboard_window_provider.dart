@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:sqflite/sqflite.dart';
 import 'package:switchsoulmonarch/database/database_provider.dart';
 import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
 
 class SettingDatabaseProvider extends DatabaseProvider {
-
   @override
   String get tableName => "show_keyboard_window";
 

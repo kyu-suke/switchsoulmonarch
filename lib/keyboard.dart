@@ -129,7 +129,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
         children: [
           Row(
             children: [
-              buildKey("ESC", widget.fn, width: 100),
+              buildKey("Esc", widget.fn, width: 100),
               ...[
                 "F1",
                 "F2",

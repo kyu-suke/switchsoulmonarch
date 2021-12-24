@@ -282,7 +282,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: cad129ec4935af6fe804c4d010ef6ed7e34bbc30
+      resolved-ref: "8e37d743951d86911c77d01227f78f22c229e8e4"
       url: "https://github.com/kyu-suke/hotkey_holder.git"
     source: git
     version: "0.0.1"
@@ -340,7 +340,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "6dc9995acf5cc3e2bd56996a7a31dee3d718f0c4"
+      resolved-ref: a0b48065720950ed324011e502ef247224c451d6
       url: "https://github.com/kyu-suke/magnetica.git"
     source: git
     version: "0.0.1"

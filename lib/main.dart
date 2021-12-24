@@ -105,16 +105,30 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
 
   Widget _buildUpdatePane() {
     return Center(
-      child: OutlinedButton(
-        child: Text("Check for updates"),
-        style: OutlinedButton.styleFrom(
-            primary: Colors.black,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(0),
-              ),
-            )),
-        onPressed: () => setState(() => {}),
+      child: Column(
+        children: [OutlinedButton(
+          child: Text("Check for updates"),
+          style: OutlinedButton.styleFrom(
+              primary: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(0),
+                ),
+              )),
+          onPressed: () => setState(() => {}),
+        ),
+          OutlinedButton(
+            child: Text("初期化。ホットキーとアプリ設定全部消します"),
+            style: OutlinedButton.styleFrom(
+                primary: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(0),
+                  ),
+                )),
+            onPressed: () => setState(() => {}),
+          ),
+    ],
       ),
     );
   }
@@ -160,7 +174,7 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
               children: [
                 _leftSideButton("Hotkey", "hotkey"),
                 _leftSideButton("Apps", "apps"),
-                _leftSideButton("Update", "update"),
+                _leftSideButton("Preference", "update"),
               ],
             ))),
         Expanded(flex: 9, child: _buildPane()),
@@ -198,8 +212,6 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
     }
   }
 }
-
-
 
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';

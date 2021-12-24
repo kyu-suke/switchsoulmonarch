@@ -23,7 +23,7 @@ class _ShortcutWindowState extends State<ShortcutWindow> {
   final Map<ShortcutActivator, Intent> _shortcuts = {
     LogicalKeySet(LogicalKeyboardKey.arrowUp): const LaunchAppIntent("a"),
     LogicalKeySet(LogicalKeyboardKey.arrowDown): const LaunchAppIntent("b"),
-    LogicalKeySet(LogicalKeyboardKey.keyA): const LaunchAppIntent("c"),
+    // LogicalKeySet(LogicalKeyboardKey.keyA): const LaunchAppIntent("c"),
     LogicalKeySet(LogicalKeyboardKey.lang1): const LaunchAppIntent("d"),
     LogicalKeySet(LogicalKeyboardKey.lang2): const LaunchAppIntent("e"),
     LogicalKeySet(LogicalKeyboardKey.lang3): const LaunchAppIntent("f"),
@@ -65,7 +65,11 @@ print('Pressed ${event.logicalKey.debugName}');
         _icons.forEach((key, value) {
           var path = value.path.split("/").toList();
           var url = Uri.decodeFull(path[path.length - 2]);
-          _shortcuts[value.encode!] = LaunchAppIntent(url);
+          print(value.key);
+          print(value.encode);
+          if (value.encode != null) {
+            _shortcuts[value.encode!] = LaunchAppIntent(url);
+          }
         });
         return
             RawKeyboardListener(

@@ -14,7 +14,6 @@ class AppsPane extends StatefulWidget {
 
 class _AppsPaneState extends State<AppsPane> {
   final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-  final ShortcutApps _icons = {};
 
   static const platform = MethodChannel('samples.flutter.dev/hoge');
 
@@ -25,11 +24,9 @@ class _AppsPaneState extends State<AppsPane> {
         "hoge": hoge,
       });
 
+      print(result);
       ref.read(appsStateNotifier.notifier).register(
           ShortcutApp(key: key, icon: result["image"], path: result["path"]));
-      setState(() {
-        _icons[key] = ShortcutApp(key: key, icon: result, path: "");
-      });
     } on PlatformException catch (e) {
       print(e);
     }
@@ -40,23 +37,25 @@ class _AppsPaneState extends State<AppsPane> {
     super.initState();
   }
 
-  void _selectFolder(String key, WidgetRef ref) async {
-    _resetState();
-    try {
-      String? path = await FilePicker.platform.getDirectoryPath(
-          pickDirectory: false,
-          allowedExtensions: ["app"],
-          type: FileType.custom);
-      setState(() {
-        _getHoge(path!, key, ref);
-      });
-    } on PlatformException catch (e) {
-      _logException('Unsupported operation' + e.toString());
-    } catch (e) {
-      _logException(e.toString());
-    } finally {
-      // setState(() => _isLoading = false);
-    }
+  Function _selectFolder(WidgetRef ref) {
+    return (String key) async {
+      _resetState();
+      try {
+        String? path = await FilePicker.platform.getDirectoryPath(
+            pickDirectory: false,
+            allowedExtensions: ["app"],
+            type: FileType.custom);
+        setState(() {
+          _getHoge(path!, key, ref);
+        });
+      } on PlatformException catch (e) {
+        _logException('Unsupported operation' + e.toString());
+      } catch (e) {
+        _logException(e.toString());
+      } finally {
+        // setState(() => _isLoading = false);
+      }
+    };
   }
 
   void _deleteApp(String key, WidgetRef ref) async {
@@ -92,7 +91,9 @@ class _AppsPaneState extends State<AppsPane> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   KeyboardPage(
-                      fn: _selectFolder, icons: _icons, deleteApp: _deleteApp),
+                      fn: _selectFolder(ref),
+                      icons: _icons,
+                      deleteApp: _deleteApp),
                 ],
               ),
             ),
