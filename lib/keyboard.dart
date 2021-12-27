@@ -6,12 +6,13 @@ import 'package:switchsoulmonarch/state/apps_state.dart';
 
 class KeyboardPage extends StatefulWidget {
   const KeyboardPage(
-      {Key? key, required this.fn, required this.icons, this.deleteApp})
+      {Key? key, required this.fn, required this.icons, this.deleteApp, this.mode = "preference"})
       : super(key: key);
 
   final Function fn;
   final ShortcutApps icons;
   final Function? deleteApp;
+  final String mode;
 
   @override
   State<KeyboardPage> createState() => _KeyboardPageState();
@@ -22,29 +23,40 @@ class _KeyboardPageState extends State<KeyboardPage> {
     return Stack(
       children: [
         widget.icons[keyName] == null
-            ? Text("")
-            : Image.memory(widget.icons[keyName]!.icon),
-        widget.icons[keyName] == null
-            ? Text("")
-            : Transform.rotate(
-                angle: 45 * math.pi / 180,
-                child: IconButton(
-                  splashRadius: 10,
-                  iconSize: 30,
-                  onPressed: widget.deleteApp != null
-                      ? () => {widget.deleteApp!(keyName)}
-                      : () => {},
-                  icon: const Icon(Icons.add_circle_outline_outlined,
-                      color: Colors.red),
-                ),
+            ? const SizedBox(width: 0, height: 0)
+            : Stack(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.only(top: 6),
+                      child:
+                          Center(child: Image.memory(widget.icons[keyName]!.icon, width: 50))),
+                  if (widget.mode == "preference") Container(
+                    padding: const EdgeInsets.only(bottom: 20, left: 30),
+                    child: Center(
+                      child: Transform.rotate(
+                        angle: 45 * math.pi / 180,
+                        child: IconButton(
+                          splashRadius: 10,
+                          iconSize: 30,
+                          onPressed: () => {widget.deleteApp!(keyName)},
+                          icon: const Icon(Icons.add_circle_outline_outlined,
+                              color: Colors.grey, size: 20),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-        Text(
-          keyName,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: Theme.of(context).primaryColor,
-            decoration: TextDecoration.none,
+        Container(
+          padding: const EdgeInsets.only(top: 2, left: 5),
+          child: Text(
+            keyName == "fn" ? keyName : keyName.toUpperCase(),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.grey,
+              decoration: TextDecoration.none,
+            ),
           ),
         ),
       ],
@@ -59,7 +71,6 @@ class _KeyboardPageState extends State<KeyboardPage> {
           width: width,
           height: height,
           margin: margin,
-          // color: Colors.red,
           decoration: decoration,
           child: _keyLabel(keyName),
         ));
@@ -74,7 +85,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
         30,
         const EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
         BoxDecoration(
-          border: Border.all(color: Colors.red),
+          border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(10),
         ));
   }
@@ -87,20 +98,28 @@ class _KeyboardPageState extends State<KeyboardPage> {
     if (position == "top") {
       width = 100;
       margin = const EdgeInsets.only(top: 5, left: 5);
-      decoration = const BoxDecoration(
+      decoration = BoxDecoration(
+        border: Border.all(color: Colors.transparent),
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
             bottomLeft: Radius.circular(10)),
-        color: Colors.white,
+        color: Colors.grey.withOpacity(0.2),
       );
     } else {
-      width = 80;
+      width = 90;
+      keyName = "";
       margin = const EdgeInsets.only(bottom: 5, left: 5);
-      decoration = const BoxDecoration(
+      decoration = BoxDecoration(
+        border: Border.all(color: Colors.transparent),
+        // border: Border(
+        //   top: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
+        //   right: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
+        //   left: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
+        // ),
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
-        color: Colors.white,
+        color: Colors.grey.withOpacity(0.2),
       );
     }
     return _gestureDetector(
@@ -117,7 +136,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
         height,
         const EdgeInsets.all(5),
         BoxDecoration(
-          border: Border.all(color: Colors.red),
+          border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(10),
         ));
   }
@@ -184,7 +203,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                buildKey("⌃", widget.fn, width: 90),
+                buildKey("⌃", widget.fn, width: 80),
                 ...[
                   SsmKeys.a.label!,
                   "s",

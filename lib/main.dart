@@ -9,6 +9,7 @@ import 'package:switchsoulmonarch/database/show_keyboard_window_provider.dart';
 import 'package:switchsoulmonarch/hotkey_pane.dart';
 import 'package:switchsoulmonarch/shortcut_window.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
+import 'package:switchsoulmonarch/state/mode_state.dart';
 import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
 import 'package:switchsoulmonarch/system_tray.dart';
 import 'package:window_manager/window_manager.dart';
@@ -21,9 +22,9 @@ void main() async {
 
   // Use it only after calling `hiddenWindowAtLaunch`
   windowManager.waitUntilReadyToShow().then((_) async {
-    // await windowManager.setAsFrameless();
-    await windowManager.setSize(Size(800, 600));
+    await windowManager.setAsFrameless();
     await windowManager.show();
+    await windowManager.setSkipTaskbar(true);
   });
 
   runApp(ProviderScope(
@@ -51,7 +52,6 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
 
   @override
   void initState() {
-    print("!!!!!!!!!!!!!!!!");
     if (widget.keyCombo != null) {
       ref
           .read(windowHotKeyStateNotifier.notifier)
@@ -73,6 +73,7 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
     final SsmSystemTray systemTray = SsmSystemTray();
     systemTray.getSystemTray(() {
       setState(() {
+        ref.read(modeStateNotifier.notifier).setMode("preference");
         selectedWindow = "preference";
       });
       windowManager.setSize(const Size(1300, 500));
@@ -89,9 +90,10 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
 
   Future<void> showShortcutWindow() async {
     setState(() {
+      ref.read(modeStateNotifier.notifier).setMode("shortcuts");
       selectedWindow = "shortcuts";
     });
-    windowManager.setSize(const Size(1200, 500));
+    windowManager.setSize(const Size(1171, 470));
     windowManager.show();
   }
 
@@ -106,17 +108,18 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   Widget _buildUpdatePane() {
     return Center(
       child: Column(
-        children: [OutlinedButton(
-          child: Text("Check for updates"),
-          style: OutlinedButton.styleFrom(
-              primary: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(0),
-                ),
-              )),
-          onPressed: () => setState(() => {}),
-        ),
+        children: [
+          OutlinedButton(
+            child: Text("Check for updates"),
+            style: OutlinedButton.styleFrom(
+                primary: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(0),
+                  ),
+                )),
+            onPressed: () => setState(() => {}),
+          ),
           OutlinedButton(
             child: Text("初期化。ホットキーとアプリ設定全部消します"),
             style: OutlinedButton.styleFrom(
@@ -128,7 +131,7 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
                 )),
             onPressed: () => setState(() => {}),
           ),
-    ],
+        ],
       ),
     );
   }
@@ -188,19 +191,33 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-            child: selectedWindow == "preference"
-                ? _buildBody(context)
-                : _buildKeyboard(context)),
-      ),
+    return Consumer(
+      builder: (context, ref, child) {
+        final mode = ref.watch(modeStateNotifier).mode;
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            body: Container(
+                child: mode == "preference"
+                    ? _buildBody(context)
+                    : _buildKeyboard(context)),
+          ),
+        );
+      },
     );
+    // return MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   home: Scaffold(
+    //     body: Container(
+    //         child: selectedWindow == "preference"
+    //             ? _buildBody(context)
+    //             : _buildKeyboard(context)),
+    //   ),
+    // );
   }
 
   final Map<String, Function> eventFuncs = {
-    "blur": () => {/*can i use hideOnDeactives?*/ windowManager.hide()},
+    "blur": () => {windowManager.hide()},
   };
 
   @override

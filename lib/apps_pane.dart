@@ -24,7 +24,6 @@ class _AppsPaneState extends State<AppsPane> {
         "hoge": hoge,
       });
 
-      print(result);
       ref.read(appsStateNotifier.notifier).register(
           ShortcutApp(key: key, icon: result["image"], path: result["path"]));
     } on PlatformException catch (e) {
@@ -42,6 +41,7 @@ class _AppsPaneState extends State<AppsPane> {
       _resetState();
       try {
         String? path = await FilePicker.platform.getDirectoryPath(
+            lockParentWindow: true,
             pickDirectory: false,
             allowedExtensions: ["app"],
             type: FileType.custom);

@@ -30,11 +30,6 @@ abstract class DatabaseProvider {
         ),
         onCreate: createDatabase,
         onUpgrade: (Database db, int oldVersion, int newVersion) async {
-          print("============∂===");
-          print("UUUUPPPPPPPPPPPPPPMIIIIIGERASTETETETTET");
-          print(db);
-          print(oldVersion);
-          print(newVersion);
           for (var i = oldVersion + 1; i <= newVersion; i++) {
             var queries = onUpgradeQueries[i.toString()];
             if (queries == null) continue;
@@ -46,8 +41,8 @@ abstract class DatabaseProvider {
         version: _version,
       );
     }
+    // TODO 毎回openしてる？
     print("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
-    print(await _instance?.getVersion());
 
     return _instance;
   }

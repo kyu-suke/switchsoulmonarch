@@ -14,7 +14,6 @@ class AppDelegate: FlutterAppDelegate {
                 let args = call.arguments as! Dictionary<String, Any>
                 let name = args["hoge"] as! String
                 let url = URL(fileURLWithPath: name)
-                print(url)
                 let res = NSWorkspace.shared.icon(forFile: url.path)
                 let image = res
                 let cgimage = image.toCGImage

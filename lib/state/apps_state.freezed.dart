@@ -100,7 +100,7 @@ class __$AppsStateCopyWithImpl<$Res> extends _$AppsStateCopyWithImpl<$Res>
 class _$_AppsState implements _AppsState {
   _$_AppsState({this.apps = null});
 
-  @JsonKey(defaultValue: null)
+  @JsonKey()
   @override
   final Map<String, ShortcutApp>? apps;
 
@@ -112,14 +112,14 @@ class _$_AppsState implements _AppsState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AppsState &&
-            (identical(other.apps, apps) ||
-                const DeepCollectionEquality().equals(other.apps, apps)));
+        (other.runtimeType == runtimeType &&
+            other is _AppsState &&
+            const DeepCollectionEquality().equals(other.apps, apps));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(apps);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(apps));
 
   @JsonKey(ignore: true)
   @override
@@ -131,7 +131,7 @@ abstract class _AppsState implements AppsState {
   factory _AppsState({Map<String, ShortcutApp>? apps}) = _$_AppsState;
 
   @override
-  Map<String, ShortcutApp>? get apps => throw _privateConstructorUsedError;
+  Map<String, ShortcutApp>? get apps;
   @override
   @JsonKey(ignore: true)
   _$AppsStateCopyWith<_AppsState> get copyWith =>

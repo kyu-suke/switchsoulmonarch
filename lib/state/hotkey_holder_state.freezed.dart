@@ -105,7 +105,7 @@ class __$HotKeyHolderStateCopyWithImpl<$Res>
 class _$_HotKeyHolderState implements _HotKeyHolderState {
   _$_HotKeyHolderState({this.keyCombo = null});
 
-  @JsonKey(defaultValue: null)
+  @JsonKey()
   @override
   final KeyCombo? keyCombo;
 
@@ -117,15 +117,14 @@ class _$_HotKeyHolderState implements _HotKeyHolderState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _HotKeyHolderState &&
-            (identical(other.keyCombo, keyCombo) ||
-                const DeepCollectionEquality()
-                    .equals(other.keyCombo, keyCombo)));
+        (other.runtimeType == runtimeType &&
+            other is _HotKeyHolderState &&
+            const DeepCollectionEquality().equals(other.keyCombo, keyCombo));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(keyCombo);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(keyCombo));
 
   @JsonKey(ignore: true)
   @override
@@ -137,7 +136,7 @@ abstract class _HotKeyHolderState implements HotKeyHolderState {
   factory _HotKeyHolderState({KeyCombo? keyCombo}) = _$_HotKeyHolderState;
 
   @override
-  KeyCombo? get keyCombo => throw _privateConstructorUsedError;
+  KeyCombo? get keyCombo;
   @override
   @JsonKey(ignore: true)
   _$HotKeyHolderStateCopyWith<_HotKeyHolderState> get copyWith =>

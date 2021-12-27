@@ -43,7 +43,6 @@ print('Pressed ${event.logicalKey.debugName}');
   final Map<Type, Action<Intent>> _actions = {
     LaunchAppIntent: CallbackAction<LaunchAppIntent>(
         onInvoke: (LaunchAppIntent intent) async {
-          print(intent.path);
       await platform.invokeMethod('launch', <String, dynamic>{
         "path": intent.path,
       });
@@ -65,8 +64,6 @@ print('Pressed ${event.logicalKey.debugName}');
         _icons.forEach((key, value) {
           var path = value.path.split("/").toList();
           var url = Uri.decodeFull(path[path.length - 2]);
-          print(value.key);
-          print(value.encode);
           if (value.encode != null) {
             _shortcuts[value.encode!] = LaunchAppIntent(url);
           }
@@ -88,7 +85,7 @@ print('Pressed ${event.logicalKey.debugName}');
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          KeyboardPage(fn: () {}, icons: _icons),
+                          KeyboardPage(fn: () {}, icons: _icons, mode: "shortcuts",),
                         ],
                       ),
                     ),

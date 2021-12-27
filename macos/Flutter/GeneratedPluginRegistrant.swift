@@ -9,6 +9,7 @@ import hotkey_holder
 import magnetica
 import sqflite
 import system_tray
+import tray_manager
 import window_manager
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
@@ -16,5 +17,6 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   MagneticaPlugin.register(with: registry.registrar(forPlugin: "MagneticaPlugin"))
   SqflitePlugin.register(with: registry.registrar(forPlugin: "SqflitePlugin"))
   SystemTrayPlugin.register(with: registry.registrar(forPlugin: "SystemTrayPlugin"))
+  TrayManagerPlugin.register(with: registry.registrar(forPlugin: "TrayManagerPlugin"))
   WindowManagerPlugin.register(with: registry.registrar(forPlugin: "WindowManagerPlugin"))
 }

@@ -48,7 +48,7 @@ dependencies:
   file_picker:
     git:
       url: https://github.com/kyu-suke/flutter_file_picker.git
-      ref: 0f2b4d2044e8428ad3dfadf1f9ec1adac229efde
+      ref: mod/getDirectoryPath
 
   sqflite: ^2.0.1
   flutter_riverpod: ^1.0.1
@@ -63,6 +63,7 @@ dependencies:
     git:
       url: https://github.com/kyu-suke/hotkey_holder.git
       ref: main
+  tray_manager: ^0.1.2
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +89,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/appIcon/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,73 +1,68 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:path/path.dart' as p;
-import 'package:system_tray/system_tray.dart';
+import 'package:tray_manager/tray_manager.dart';
 
-class SsmSystemTray {
-  Future<SystemTray> getSystemTray(Function fn1, Function fn2) async {
-    return initSystemTray(fn1, fn2).then((value) => _systemTray);
+class SsmSystemTray with TrayListener {
+  Future<TrayManager> getSystemTray(Function fn1, Function fn2) async {
+    return initSystemTray(fn1, fn2).then((value) => _trayManager);
   }
 
-  final SystemTray _systemTray = SystemTray();
+  // final SystemTray _systemTray = SystemTray();
+  final TrayManager _trayManager = TrayManager.instance;
+  Function? showPreference;
+  Function? exitApp;
 
   Future<void> initSystemTray(Function fn1, Function fn2) async {
-    String path;
-    if (Platform.isMacOS) {
-      path = p.joinAll(['AppIcon']);
-    } else {
-      throw ("not supported platform");
+    TrayManager.instance.addListener(this);
+    await TrayManager.instance.setIcon("assets/appIcon/ssm_32.png");
+    showPreference = fn1;
+    exitApp = fn2;
+
+    List<MenuItem> items = [
+      MenuItem(title: 'Shortcuts'),
+      MenuItem.separator,
+      MenuItem(title: 'Preference'),
+      MenuItem.separator,
+      MenuItem(title: 'Exit'),
+    ];
+    await TrayManager.instance.setContextMenu(items);
+
+    // // handle system tray event
+    // _systemTray.registerSystemTrayEventHandler((eventName) {
+    //   print("eventName: $eventName");
+    //   if (eventName == "leftMouseUp") {
+    //     // windowManager.show();
+    //     fn1();
+    //   }
+    // });
+  }
+
+  @override
+  void onTrayIconMouseDown() {
+    TrayManager.instance.popUpContextMenu();
+  }
+
+  @override
+  void onTrayIconRightMouseDown() {
+    TrayManager.instance.popUpContextMenu();
+  }
+
+  @override
+  void onTrayIconRightMouseUp() {
+    print(TrayManager.instance.getBounds());
+  }
+
+  @override
+  void onTrayMenuItemClick(MenuItem menuItem) {
+    switch (menuItem.title) {
+      case "Shortcuts":
+        break;
+      case "Preference":
+        showPreference!();
+        break;
+      case "Exit":
+        exitApp!();
+        break;
     }
-
-    // We first init the systray menu and then add the menu entries
-    await _systemTray.initSystemTray(title: "system tray2",
-        iconPath: path, toolTip: "How to use system tray with Flutter");
-
-    await _systemTray.setContextMenu(
-      [
-        MenuItem(
-          label: 'Show',
-          onClicked: () {
-            // appWindow.show();
-            fn1();
-            // windowManager.show();
-          },
-        ),
-        MenuSeparator(),
-        SubMenu(
-          label: "SubMenu",
-          children: [
-            MenuItem(
-              label: 'SubItem1',
-              enabled: false,
-              onClicked: () {
-                print("click SubItem1");
-              },
-            ),
-            MenuItem(label: 'SubItem2'),
-            MenuItem(label: 'SubItem3'),
-          ],
-        ),
-        MenuSeparator(),
-        MenuItem(
-          label: 'Exit',
-          onClicked: () {
-            // appWindow.hide();
-            // appWindow.close();
-            // windowManager.terminate();
-            fn2();
-          },
-        ),
-      ],
-    );
-
-    // handle system tray event
-    _systemTray.registerSystemTrayEventHandler((eventName) {
-      print("eventName: $eventName");
-      if (eventName == "leftMouseUp") {
-        // windowManager.show();
-        fn1();
-      }
-    });
   }
 }

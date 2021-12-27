@@ -194,11 +194,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0f2b4d2044e8428ad3dfadf1f9ec1adac229efde"
-      resolved-ref: "0f2b4d2044e8428ad3dfadf1f9ec1adac229efde"
+      ref: "mod/getDirectoryPath"
+      resolved-ref: d8fd5524b644fca7cdf79b540e9a1515d6fab004
       url: "https://github.com/kyu-suke/flutter_file_picker.git"
     source: git
-    version: "4.1.0"
+    version: "4.3.0"
   fixnum:
     dependency: transitive
     description:
@@ -540,6 +540,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  tray_manager:
+    dependency: "direct main"
+    description:
+      name: tray_manager
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   typed_data:
     dependency: transitive
     description:
@@ -547,6 +554,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.5"
   vector_math:
     dependency: transitive
     description:
