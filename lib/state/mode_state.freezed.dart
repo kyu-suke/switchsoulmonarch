@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ModeStateTearOff {
   const _$ModeStateTearOff();
 
-  _ModeState call({String mode = "preference", bool canHide = false}) {
+  _ModeState call({String mode = "preference", bool canHide = true}) {
     return _ModeState(
       mode: mode,
       canHide: canHide,
@@ -110,7 +110,7 @@ class __$ModeStateCopyWithImpl<$Res> extends _$ModeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ModeState implements _ModeState {
-  _$_ModeState({this.mode = "preference", this.canHide = false});
+  _$_ModeState({this.mode = "preference", this.canHide = true});
 
   @JsonKey()
   @override

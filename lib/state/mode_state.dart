@@ -14,7 +14,7 @@ part 'mode_state.freezed.dart';
 abstract class ModeState with _$ModeState {
   factory ModeState({
     @Default("preference") String mode,
-    @Default(false) bool canHide,
+    @Default(true) bool canHide,
   }) = _ModeState;
 }
 

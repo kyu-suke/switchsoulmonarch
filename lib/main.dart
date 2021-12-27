@@ -43,7 +43,6 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   String selectedPane = "hotkey";
-  String selectedWindow = "preference";
 
   final bool _isFullScreen = false;
   final bool _isResizable = false;
@@ -72,10 +71,7 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
     // system tray setting
     final SsmSystemTray systemTray = SsmSystemTray();
     systemTray.getSystemTray(() {
-      setState(() {
         ref.read(modeStateNotifier.notifier).setMode("preference");
-        selectedWindow = "preference";
-      });
       windowManager.setSize(const Size(1300, 500));
       windowManager.show();
     }, () {} /*windowManager.terminate*/ /* TODO implement terminate in swift */);
@@ -89,10 +85,7 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   }
 
   Future<void> showShortcutWindow() async {
-    setState(() {
       ref.read(modeStateNotifier.notifier).setMode("shortcuts");
-      selectedWindow = "shortcuts";
-    });
     windowManager.setSize(const Size(1171, 470));
     windowManager.show();
   }
@@ -102,7 +95,7 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   }
 
   Widget _buildAppsPane() {
-    return AppsPane();
+    return AppsPane(show: windowManager.show,);
   }
 
   Widget _buildUpdatePane() {
@@ -223,9 +216,14 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   @override
   void onWindowEvent(String eventName) {
     print('[WindowManager] onWindowEvent: $eventName');
+    print(ref.watch(modeStateNotifier).canHide);
     final eventFunc = eventFuncs[eventName];
     if (eventFunc != null) {
-      // eventFunc();
+      final canHide = ref.watch(modeStateNotifier).canHide;
+      if (canHide) {
+        eventFunc();
+      }
+
     }
   }
 }

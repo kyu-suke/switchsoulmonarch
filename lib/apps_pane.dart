@@ -4,9 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:switchsoulmonarch/keyboard.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
+import 'package:switchsoulmonarch/state/mode_state.dart';
 
 class AppsPane extends StatefulWidget {
-  const AppsPane({Key? key}) : super(key: key);
+  const AppsPane({Key? key, required this.show}) : super(key: key);
+
+  final Function show;
 
   @override
   _AppsPaneState createState() => _AppsPaneState();
@@ -39,12 +42,15 @@ class _AppsPaneState extends State<AppsPane> {
   Function _selectFolder(WidgetRef ref) {
     return (String key) async {
       _resetState();
+      ref.read(modeStateNotifier.notifier).setCanHide(false);
       try {
         String? path = await FilePicker.platform.getDirectoryPath(
             lockParentWindow: true,
             pickDirectory: false,
             allowedExtensions: ["app"],
             type: FileType.custom);
+        widget.show();
+        ref.read(modeStateNotifier.notifier).setCanHide(true);
         setState(() {
           _getHoge(path!, key, ref);
         });
