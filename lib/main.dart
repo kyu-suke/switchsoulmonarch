@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:switchsoulmonarch/apps_pane.dart';
 import 'package:switchsoulmonarch/database/apps_provider.dart';
@@ -9,8 +10,8 @@ import 'package:switchsoulmonarch/database/show_keyboard_window_provider.dart';
 import 'package:switchsoulmonarch/hotkey_pane.dart';
 import 'package:switchsoulmonarch/shortcut_window.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
-import 'package:switchsoulmonarch/state/mode_state.dart';
 import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
+import 'package:switchsoulmonarch/state/mode_state.dart';
 import 'package:switchsoulmonarch/system_tray.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -49,6 +50,8 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   final bool _isMinimizable = false;
   final bool _isClosable = false;
 
+
+
   @override
   void initState() {
     if (widget.keyCombo != null) {
@@ -71,12 +74,22 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
     // system tray setting
     final SsmSystemTray systemTray = SsmSystemTray();
     systemTray.getSystemTray(() {
-        ref.read(modeStateNotifier.notifier).setMode("preference");
+      ref.read(modeStateNotifier.notifier).setMode("preference");
       windowManager.setSize(const Size(1300, 500));
       windowManager.show();
-    }, () {} /*windowManager.terminate*/ /* TODO implement terminate in swift */);
+    }, terminateApp);
     super.initState();
   }
+
+  static const platform = MethodChannel('samples.flutter.dev/hoge');
+  void terminateApp() {
+    try {
+      final result = platform.invokeMethod('terminate', {});
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
 
   @override
   void dispose() {
@@ -85,7 +98,7 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   }
 
   Future<void> showShortcutWindow() async {
-      ref.read(modeStateNotifier.notifier).setMode("shortcuts");
+    ref.read(modeStateNotifier.notifier).setMode("shortcuts");
     windowManager.setSize(const Size(1171, 470));
     windowManager.show();
   }
@@ -95,48 +108,18 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   }
 
   Widget _buildAppsPane() {
-    return AppsPane(show: windowManager.show,);
-  }
-
-  Widget _buildUpdatePane() {
-    return Center(
-      child: Column(
-        children: [
-          OutlinedButton(
-            child: Text("Check for updates"),
-            style: OutlinedButton.styleFrom(
-                primary: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(0),
-                  ),
-                )),
-            onPressed: () => setState(() => {}),
-          ),
-          OutlinedButton(
-            child: Text("初期化。ホットキーとアプリ設定全部消します"),
-            style: OutlinedButton.styleFrom(
-                primary: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(0),
-                  ),
-                )),
-            onPressed: () => setState(() => {}),
-          ),
-        ],
-      ),
+    return AppsPane(
+      show: windowManager.show,
     );
   }
 
+
+
   Widget _buildPane() {
     Widget pane;
-    if (selectedPane == "hotkey") {
-      pane = _buildHotkeyPane();
-    } else if (selectedPane == "apps") {
+    pane = _buildHotkeyPane();
+    if (selectedPane == "apps") {
       pane = _buildAppsPane();
-    } else {
-      pane = _buildUpdatePane();
     }
     return pane;
   }
@@ -170,7 +153,6 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
               children: [
                 _leftSideButton("Hotkey", "hotkey"),
                 _leftSideButton("Apps", "apps"),
-                _leftSideButton("Preference", "update"),
               ],
             ))),
         Expanded(flex: 9, child: _buildPane()),
@@ -223,7 +205,6 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
       if (canHide) {
         eventFunc();
       }
-
     }
   }
 }

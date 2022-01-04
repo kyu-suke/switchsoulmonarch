@@ -11,10 +11,13 @@ abstract class DatabaseProvider {
   int get _version => 2;
 
   final onUpgradeQueries = {
-     '2' : [
-       // 'CREATE TABLE show_keyboard_window (key TEXT DEFAULT "", modifiers TEXT DEFAULT "");',
-       'CREATE TABLE apps (key TEXT DEFAULT "", iconBase64 TEXT DEFAULT "", path TEXT DEFAULT "")'
-     ],
+    '1': [
+      'CREATE TABLE show_keyboard_window ( key TEXT DEFAULT "", modifiers TEXT DEFAULT "")'
+    ],
+    '2': [
+      // 'CREATE TABLE show_keyboard_window (key TEXT DEFAULT "", modifiers TEXT DEFAULT "");',
+      'CREATE TABLE apps (key TEXT DEFAULT "", iconBase64 TEXT DEFAULT "", path TEXT DEFAULT "")'
+    ],
   };
 
 
@@ -28,7 +31,16 @@ abstract class DatabaseProvider {
           await getDatabasesPath(),
           databaseName,
         ),
-        onCreate: createDatabase,
+        onCreate: (Database db, int version) async {
+          // createDatabase(db, version);
+          for (var i = 1; onUpgradeQueries[i.toString()] != null ; i++) {
+            var queries = onUpgradeQueries[i.toString()];
+            if (queries == null) continue;
+            for (String query in queries) {
+              await db.execute(query);
+            }
+          }
+        },
         onUpgrade: (Database db, int oldVersion, int newVersion) async {
           for (var i = oldVersion + 1; i <= newVersion; i++) {
             var queries = onUpgradeQueries[i.toString()];
@@ -48,13 +60,14 @@ abstract class DatabaseProvider {
   }
 
   // createDatabase(Database db, int version);
-  createDatabase(Database db, int version) => db.execute(
-    """
+  createDatabase(Database db, int version) =>
+      db.execute(
+        """
           CREATE TABLE show_keyboard_window (
             key TEXT DEFAULT "",
             modifiers TEXT DEFAULT ""
           )
         """,
-  );
+      );
 
 }

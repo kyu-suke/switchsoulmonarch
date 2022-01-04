@@ -1,5 +1,6 @@
 import Cocoa
 import FlutterMacOS
+import Sparkle
 
 @NSApplicationMain
 class AppDelegate: FlutterAppDelegate {
@@ -29,11 +30,19 @@ class AppDelegate: FlutterAppDelegate {
                 let name = args["path"] as! String
                 NSWorkspace.shared.launchApplication(name)
                 break;
-                
+
+            case "checkForUpdate":
+                let hoge = SUUpdater()
+                hoge.checkForUpdates(self)
+                break;
+
+            case "terminate":
+                NSApplication.shared.terminate(nil)
+                break;
+
             default:
                 break;
             }
-            
         });
     }
     

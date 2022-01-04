@@ -64,8 +64,10 @@ class _AppsPaneState extends State<AppsPane> {
     };
   }
 
-  void _deleteApp(String key, WidgetRef ref) async {
-    ref.read(appsStateNotifier.notifier).delete(key);
+  Function _deleteApp(WidgetRef ref) {
+    return (String key) async {
+      ref.read(appsStateNotifier.notifier).delete(key);
+    };
   }
 
   void _logException(String message) {
@@ -99,7 +101,7 @@ class _AppsPaneState extends State<AppsPane> {
                   KeyboardPage(
                       fn: _selectFolder(ref),
                       icons: _icons,
-                      deleteApp: _deleteApp),
+                      deleteApp: _deleteApp(ref)),
                 ],
               ),
             ),

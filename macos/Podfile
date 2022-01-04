@@ -31,6 +31,8 @@ target 'Runner' do
   use_modular_headers!
 
   flutter_install_all_macos_pods File.dirname(File.realpath(__FILE__))
+
+  pod 'Sparkle'
 end
 
 post_install do |installer|
@@ -38,3 +40,5 @@ post_install do |installer|
     flutter_additional_macos_build_settings(target)
   end
 end
+
+
