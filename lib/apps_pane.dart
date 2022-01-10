@@ -6,23 +6,16 @@ import 'package:switchsoulmonarch/keyboard.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
 import 'package:switchsoulmonarch/state/mode_state.dart';
 
-class AppsPane extends StatefulWidget {
+class AppsPane extends StatelessWidget {
   const AppsPane({Key? key, required this.show}) : super(key: key);
 
   final Function show;
-
-  @override
-  _AppsPaneState createState() => _AppsPaneState();
-}
-
-class _AppsPaneState extends State<AppsPane> {
 
   static const platform = MethodChannel('switch.soul.monarch/channel');
 
   Future<void> _getApp(String appPath, String key, WidgetRef ref) async {
     try {
-      final result =
-          await platform.invokeMethod('getApp', <String, dynamic>{
+      final result = await platform.invokeMethod('getApp', <String, dynamic>{
         "appPath": appPath,
       });
 
@@ -31,11 +24,6 @@ class _AppsPaneState extends State<AppsPane> {
     } on PlatformException catch (e) {
       print(e);
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   Function _selectFolder(WidgetRef ref) {
@@ -47,11 +35,9 @@ class _AppsPaneState extends State<AppsPane> {
             pickDirectory: false,
             allowedExtensions: ["app"],
             type: FileType.custom);
-        widget.show();
+        show();
         ref.read(modeStateNotifier.notifier).setCanHide(true);
-        setState(() {
-          _getApp(path!, key, ref);
-        });
+        _getApp(path!, key, ref);
       } on PlatformException catch (e) {
         print(e);
       } catch (e) {

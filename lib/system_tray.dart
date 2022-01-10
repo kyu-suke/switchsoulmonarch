@@ -13,11 +13,12 @@ class SsmSystemTray with TrayListener {
   Function? showPreference;
   Function? exitApp;
 
-  Future<void> initSystemTray(Function showPreference, Function exitApp) async {
+  Future<void> initSystemTray(
+      Function showPreferenceFunction, Function exitAppFunction) async {
     TrayManager.instance.addListener(this);
     await TrayManager.instance.setIcon("assets/appIcon/ssm_32.png");
-    showPreference = showPreference;
-    exitApp = exitApp;
+    showPreference = showPreferenceFunction;
+    exitApp = exitAppFunction;
 
     List<MenuItem> items = [
       MenuItem(title: 'Shortcuts'),

@@ -62,15 +62,17 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
 
     // system tray setting
     final SsmSystemTray systemTray = SsmSystemTray();
-    systemTray.getSystemTray(() {
-      ref.read(modeStateNotifier.notifier).setMode("preference");
-      windowManager.setSize(const Size(1300, 500));
-      windowManager.show();
-    }, terminateApp);
+    systemTray.getSystemTray(showPreference, terminateApp);
     super.initState();
   }
 
   static const platform = MethodChannel('switch.soul.monarch/channel');
+
+  void showPreference() {
+    ref.read(modeStateNotifier.notifier).setMode("preference");
+    windowManager.setSize(const Size(1300, 500));
+    windowManager.show();
+  }
 
   void terminateApp() {
     try {
@@ -137,8 +139,8 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
             flex: 1,
             child: Column(
               children: [
-            _leftSideButton("Hotkey", "hotkey"),
-            _leftSideButton("Apps", "apps"),
+                _leftSideButton("Hotkey", "hotkey"),
+                _leftSideButton("Apps", "apps"),
               ],
             )),
         Expanded(flex: 9, child: _buildPane()),
@@ -147,7 +149,7 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   }
 
   Widget _buildKeyboard(BuildContext context) {
-    return const ShortcutWindow();
+    return ShortcutWindow();
   }
 
   @override

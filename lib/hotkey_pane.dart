@@ -5,22 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotkey_holder/hotkey_holder.dart';
 import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
 
-class HotKeyPane extends StatefulWidget {
+class HotKeyPane extends StatelessWidget {
   const HotKeyPane({Key? key, required Function fn})
       : showFunc = fn,
         super(key: key);
 
   final Function showFunc;
-
-  @override
-  _HotKeyPaneState createState() => _HotKeyPaneState();
-}
-
-class _HotKeyPaneState extends State<HotKeyPane> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   void insertKeyCombo(HotKeyHolderKeyCombo keyCombo, WidgetRef ref) {
     ref.read(windowHotKeyStateNotifier.notifier).register(
@@ -28,8 +18,7 @@ class _HotKeyPaneState extends State<HotKeyPane> {
   }
 
   void deleteKeyCombo() {
-    // TODO delete keycombo
-    print("delete keyCombo");
+    print("deleted keyCombo");
   }
 
   static const platform = MethodChannel('switch.soul.monarch/channel');
@@ -63,7 +52,7 @@ class _HotKeyPaneState extends State<HotKeyPane> {
                   insertKeyCombo(keyCombo, ref);
                 },
                 onDelete: deleteKeyCombo,
-                event: widget.showFunc),
+                event: showFunc),
             const SizedBox(
               height: 10,
             ),

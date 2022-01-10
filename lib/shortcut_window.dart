@@ -4,20 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:switchsoulmonarch/keyboard.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
 
-class ShortcutWindow extends StatefulWidget {
-  const ShortcutWindow({Key? key}) : super(key: key);
+class ShortcutWindow extends StatelessWidget {
+  ShortcutWindow({Key? key}) : super(key: key);
 
-  @override
-  _ShortcutWindowState createState() => _ShortcutWindowState();
-}
-
-class LaunchAppIntent extends Intent {
-  const LaunchAppIntent(this.path);
-
-  final String path;
-}
-
-class _ShortcutWindowState extends State<ShortcutWindow> {
   static const platform = MethodChannel('switch.soul.monarch/channel');
 
   final Map<ShortcutActivator, String> _shortcuts = {};
@@ -27,11 +16,6 @@ class _ShortcutWindowState extends State<ShortcutWindow> {
     platform.invokeMethod('launch', <String, dynamic>{
       "path": _shortcuts[LogicalKeySet(event.data.logicalKey)],
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   final FocusNode _focusNode = FocusNode();
