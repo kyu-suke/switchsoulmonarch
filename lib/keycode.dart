@@ -1,3 +1,4 @@
+// TODO なんとなく用意した記憶あるけど使ってない
 enum SsmKeys {
   a,
   b,

@@ -6,7 +6,11 @@ import 'package:switchsoulmonarch/state/apps_state.dart';
 
 class KeyboardPage extends StatefulWidget {
   const KeyboardPage(
-      {Key? key, required this.fn, required this.icons, this.deleteApp, this.mode = "preference"})
+      {Key? key,
+      required this.fn,
+      required this.icons,
+      this.deleteApp,
+      this.mode = "preference"})
       : super(key: key);
 
   final Function fn;
@@ -28,30 +32,32 @@ class _KeyboardPageState extends State<KeyboardPage> {
                 children: [
                   Container(
                       padding: const EdgeInsets.only(top: 6),
-                      child:
-                          Center(child: Image.memory(widget.icons[keyName]!.icon, width: 50))),
-                  if (widget.mode == "preference") Container(
-                    padding: const EdgeInsets.only(bottom: 20, left: 30),
-                    child: Center(
-                      child: Transform.rotate(
-                        angle: 45 * math.pi / 180,
-                        child: IconButton(
-                          splashRadius: 10,
-                          iconSize: 30,
-                          onPressed: () => {widget.deleteApp!(keyName)},
-                          icon: const Icon(Icons.add_circle_outline_outlined,
-                              color: Colors.grey, size: 20),
+                      child: Center(
+                          child: Image.memory(widget.icons[keyName]!.icon,
+                              width: 50))),
+                  if (widget.mode == "preference")
+                    Container(
+                      padding: const EdgeInsets.only(bottom: 20, left: 30),
+                      child: Center(
+                        child: Transform.rotate(
+                          angle: 45 * math.pi / 180,
+                          child: IconButton(
+                            splashRadius: 10,
+                            iconSize: 30,
+                            onPressed: () => {widget.deleteApp!(keyName)},
+                            icon: const Icon(Icons.add_circle_outline_outlined,
+                                color: Colors.grey, size: 20),
+                          ),
                         ),
                       ),
-                    ),
-                  )
+                    )
                 ],
               ),
         Container(
           padding: const EdgeInsets.only(top: 2, left: 5),
           child: Text(
             keyName == "fn" ? keyName : keyName.toUpperCase(),
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
               color: Colors.grey,
@@ -100,7 +106,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
       margin = const EdgeInsets.only(top: 5, left: 5);
       decoration = BoxDecoration(
         border: Border.all(color: Colors.transparent),
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
             bottomLeft: Radius.circular(10)),
@@ -112,12 +118,7 @@ class _KeyboardPageState extends State<KeyboardPage> {
       margin = const EdgeInsets.only(bottom: 5, left: 5);
       decoration = BoxDecoration(
         border: Border.all(color: Colors.transparent),
-        // border: Border(
-        //   top: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
-        //   right: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
-        //   left: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
-        // ),
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
         color: Colors.grey.withOpacity(0.2),
       );

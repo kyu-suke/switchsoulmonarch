@@ -28,14 +28,15 @@ class _HotKeyPaneState extends State<HotKeyPane> {
   }
 
   void deleteKeyCombo() {
+    // TODO delete keycombo
     print("delete keyCombo");
   }
 
-  static const platform = MethodChannel('samples.flutter.dev/hoge');
+  static const platform = MethodChannel('switch.soul.monarch/channel');
 
   void checkForUpdate() {
     try {
-      final result = platform.invokeMethod('checkForUpdate', {});
+      platform.invokeMethod('checkForUpdate', {});
     } on PlatformException catch (e) {
       print(e);
     }
@@ -63,14 +64,14 @@ class _HotKeyPaneState extends State<HotKeyPane> {
                 },
                 onDelete: deleteKeyCombo,
                 event: widget.showFunc),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             OutlinedButton(
-              child: Text("Check for updates"),
+              child: const Text("Check for updates"),
               style: OutlinedButton.styleFrom(
                   primary: Colors.black,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(0),
                     ),

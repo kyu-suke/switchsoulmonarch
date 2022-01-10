@@ -20,7 +20,7 @@ PODS:
     - FlutterMacOS
   - tray_manager (0.0.1):
     - FlutterMacOS
-  - window_manager (0.1.0):
+  - window_manager (0.1.2):
     - FlutterMacOS
 
 DEPENDENCIES:
@@ -67,7 +67,7 @@ SPEC CHECKSUMS:
   sqflite: a5789cceda41d54d23f31d6de539d65bb14100ea
   system_tray: e53c972838c69589ff2e77d6d3abfd71332f9e5d
   tray_manager: 9064e219c56d75c476e46b9a21182087930baf90
-  window_manager: db713621c322d52e96064336a4ba2b7e4e30c94f
+  window_manager: 8c227608c115dbd132510c023d3644274aaec8a8
 
 PODFILE CHECKSUM: 2487e6c5693c0e0c9961b9322c6bb29c8ac86293
 

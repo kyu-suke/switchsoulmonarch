@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:sqflite/sqflite.dart';
 import 'package:switchsoulmonarch/database/database_provider.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
 
 class AppsProvider extends DatabaseProvider {
-
   @override
   String get tableName => "apps";
 
@@ -18,7 +16,8 @@ class AppsProvider extends DatabaseProvider {
   Future<int> delete(String key) async {
     final AppsProvider provider = AppsProvider();
     final database = await (provider.database);
-    return await database!.delete(provider.tableName, where: "key=?", whereArgs: [key]);
+    return await database!
+        .delete(provider.tableName, where: "key=?", whereArgs: [key]);
   }
 
   Future<ShortcutApps?> get() async {

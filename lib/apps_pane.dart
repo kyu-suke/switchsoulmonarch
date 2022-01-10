@@ -16,15 +16,14 @@ class AppsPane extends StatefulWidget {
 }
 
 class _AppsPaneState extends State<AppsPane> {
-  final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
-  static const platform = MethodChannel('samples.flutter.dev/hoge');
+  static const platform = MethodChannel('switch.soul.monarch/channel');
 
-  Future<void> _getHoge(String hoge, String key, WidgetRef ref) async {
+  Future<void> _getApp(String appPath, String key, WidgetRef ref) async {
     try {
       final result =
-          await platform.invokeMethod('getBatteryLevel', <String, dynamic>{
-        "hoge": hoge,
+          await platform.invokeMethod('getApp', <String, dynamic>{
+        "appPath": appPath,
       });
 
       ref.read(appsStateNotifier.notifier).register(
@@ -41,7 +40,6 @@ class _AppsPaneState extends State<AppsPane> {
 
   Function _selectFolder(WidgetRef ref) {
     return (String key) async {
-      _resetState();
       ref.read(modeStateNotifier.notifier).setCanHide(false);
       try {
         String? path = await FilePicker.platform.getDirectoryPath(
@@ -52,14 +50,12 @@ class _AppsPaneState extends State<AppsPane> {
         widget.show();
         ref.read(modeStateNotifier.notifier).setCanHide(true);
         setState(() {
-          _getHoge(path!, key, ref);
+          _getApp(path!, key, ref);
         });
       } on PlatformException catch (e) {
-        _logException('Unsupported operation' + e.toString());
+        print(e);
       } catch (e) {
-        _logException(e.toString());
-      } finally {
-        // setState(() => _isLoading = false);
+        print(e);
       }
     };
   }
@@ -68,22 +64,6 @@ class _AppsPaneState extends State<AppsPane> {
     return (String key) async {
       ref.read(appsStateNotifier.notifier).delete(key);
     };
-  }
-
-  void _logException(String message) {
-    _scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
-    _scaffoldMessengerKey.currentState?.showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
-
-  void _resetState() {
-    if (!mounted) {
-      return;
-    }
-    setState(() {});
   }
 
   @override

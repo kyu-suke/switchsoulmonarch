@@ -36,10 +36,6 @@ class AppsStateNotifier extends StateNotifier<AppsState> {
     setAll(apps);
   }
 
-  Future<ShortcutApps?> get() async {
-    return await _get();
-  }
-
   Future<void> register(ShortcutApp app) async {
     set(app);
     await _delete(app.key);
@@ -59,10 +55,6 @@ class AppsStateNotifier extends StateNotifier<AppsState> {
 
   Future<void> _insert(ShortcutApp app) async {
     await appsProvider.insert(app);
-  }
-
-  Future<ShortcutApps?> _get() async {
-    // return await AppsProvider.get();
   }
 }
 
