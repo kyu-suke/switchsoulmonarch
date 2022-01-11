@@ -3,20 +3,22 @@ import 'dart:async';
 import 'package:tray_manager/tray_manager.dart';
 
 class SsmSystemTray with TrayListener {
-  Future<TrayManager> getSystemTray(Function fn1, Function fn2) async {
-    return initSystemTray(fn1, fn2).then((value) => _trayManager);
+  Future<TrayManager> getSystemTray(
+      Function showPreference, Function exitApp) async {
+    return initSystemTray(showPreference, exitApp)
+        .then((value) => _trayManager);
   }
 
-  // final SystemTray _systemTray = SystemTray();
   final TrayManager _trayManager = TrayManager.instance;
   Function? showPreference;
   Function? exitApp;
 
-  Future<void> initSystemTray(Function fn1, Function fn2) async {
+  Future<void> initSystemTray(
+      Function showPreferenceFunction, Function exitAppFunction) async {
     TrayManager.instance.addListener(this);
     await TrayManager.instance.setIcon("assets/appIcon/ssm_32.png");
-    showPreference = fn1;
-    exitApp = fn2;
+    showPreference = showPreferenceFunction;
+    exitApp = exitAppFunction;
 
     List<MenuItem> items = [
       MenuItem(title: 'Shortcuts'),
@@ -26,15 +28,6 @@ class SsmSystemTray with TrayListener {
       MenuItem(title: 'Exit'),
     ];
     await TrayManager.instance.setContextMenu(items);
-
-    // // handle system tray event
-    // _systemTray.registerSystemTrayEventHandler((eventName) {
-    //   print("eventName: $eventName");
-    //   if (eventName == "leftMouseUp") {
-    //     // windowManager.show();
-    //     fn1();
-    //   }
-    // });
   }
 
   @override

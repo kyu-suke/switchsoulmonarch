@@ -7,13 +7,13 @@ class AppDelegate: FlutterAppDelegate {
     
     override func applicationDidFinishLaunching(_ aNotification: Notification) {
         let controller : FlutterViewController = mainFlutterWindow?.contentViewController as! FlutterViewController
-        let channel = FlutterMethodChannel.init(name: "samples.flutter.dev/hoge", binaryMessenger: controller.engine.binaryMessenger)
+        let channel = FlutterMethodChannel.init(name: "switch.soul.monarch/channel", binaryMessenger: controller.engine.binaryMessenger)
         channel.setMethodCallHandler({
             (_ call: FlutterMethodCall, _ result: FlutterResult) -> Void in
             switch (call.method) {
-            case "getBatteryLevel":
+            case "getApp":
                 let args = call.arguments as! Dictionary<String, Any>
-                let name = args["hoge"] as! String
+                let name = args["appPath"] as! String
                 let url = URL(fileURLWithPath: name)
                 let res = NSWorkspace.shared.icon(forFile: url.path)
                 let image = res
@@ -32,8 +32,19 @@ class AppDelegate: FlutterAppDelegate {
                 break;
 
             case "checkForUpdate":
-                let hoge = SUUpdater()
-                hoge.checkForUpdates(self)
+                let updater = SUUpdater()
+                updater.checkForUpdates(self)
+
+                // TODO SUUUpdater is depricated. use SPUUpdater
+//                let userDriver: SPUUserDriver = SPUStandardUserDriver(hostBundle: Bundle.main, delegate: nil)
+//                let updater = SPUUpdater(hostBundle: Bundle.main, applicationBundle: Bundle.main, userDriver: userDriver, delegate: nil)
+//                do {
+//                    try updater.start()
+//                    updater.checkForUpdates()
+//                } catch {
+//                    assertionFailure("Failed to initalize updater: \(error)")
+//                }
+
                 break;
 
             case "terminate":

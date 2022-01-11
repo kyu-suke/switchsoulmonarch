@@ -6,25 +6,17 @@ import 'package:switchsoulmonarch/keyboard.dart';
 import 'package:switchsoulmonarch/state/apps_state.dart';
 import 'package:switchsoulmonarch/state/mode_state.dart';
 
-class AppsPane extends StatefulWidget {
+class AppsPane extends StatelessWidget {
   const AppsPane({Key? key, required this.show}) : super(key: key);
 
   final Function show;
 
-  @override
-  _AppsPaneState createState() => _AppsPaneState();
-}
+  static const platform = MethodChannel('switch.soul.monarch/channel');
 
-class _AppsPaneState extends State<AppsPane> {
-  final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-
-  static const platform = MethodChannel('samples.flutter.dev/hoge');
-
-  Future<void> _getHoge(String hoge, String key, WidgetRef ref) async {
+  Future<void> _getApp(String appPath, String key, WidgetRef ref) async {
     try {
-      final result =
-          await platform.invokeMethod('getBatteryLevel', <String, dynamic>{
-        "hoge": hoge,
+      final result = await platform.invokeMethod('getApp', <String, dynamic>{
+        "appPath": appPath,
       });
 
       ref.read(appsStateNotifier.notifier).register(
@@ -34,14 +26,8 @@ class _AppsPaneState extends State<AppsPane> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   Function _selectFolder(WidgetRef ref) {
     return (String key) async {
-      _resetState();
       ref.read(modeStateNotifier.notifier).setCanHide(false);
       try {
         String? path = await FilePicker.platform.getDirectoryPath(
@@ -49,17 +35,13 @@ class _AppsPaneState extends State<AppsPane> {
             pickDirectory: false,
             allowedExtensions: ["app"],
             type: FileType.custom);
-        widget.show();
+        show();
         ref.read(modeStateNotifier.notifier).setCanHide(true);
-        setState(() {
-          _getHoge(path!, key, ref);
-        });
+        _getApp(path!, key, ref);
       } on PlatformException catch (e) {
-        _logException('Unsupported operation' + e.toString());
+        print(e);
       } catch (e) {
-        _logException(e.toString());
-      } finally {
-        // setState(() => _isLoading = false);
+        print(e);
       }
     };
   }
@@ -68,22 +50,6 @@ class _AppsPaneState extends State<AppsPane> {
     return (String key) async {
       ref.read(appsStateNotifier.notifier).delete(key);
     };
-  }
-
-  void _logException(String message) {
-    _scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
-    _scaffoldMessengerKey.currentState?.showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
-
-  void _resetState() {
-    if (!mounted) {
-      return;
-    }
-    setState(() {});
   }
 
   @override

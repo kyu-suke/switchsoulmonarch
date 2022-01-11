@@ -45,13 +45,6 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   String selectedPane = "hotkey";
 
-  final bool _isFullScreen = false;
-  final bool _isResizable = false;
-  final bool _isMinimizable = false;
-  final bool _isClosable = false;
-
-
-
   @override
   void initState() {
     if (widget.keyCombo != null) {
@@ -65,31 +58,29 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
 
     // window setting
     windowManager.addListener(this);
-    // windowManager.setFullScreen(_isFullScreen);
-    // windowManager.setResizable(_isResizable);
-    // windowManager.setMinimizable(_isMinimizable);
-    // windowManager.setClosable(_isClosable);
     windowManager.setSize(const Size(1300, 500));
 
     // system tray setting
     final SsmSystemTray systemTray = SsmSystemTray();
-    systemTray.getSystemTray(() {
-      ref.read(modeStateNotifier.notifier).setMode("preference");
-      windowManager.setSize(const Size(1300, 500));
-      windowManager.show();
-    }, terminateApp);
+    systemTray.getSystemTray(showPreference, terminateApp);
     super.initState();
   }
 
-  static const platform = MethodChannel('samples.flutter.dev/hoge');
+  static const platform = MethodChannel('switch.soul.monarch/channel');
+
+  void showPreference() {
+    ref.read(modeStateNotifier.notifier).setMode("preference");
+    windowManager.setSize(const Size(1300, 500));
+    windowManager.show();
+  }
+
   void terminateApp() {
     try {
-      final result = platform.invokeMethod('terminate', {});
+      platform.invokeMethod('terminate', {});
     } on PlatformException catch (e) {
       print(e);
     }
   }
-
 
   @override
   void dispose() {
@@ -112,8 +103,6 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
       show: windowManager.show,
     );
   }
-
-
 
   Widget _buildPane() {
     Widget pane;
@@ -148,13 +137,12 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
       children: [
         Expanded(
             flex: 1,
-            child: Container(
-                child: Column(
+            child: Column(
               children: [
                 _leftSideButton("Hotkey", "hotkey"),
                 _leftSideButton("Apps", "apps"),
               ],
-            ))),
+            )),
         Expanded(flex: 9, child: _buildPane()),
       ],
     );
@@ -180,15 +168,6 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
         );
       },
     );
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   home: Scaffold(
-    //     body: Container(
-    //         child: selectedWindow == "preference"
-    //             ? _buildBody(context)
-    //             : _buildKeyboard(context)),
-    //   ),
-    // );
   }
 
   final Map<String, Function> eventFuncs = {
@@ -198,7 +177,6 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   @override
   void onWindowEvent(String eventName) {
     print('[WindowManager] onWindowEvent: $eventName');
-    print(ref.watch(modeStateNotifier).canHide);
     final eventFunc = eventFuncs[eventName];
     if (eventFunc != null) {
       final canHide = ref.watch(modeStateNotifier).canHide;
@@ -209,6 +187,7 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   }
 }
 
+// TODO meta keys does not work in shortcut_window
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';

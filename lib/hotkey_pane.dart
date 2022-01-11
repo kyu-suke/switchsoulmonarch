@@ -5,22 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotkey_holder/hotkey_holder.dart';
 import 'package:switchsoulmonarch/state/hotkey_holder_state.dart';
 
-class HotKeyPane extends StatefulWidget {
+class HotKeyPane extends StatelessWidget {
   const HotKeyPane({Key? key, required Function fn})
       : showFunc = fn,
         super(key: key);
 
   final Function showFunc;
-
-  @override
-  _HotKeyPaneState createState() => _HotKeyPaneState();
-}
-
-class _HotKeyPaneState extends State<HotKeyPane> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   void insertKeyCombo(HotKeyHolderKeyCombo keyCombo, WidgetRef ref) {
     ref.read(windowHotKeyStateNotifier.notifier).register(
@@ -28,14 +18,14 @@ class _HotKeyPaneState extends State<HotKeyPane> {
   }
 
   void deleteKeyCombo() {
-    print("delete keyCombo");
+    print("deleted keyCombo");
   }
 
-  static const platform = MethodChannel('samples.flutter.dev/hoge');
+  static const platform = MethodChannel('switch.soul.monarch/channel');
 
   void checkForUpdate() {
     try {
-      final result = platform.invokeMethod('checkForUpdate', {});
+      platform.invokeMethod('checkForUpdate', {});
     } on PlatformException catch (e) {
       print(e);
     }
@@ -62,15 +52,15 @@ class _HotKeyPaneState extends State<HotKeyPane> {
                   insertKeyCombo(keyCombo, ref);
                 },
                 onDelete: deleteKeyCombo,
-                event: widget.showFunc),
-            SizedBox(
+                event: showFunc),
+            const SizedBox(
               height: 10,
             ),
             OutlinedButton(
-              child: Text("Check for updates"),
+              child: const Text("Check for updates"),
               style: OutlinedButton.styleFrom(
                   primary: Colors.black,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(0),
                     ),
