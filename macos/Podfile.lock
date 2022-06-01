@@ -12,7 +12,7 @@ PODS:
     - FlutterMacOS
     - Magnet
   - Sauce (2.2.0)
-  - Sparkle (2.0.0)
+  - Sparkle (2.1.0)
   - sqflite (0.0.2):
     - FlutterMacOS
     - FMDB (>= 2.7.5)
@@ -20,7 +20,7 @@ PODS:
     - FlutterMacOS
   - tray_manager (0.0.1):
     - FlutterMacOS
-  - window_manager (0.1.2):
+  - window_manager (0.2.0):
     - FlutterMacOS
 
 DEPENDENCIES:
@@ -63,12 +63,12 @@ SPEC CHECKSUMS:
   Magnet: a44a5a14eecc77433cbaad1431b78f7d20725bf2
   magnetica: c5942312396c5d994096362c99b9bb4599d1027b
   Sauce: 3ade51738563f86b08888cf4b91ae5943012088b
-  Sparkle: 128c668ddd0780beb08576ce18460d2a37f64f9f
+  Sparkle: 7f5f6d4328458515e23272f4138e610c1fa3e32d
   sqflite: a5789cceda41d54d23f31d6de539d65bb14100ea
   system_tray: e53c972838c69589ff2e77d6d3abfd71332f9e5d
   tray_manager: 9064e219c56d75c476e46b9a21182087930baf90
-  window_manager: 8c227608c115dbd132510c023d3644274aaec8a8
+  window_manager: 3a1844359a6295ab1e47659b1a777e36773cd6e8
 
-PODFILE CHECKSUM: 2487e6c5693c0e0c9961b9322c6bb29c8ac86293
+PODFILE CHECKSUM: 5714811e6c48c6fc1fe713be6665ce8d4efc9378
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

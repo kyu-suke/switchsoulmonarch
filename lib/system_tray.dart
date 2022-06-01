@@ -21,13 +21,14 @@ class SsmSystemTray with TrayListener {
     exitApp = exitAppFunction;
 
     List<MenuItem> items = [
-      MenuItem(title: 'Shortcuts'),
-      MenuItem.separator,
-      MenuItem(title: 'Preference'),
-      MenuItem.separator,
-      MenuItem(title: 'Exit'),
+      MenuItem(label: 'Shortcuts'),
+      MenuItem.separator(),
+      MenuItem(label: 'Preference'),
+      MenuItem.separator(),
+      MenuItem(label: 'Exit'),
     ];
-    await TrayManager.instance.setContextMenu(items);
+    final menu = Menu(items: items);
+    await TrayManager.instance.setContextMenu(menu);
   }
 
   @override
@@ -47,7 +48,7 @@ class SsmSystemTray with TrayListener {
 
   @override
   void onTrayMenuItemClick(MenuItem menuItem) {
-    switch (menuItem.title) {
+    switch (menuItem.label) {
       case "Shortcuts":
         break;
       case "Preference":
