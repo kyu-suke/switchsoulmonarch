@@ -16,11 +16,10 @@ dependencies:
   freezed_annotation: ^2.0.3
   window_manager: ^0.2.3
   tray_manager: ^0.1.7
-
   file_picker:
     git:
-      url: https://github.com/kyu-suke/flutter_file_picker.git
-      ref: mod/getDirectoryPath
+      url: https://github.com/miguelpruivo/flutter_file_picker.git
+      ref: 4.5.0
 
   magnetica:
     git:

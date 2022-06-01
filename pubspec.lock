@@ -194,11 +194,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "mod/getDirectoryPath"
-      resolved-ref: d8fd5524b644fca7cdf79b540e9a1515d6fab004
-      url: "https://github.com/kyu-suke/flutter_file_picker.git"
+      ref: "4.5.0"
+      resolved-ref: bb0683cc603be6cdd9169ee1f9fe94d4b74ac01b
+      url: "https://github.com/miguelpruivo/flutter_file_picker.git"
     source: git
-    version: "4.3.0"
+    version: "4.5.0"
   fixnum:
     dependency: transitive
     description:
@@ -587,6 +587,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  win32:
+    dependency: transitive
+    description:
+      name: win32
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.6.1"
   window_manager:
     dependency: "direct main"
     description:
