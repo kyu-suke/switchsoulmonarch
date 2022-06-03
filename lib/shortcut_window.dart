@@ -13,6 +13,7 @@ class ShortcutWindow extends StatelessWidget {
 
   void _handleKeyEvent(RawKeyEvent event) {
     if (event is RawKeyUpEvent) return;
+    if (_shortcuts[LogicalKeySet(event.data.logicalKey)] == null) return;
     platform.invokeMethod('launch', <String, dynamic>{
       "path": _shortcuts[LogicalKeySet(event.data.logicalKey)],
     });
