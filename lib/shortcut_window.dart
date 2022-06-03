@@ -25,9 +25,9 @@ class ShortcutWindow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final _icons = ref.watch(appsStateNotifier.notifier).apps ?? {};
+        final icons = ref.watch(appsStateNotifier.notifier).apps ?? {};
 
-        _icons.forEach((key, value) {
+        icons.forEach((key, value) {
           var path = value.path.split("/").toList();
           var url = Uri.decodeFull(path[path.length - 2]);
           if (value.encode != null) {
@@ -48,7 +48,7 @@ class ShortcutWindow extends StatelessWidget {
                     children: <Widget>[
                       KeyboardPage(
                         fn: () {},
-                        icons: _icons,
+                        icons: icons,
                         mode: "shortcuts",
                       ),
                     ],
