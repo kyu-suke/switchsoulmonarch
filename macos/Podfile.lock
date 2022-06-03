@@ -12,6 +12,8 @@ PODS:
     - FlutterMacOS
     - Magnet
   - Sauce (2.2.0)
+  - screen_retriever (0.0.1):
+    - FlutterMacOS
   - Sparkle (2.1.0)
   - sqflite (0.0.2):
     - FlutterMacOS
@@ -27,6 +29,7 @@ DEPENDENCIES:
   - FlutterMacOS (from `Flutter/ephemeral`)
   - hotkey_holder (from `Flutter/ephemeral/.symlinks/plugins/hotkey_holder/macos`)
   - magnetica (from `Flutter/ephemeral/.symlinks/plugins/magnetica/macos`)
+  - screen_retriever (from `Flutter/ephemeral/.symlinks/plugins/screen_retriever/macos`)
   - Sparkle
   - sqflite (from `Flutter/ephemeral/.symlinks/plugins/sqflite/macos`)
   - system_tray (from `Flutter/ephemeral/.symlinks/plugins/system_tray/macos`)
@@ -47,6 +50,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/hotkey_holder/macos
   magnetica:
     :path: Flutter/ephemeral/.symlinks/plugins/magnetica/macos
+  screen_retriever:
+    :path: Flutter/ephemeral/.symlinks/plugins/screen_retriever/macos
   sqflite:
     :path: Flutter/ephemeral/.symlinks/plugins/sqflite/macos
   system_tray:
@@ -63,6 +68,7 @@ SPEC CHECKSUMS:
   Magnet: a44a5a14eecc77433cbaad1431b78f7d20725bf2
   magnetica: c5942312396c5d994096362c99b9bb4599d1027b
   Sauce: 3ade51738563f86b08888cf4b91ae5943012088b
+  screen_retriever: 59634572a57080243dd1bf715e55b6c54f241a38
   Sparkle: 7f5f6d4328458515e23272f4138e610c1fa3e32d
   sqflite: a5789cceda41d54d23f31d6de539d65bb14100ea
   system_tray: e53c972838c69589ff2e77d6d3abfd71332f9e5d
