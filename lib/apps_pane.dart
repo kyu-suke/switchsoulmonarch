@@ -30,14 +30,13 @@ class AppsPane extends StatelessWidget {
     return (String key) async {
       ref.read(modeStateNotifier.notifier).setCanHide(false);
       try {
-        String? path = await FilePicker.platform.getDirectoryPath(
+        final path = await FilePicker.platform.pickFiles(
             lockParentWindow: true,
-            pickDirectory: false,
             allowedExtensions: ["app"],
             type: FileType.custom);
         show();
         ref.read(modeStateNotifier.notifier).setCanHide(true);
-        _getApp(path!, key, ref);
+        _getApp(path!.files.first.path!, key, ref);
       } on PlatformException catch (e) {
         print(e);
       } catch (e) {

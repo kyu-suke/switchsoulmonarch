@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -58,7 +57,8 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
 
     // window setting
     windowManager.addListener(this);
-    windowManager.setSize(const Size(1300, 500));
+    windowManager.setResizable(false);
+    windowManager.setSize(const Size(434, 130));
 
     // system tray setting
     final SsmSystemTray systemTray = SsmSystemTray();
@@ -70,7 +70,11 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
 
   void showPreference() {
     ref.read(modeStateNotifier.notifier).setMode("preference");
-    windowManager.setSize(const Size(1300, 500));
+    if (selectedPane == "apps") {
+      windowManager.setSize(const Size(1300, 500), animate: false);
+    } else {
+      windowManager.setSize(const Size(434, 130), animate: false);
+    }
     windowManager.show();
   }
 
@@ -117,17 +121,26 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
     return Row(
       children: [
         Expanded(
-            child: OutlinedButton(
-          child: Text(label),
-          style: OutlinedButton.styleFrom(
-              primary: Colors.black,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(0),
-                ),
-              )),
-          onPressed: () => setState(() => selectedPane = pane),
-        )),
+          child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  primary: Colors.black,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(0),
+                    ),
+                  )),
+              child: Text(label),
+              onPressed: () async {
+                setState(() => selectedPane = pane);
+                if (selectedPane == "apps") {
+                  await windowManager.setSize(const Size(1300, 500),
+                      animate: false);
+                } else {
+                  await windowManager.setSize(const Size(434, 130),
+                      animate: false);
+                }
+              }),
+        ),
       ],
     );
   }
@@ -136,14 +149,14 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
     return Row(
       children: [
         Expanded(
-            flex: 1,
+            flex: selectedPane == "apps" ? 1 : 3,
             child: Column(
               children: [
                 _leftSideButton("Hotkey", "hotkey"),
                 _leftSideButton("Apps", "apps"),
               ],
             )),
-        Expanded(flex: 9, child: _buildPane()),
+        Expanded(flex: selectedPane == "apps" ? 9 : 7, child: _buildPane()),
       ],
     );
   }
@@ -175,8 +188,9 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
   };
 
   @override
-  void onWindowEvent(String eventName) {
-    print('[WindowManager] onWindowEvent: $eventName');
+  void onWindowEvent(String eventName) async {
+    final size = await windowManager.getSize();
+    print('[WindowManager] onWindowEvent: $eventName, size: $size');
     final eventFunc = eventFuncs[eventName];
     if (eventFunc != null) {
       final canHide = ref.watch(modeStateNotifier).canHide;
@@ -186,96 +200,3 @@ class _HomePageState extends ConsumerState<HomePage> with WindowListener {
     }
   }
 }
-
-// TODO meta keys does not work in shortcut_window
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-//
-// void main() => runApp(const MyApp());
-//
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-//
-//   static const String _title = 'Flutter Code Sample';
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: _title,
-//       home: Scaffold(
-//         appBar: AppBar(title: const Text(_title)),
-//         body: const MyStatefulWidget(),
-//       ),
-//     );
-//   }
-// }
-//
-// class MyStatefulWidget extends StatefulWidget {
-//   const MyStatefulWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-// }
-//
-// class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-// // The node used to request the keyboard focus.
-//   final FocusNode _focusNode = FocusNode();
-// // The message to display.
-//   String? _message;
-//
-// // Focus nodes need to be disposed.
-//   @override
-//   void dispose() {
-//     _focusNode.dispose();
-//     super.dispose();
-//   }
-//
-// // Handles the key events from the RawKeyboardListener and update the
-// // _message.
-//   void _handleKeyEvent(RawKeyEvent event) {
-//     setState(() {
-//       if (event.logicalKey == LogicalKeyboardKey.keyQ) {
-//         _message = 'Pressed the "Q" key!';
-//       } else {
-//         if (kReleaseMode) {
-//           _message =
-//           'Not a Q: Pressed 0x${event.logicalKey.keyId.toRadixString(16)}';
-//         } else {
-//           // The debugName will only print useful information in debug mode.
-//           _message = 'Not a Q: Pressed ${event.logicalKey.debugName}';
-//         }
-//       }
-//     });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final TextTheme textTheme = Theme.of(context).textTheme;
-//     return Container(
-//       color: Colors.white,
-//       alignment: Alignment.center,
-//       child: DefaultTextStyle(
-//         style: textTheme.headline4!,
-//         child: RawKeyboardListener(
-//           focusNode: _focusNode,
-//           onKey: _handleKeyEvent,
-//           child: AnimatedBuilder(
-//             animation: _focusNode,
-//             builder: (BuildContext context, Widget? child) {
-//               if (!_focusNode.hasFocus) {
-//                 return GestureDetector(
-//                   onTap: () {
-//                     FocusScope.of(context).requestFocus(_focusNode);
-//                   },
-//                   child: const Text('Tap to focus'),
-//                 );
-//               }
-//               return Text(_message ?? 'Press a key');
-//             },
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
